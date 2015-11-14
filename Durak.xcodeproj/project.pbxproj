@@ -1,0 +1,575 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		11AD61681BF4BC73006BF35F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61671BF4BC73006BF35F /* main.m */; };
+		11AD616B1BF4BC73006BF35F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD616A1BF4BC73006BF35F /* AppDelegate.m */; };
+		11AD616E1BF4BC73006BF35F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD616D1BF4BC73006BF35F /* ViewController.m */; };
+		11AD61711BF4BC73006BF35F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11AD616F1BF4BC73006BF35F /* Main.storyboard */; };
+		11AD61731BF4BC73006BF35F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61721BF4BC73006BF35F /* Assets.xcassets */; };
+		11AD61761BF4BC73006BF35F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61741BF4BC73006BF35F /* LaunchScreen.storyboard */; };
+		11AD61811BF4BC73006BF35F /* DurakUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61801BF4BC73006BF35F /* DurakUITests.m */; };
+		11AD61A51BF4BCD3006BF35F /* cardback.png in Resources */ = {isa = PBXBuildFile; fileRef = 11AD618C1BF4BCD3006BF35F /* cardback.png */; settings = {ASSET_TAGS = (); }; };
+		11AD61A61BF4BCD3006BF35F /* J♠.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD618D1BF4BCD3006BF35F /* J♠.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61A71BF4BCD3006BF35F /* J♠@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD618E1BF4BCD3006BF35F /* J♠@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61A81BF4BCD3006BF35F /* J♣.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD618F1BF4BCD3006BF35F /* J♣.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61A91BF4BCD3006BF35F /* J♣@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61901BF4BCD3006BF35F /* J♣@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61AA1BF4BCD3006BF35F /* J♥.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61911BF4BCD3006BF35F /* J♥.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61AB1BF4BCD3006BF35F /* J♥@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61921BF4BCD3006BF35F /* J♥@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61AC1BF4BCD3006BF35F /* J♦.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61931BF4BCD3006BF35F /* J♦.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61AD1BF4BCD3006BF35F /* J♦@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61941BF4BCD3006BF35F /* J♦@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61AE1BF4BCD3006BF35F /* K♠.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61951BF4BCD3006BF35F /* K♠.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61AF1BF4BCD3006BF35F /* K♠@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61961BF4BCD3006BF35F /* K♠@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61B01BF4BCD3006BF35F /* K♣.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61971BF4BCD3006BF35F /* K♣.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61B11BF4BCD3006BF35F /* K♣@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61981BF4BCD3006BF35F /* K♣@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61B21BF4BCD3006BF35F /* K♥.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61991BF4BCD3006BF35F /* K♥.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61B31BF4BCD3006BF35F /* K♥@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD619A1BF4BCD3006BF35F /* K♥@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61B41BF4BCD3006BF35F /* K♦.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD619B1BF4BCD3006BF35F /* K♦.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61B51BF4BCD3006BF35F /* K♦@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD619C1BF4BCD3006BF35F /* K♦@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61B61BF4BCD3006BF35F /* Q♠.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD619D1BF4BCD3006BF35F /* Q♠.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61B71BF4BCD3006BF35F /* Q♠@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD619E1BF4BCD3006BF35F /* Q♠@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61B81BF4BCD3006BF35F /* Q♣.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD619F1BF4BCD3006BF35F /* Q♣.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61B91BF4BCD3006BF35F /* Q♣@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61A01BF4BCD3006BF35F /* Q♣@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61BA1BF4BCD3006BF35F /* Q♥.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61A11BF4BCD3006BF35F /* Q♥.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61BB1BF4BCD3006BF35F /* Q♥@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61A21BF4BCD3006BF35F /* Q♥@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61BC1BF4BCD3006BF35F /* Q♦.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61A31BF4BCD3006BF35F /* Q♦.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61BD1BF4BCD3006BF35F /* Q♦@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11AD61A41BF4BCD3006BF35F /* Q♦@2x.jpg */; settings = {ASSET_TAGS = (); }; };
+		11AD61C01BF4BCFC006BF35F /* PlayingCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61BF1BF4BCFC006BF35F /* PlayingCardView.m */; settings = {ASSET_TAGS = (); }; };
+		11AD61CC1BF4BDB3006BF35F /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61C31BF4BDB3006BF35F /* Card.m */; settings = {ASSET_TAGS = (); }; };
+		11AD61CE1BF4BDB3006BF35F /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61C71BF4BDB3006BF35F /* Deck.m */; settings = {ASSET_TAGS = (); }; };
+		11AD61CF1BF4BDB3006BF35F /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61C91BF4BDB3006BF35F /* PlayingCard.m */; settings = {ASSET_TAGS = (); }; };
+		11AD61D01BF4BDB3006BF35F /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61CB1BF4BDB3006BF35F /* PlayingCardDeck.m */; settings = {ASSET_TAGS = (); }; };
+		11AD61D31BF4C5BA006BF35F /* DurakGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61D21BF4C5BA006BF35F /* DurakGameModel.m */; settings = {ASSET_TAGS = (); }; };
+		11D79F5B1BF64E78005C4F7E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D79F5A1BF64E78005C4F7E /* SettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		11AD617D1BF4BC73006BF35F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 11AD615B1BF4BC73006BF35F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11AD61621BF4BC73006BF35F;
+			remoteInfo = Durak;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		11AD61631BF4BC73006BF35F /* Durak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Durak.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		11AD61671BF4BC73006BF35F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		11AD61691BF4BC73006BF35F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		11AD616A1BF4BC73006BF35F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		11AD616C1BF4BC73006BF35F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		11AD616D1BF4BC73006BF35F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		11AD61701BF4BC73006BF35F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		11AD61721BF4BC73006BF35F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		11AD61751BF4BC73006BF35F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		11AD61771BF4BC73006BF35F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11AD617C1BF4BC73006BF35F /* DurakUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DurakUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		11AD61801BF4BC73006BF35F /* DurakUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DurakUITests.m; sourceTree = "<group>"; };
+		11AD61821BF4BC73006BF35F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11AD618C1BF4BCD3006BF35F /* cardback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cardback.png; sourceTree = "<group>"; };
+		11AD618D1BF4BCD3006BF35F /* J♠.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "J♠.jpg"; sourceTree = "<group>"; };
+		11AD618E1BF4BCD3006BF35F /* J♠@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "J♠@2x.jpg"; sourceTree = "<group>"; };
+		11AD618F1BF4BCD3006BF35F /* J♣.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "J♣.jpg"; sourceTree = "<group>"; };
+		11AD61901BF4BCD3006BF35F /* J♣@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "J♣@2x.jpg"; sourceTree = "<group>"; };
+		11AD61911BF4BCD3006BF35F /* J♥.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "J♥.jpg"; sourceTree = "<group>"; };
+		11AD61921BF4BCD3006BF35F /* J♥@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "J♥@2x.jpg"; sourceTree = "<group>"; };
+		11AD61931BF4BCD3006BF35F /* J♦.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "J♦.jpg"; sourceTree = "<group>"; };
+		11AD61941BF4BCD3006BF35F /* J♦@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "J♦@2x.jpg"; sourceTree = "<group>"; };
+		11AD61951BF4BCD3006BF35F /* K♠.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "K♠.jpg"; sourceTree = "<group>"; };
+		11AD61961BF4BCD3006BF35F /* K♠@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "K♠@2x.jpg"; sourceTree = "<group>"; };
+		11AD61971BF4BCD3006BF35F /* K♣.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "K♣.jpg"; sourceTree = "<group>"; };
+		11AD61981BF4BCD3006BF35F /* K♣@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "K♣@2x.jpg"; sourceTree = "<group>"; };
+		11AD61991BF4BCD3006BF35F /* K♥.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "K♥.jpg"; sourceTree = "<group>"; };
+		11AD619A1BF4BCD3006BF35F /* K♥@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "K♥@2x.jpg"; sourceTree = "<group>"; };
+		11AD619B1BF4BCD3006BF35F /* K♦.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "K♦.jpg"; sourceTree = "<group>"; };
+		11AD619C1BF4BCD3006BF35F /* K♦@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "K♦@2x.jpg"; sourceTree = "<group>"; };
+		11AD619D1BF4BCD3006BF35F /* Q♠.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Q♠.jpg"; sourceTree = "<group>"; };
+		11AD619E1BF4BCD3006BF35F /* Q♠@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Q♠@2x.jpg"; sourceTree = "<group>"; };
+		11AD619F1BF4BCD3006BF35F /* Q♣.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Q♣.jpg"; sourceTree = "<group>"; };
+		11AD61A01BF4BCD3006BF35F /* Q♣@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Q♣@2x.jpg"; sourceTree = "<group>"; };
+		11AD61A11BF4BCD3006BF35F /* Q♥.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Q♥.jpg"; sourceTree = "<group>"; };
+		11AD61A21BF4BCD3006BF35F /* Q♥@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Q♥@2x.jpg"; sourceTree = "<group>"; };
+		11AD61A31BF4BCD3006BF35F /* Q♦.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Q♦.jpg"; sourceTree = "<group>"; };
+		11AD61A41BF4BCD3006BF35F /* Q♦@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Q♦@2x.jpg"; sourceTree = "<group>"; };
+		11AD61BE1BF4BCFC006BF35F /* PlayingCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardView.h; sourceTree = "<group>"; };
+		11AD61BF1BF4BCFC006BF35F /* PlayingCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardView.m; sourceTree = "<group>"; };
+		11AD61C21BF4BDB3006BF35F /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		11AD61C31BF4BDB3006BF35F /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		11AD61C61BF4BDB3006BF35F /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
+		11AD61C71BF4BDB3006BF35F /* Deck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deck.m; sourceTree = "<group>"; };
+		11AD61C81BF4BDB3006BF35F /* PlayingCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCard.h; sourceTree = "<group>"; };
+		11AD61C91BF4BDB3006BF35F /* PlayingCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCard.m; sourceTree = "<group>"; };
+		11AD61CA1BF4BDB3006BF35F /* PlayingCardDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardDeck.h; sourceTree = "<group>"; };
+		11AD61CB1BF4BDB3006BF35F /* PlayingCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardDeck.m; sourceTree = "<group>"; };
+		11AD61D11BF4C5BA006BF35F /* DurakGameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DurakGameModel.h; sourceTree = "<group>"; };
+		11AD61D21BF4C5BA006BF35F /* DurakGameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DurakGameModel.m; sourceTree = "<group>"; };
+		11D79F591BF64E78005C4F7E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		11D79F5A1BF64E78005C4F7E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		11AD61601BF4BC73006BF35F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11AD61791BF4BC73006BF35F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		11AD615A1BF4BC73006BF35F = {
+			isa = PBXGroup;
+			children = (
+				11AD61651BF4BC73006BF35F /* Durak */,
+				11AD617F1BF4BC73006BF35F /* DurakUITests */,
+				11AD61641BF4BC73006BF35F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		11AD61641BF4BC73006BF35F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				11AD61631BF4BC73006BF35F /* Durak.app */,
+				11AD617C1BF4BC73006BF35F /* DurakUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		11AD61651BF4BC73006BF35F /* Durak */ = {
+			isa = PBXGroup;
+			children = (
+				11AD61C11BF4BDB3006BF35F /* Model */,
+				11AD61BE1BF4BCFC006BF35F /* PlayingCardView.h */,
+				11AD61BF1BF4BCFC006BF35F /* PlayingCardView.m */,
+				11AD618B1BF4BCD3006BF35F /* images */,
+				11AD61691BF4BC73006BF35F /* AppDelegate.h */,
+				11AD616A1BF4BC73006BF35F /* AppDelegate.m */,
+				11AD616C1BF4BC73006BF35F /* ViewController.h */,
+				11AD616D1BF4BC73006BF35F /* ViewController.m */,
+				11AD616F1BF4BC73006BF35F /* Main.storyboard */,
+				11D79F591BF64E78005C4F7E /* SettingsViewController.h */,
+				11D79F5A1BF64E78005C4F7E /* SettingsViewController.m */,
+				11AD61661BF4BC73006BF35F /* Supporting Files */,
+			);
+			path = Durak;
+			sourceTree = "<group>";
+		};
+		11AD61661BF4BC73006BF35F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				11AD61721BF4BC73006BF35F /* Assets.xcassets */,
+				11AD61741BF4BC73006BF35F /* LaunchScreen.storyboard */,
+				11AD61771BF4BC73006BF35F /* Info.plist */,
+				11AD61671BF4BC73006BF35F /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		11AD617F1BF4BC73006BF35F /* DurakUITests */ = {
+			isa = PBXGroup;
+			children = (
+				11AD61801BF4BC73006BF35F /* DurakUITests.m */,
+				11AD61821BF4BC73006BF35F /* Info.plist */,
+			);
+			path = DurakUITests;
+			sourceTree = "<group>";
+		};
+		11AD618B1BF4BCD3006BF35F /* images */ = {
+			isa = PBXGroup;
+			children = (
+				11AD618C1BF4BCD3006BF35F /* cardback.png */,
+				11AD618D1BF4BCD3006BF35F /* J♠.jpg */,
+				11AD618E1BF4BCD3006BF35F /* J♠@2x.jpg */,
+				11AD618F1BF4BCD3006BF35F /* J♣.jpg */,
+				11AD61901BF4BCD3006BF35F /* J♣@2x.jpg */,
+				11AD61911BF4BCD3006BF35F /* J♥.jpg */,
+				11AD61921BF4BCD3006BF35F /* J♥@2x.jpg */,
+				11AD61931BF4BCD3006BF35F /* J♦.jpg */,
+				11AD61941BF4BCD3006BF35F /* J♦@2x.jpg */,
+				11AD61951BF4BCD3006BF35F /* K♠.jpg */,
+				11AD61961BF4BCD3006BF35F /* K♠@2x.jpg */,
+				11AD61971BF4BCD3006BF35F /* K♣.jpg */,
+				11AD61981BF4BCD3006BF35F /* K♣@2x.jpg */,
+				11AD61991BF4BCD3006BF35F /* K♥.jpg */,
+				11AD619A1BF4BCD3006BF35F /* K♥@2x.jpg */,
+				11AD619B1BF4BCD3006BF35F /* K♦.jpg */,
+				11AD619C1BF4BCD3006BF35F /* K♦@2x.jpg */,
+				11AD619D1BF4BCD3006BF35F /* Q♠.jpg */,
+				11AD619E1BF4BCD3006BF35F /* Q♠@2x.jpg */,
+				11AD619F1BF4BCD3006BF35F /* Q♣.jpg */,
+				11AD61A01BF4BCD3006BF35F /* Q♣@2x.jpg */,
+				11AD61A11BF4BCD3006BF35F /* Q♥.jpg */,
+				11AD61A21BF4BCD3006BF35F /* Q♥@2x.jpg */,
+				11AD61A31BF4BCD3006BF35F /* Q♦.jpg */,
+				11AD61A41BF4BCD3006BF35F /* Q♦@2x.jpg */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		11AD61C11BF4BDB3006BF35F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				11AD61C21BF4BDB3006BF35F /* Card.h */,
+				11AD61C31BF4BDB3006BF35F /* Card.m */,
+				11AD61C61BF4BDB3006BF35F /* Deck.h */,
+				11AD61C71BF4BDB3006BF35F /* Deck.m */,
+				11AD61C81BF4BDB3006BF35F /* PlayingCard.h */,
+				11AD61C91BF4BDB3006BF35F /* PlayingCard.m */,
+				11AD61CA1BF4BDB3006BF35F /* PlayingCardDeck.h */,
+				11AD61CB1BF4BDB3006BF35F /* PlayingCardDeck.m */,
+				11AD61D11BF4C5BA006BF35F /* DurakGameModel.h */,
+				11AD61D21BF4C5BA006BF35F /* DurakGameModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		11AD61621BF4BC73006BF35F /* Durak */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11AD61851BF4BC73006BF35F /* Build configuration list for PBXNativeTarget "Durak" */;
+			buildPhases = (
+				11AD615F1BF4BC73006BF35F /* Sources */,
+				11AD61601BF4BC73006BF35F /* Frameworks */,
+				11AD61611BF4BC73006BF35F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Durak;
+			productName = Durak;
+			productReference = 11AD61631BF4BC73006BF35F /* Durak.app */;
+			productType = "com.apple.product-type.application";
+		};
+		11AD617B1BF4BC73006BF35F /* DurakUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11AD61881BF4BC73006BF35F /* Build configuration list for PBXNativeTarget "DurakUITests" */;
+			buildPhases = (
+				11AD61781BF4BC73006BF35F /* Sources */,
+				11AD61791BF4BC73006BF35F /* Frameworks */,
+				11AD617A1BF4BC73006BF35F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				11AD617E1BF4BC73006BF35F /* PBXTargetDependency */,
+			);
+			name = DurakUITests;
+			productName = DurakUITests;
+			productReference = 11AD617C1BF4BC73006BF35F /* DurakUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		11AD615B1BF4BC73006BF35F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Alex Kartsev";
+				TargetAttributes = {
+					11AD61621BF4BC73006BF35F = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					11AD617B1BF4BC73006BF35F = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 11AD61621BF4BC73006BF35F;
+					};
+				};
+			};
+			buildConfigurationList = 11AD615E1BF4BC73006BF35F /* Build configuration list for PBXProject "Durak" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 11AD615A1BF4BC73006BF35F;
+			productRefGroup = 11AD61641BF4BC73006BF35F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				11AD61621BF4BC73006BF35F /* Durak */,
+				11AD617B1BF4BC73006BF35F /* DurakUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		11AD61611BF4BC73006BF35F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11AD61BA1BF4BCD3006BF35F /* Q♥.jpg in Resources */,
+				11AD61B21BF4BCD3006BF35F /* K♥.jpg in Resources */,
+				11AD61B11BF4BCD3006BF35F /* K♣@2x.jpg in Resources */,
+				11AD61AE1BF4BCD3006BF35F /* K♠.jpg in Resources */,
+				11AD61B71BF4BCD3006BF35F /* Q♠@2x.jpg in Resources */,
+				11AD61A71BF4BCD3006BF35F /* J♠@2x.jpg in Resources */,
+				11AD61A61BF4BCD3006BF35F /* J♠.jpg in Resources */,
+				11AD61B91BF4BCD3006BF35F /* Q♣@2x.jpg in Resources */,
+				11AD61AC1BF4BCD3006BF35F /* J♦.jpg in Resources */,
+				11AD61BD1BF4BCD3006BF35F /* Q♦@2x.jpg in Resources */,
+				11AD61B81BF4BCD3006BF35F /* Q♣.jpg in Resources */,
+				11AD61761BF4BC73006BF35F /* LaunchScreen.storyboard in Resources */,
+				11AD61B51BF4BCD3006BF35F /* K♦@2x.jpg in Resources */,
+				11AD61AF1BF4BCD3006BF35F /* K♠@2x.jpg in Resources */,
+				11AD61731BF4BC73006BF35F /* Assets.xcassets in Resources */,
+				11AD61A81BF4BCD3006BF35F /* J♣.jpg in Resources */,
+				11AD61B31BF4BCD3006BF35F /* K♥@2x.jpg in Resources */,
+				11AD61BC1BF4BCD3006BF35F /* Q♦.jpg in Resources */,
+				11AD61AD1BF4BCD3006BF35F /* J♦@2x.jpg in Resources */,
+				11AD61B61BF4BCD3006BF35F /* Q♠.jpg in Resources */,
+				11AD61BB1BF4BCD3006BF35F /* Q♥@2x.jpg in Resources */,
+				11AD61AB1BF4BCD3006BF35F /* J♥@2x.jpg in Resources */,
+				11AD61B01BF4BCD3006BF35F /* K♣.jpg in Resources */,
+				11AD61A51BF4BCD3006BF35F /* cardback.png in Resources */,
+				11AD61711BF4BC73006BF35F /* Main.storyboard in Resources */,
+				11AD61AA1BF4BCD3006BF35F /* J♥.jpg in Resources */,
+				11AD61A91BF4BCD3006BF35F /* J♣@2x.jpg in Resources */,
+				11AD61B41BF4BCD3006BF35F /* K♦.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11AD617A1BF4BC73006BF35F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		11AD615F1BF4BC73006BF35F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11AD61D01BF4BDB3006BF35F /* PlayingCardDeck.m in Sources */,
+				11AD61CE1BF4BDB3006BF35F /* Deck.m in Sources */,
+				11AD61D31BF4C5BA006BF35F /* DurakGameModel.m in Sources */,
+				11AD61CC1BF4BDB3006BF35F /* Card.m in Sources */,
+				11AD616E1BF4BC73006BF35F /* ViewController.m in Sources */,
+				11AD61C01BF4BCFC006BF35F /* PlayingCardView.m in Sources */,
+				11AD616B1BF4BC73006BF35F /* AppDelegate.m in Sources */,
+				11D79F5B1BF64E78005C4F7E /* SettingsViewController.m in Sources */,
+				11AD61CF1BF4BDB3006BF35F /* PlayingCard.m in Sources */,
+				11AD61681BF4BC73006BF35F /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11AD61781BF4BC73006BF35F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11AD61811BF4BC73006BF35F /* DurakUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		11AD617E1BF4BC73006BF35F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11AD61621BF4BC73006BF35F /* Durak */;
+			targetProxy = 11AD617D1BF4BC73006BF35F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		11AD616F1BF4BC73006BF35F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				11AD61701BF4BC73006BF35F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		11AD61741BF4BC73006BF35F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				11AD61751BF4BC73006BF35F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		11AD61831BF4BC73006BF35F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		11AD61841BF4BC73006BF35F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		11AD61861BF4BC73006BF35F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Durak/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Alex-Kartsev.Durak";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		11AD61871BF4BC73006BF35F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Durak/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Alex-Kartsev.Durak";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		11AD61891BF4BC73006BF35F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = DurakUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Alex-Kartsev.DurakUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Durak;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		11AD618A1BF4BC73006BF35F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = DurakUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Alex-Kartsev.DurakUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Durak;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		11AD615E1BF4BC73006BF35F /* Build configuration list for PBXProject "Durak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11AD61831BF4BC73006BF35F /* Debug */,
+				11AD61841BF4BC73006BF35F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		11AD61851BF4BC73006BF35F /* Build configuration list for PBXNativeTarget "Durak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11AD61861BF4BC73006BF35F /* Debug */,
+				11AD61871BF4BC73006BF35F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		11AD61881BF4BC73006BF35F /* Build configuration list for PBXNativeTarget "DurakUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11AD61891BF4BC73006BF35F /* Debug */,
+				11AD618A1BF4BC73006BF35F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 11AD615B1BF4BC73006BF35F /* Project object */;
+}
