@@ -191,9 +191,11 @@
                     }
                 }
             }
-            playingCardView.faceUp = YES;
             
-            [self.view bringSubviewToFront:playingCardView];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                playingCardView.faceUp = YES;
+                [self.view bringSubviewToFront:playingCardView];
+            });
             
             switch (i) {
                 case 0: {
@@ -339,6 +341,9 @@
     }
 }
 
+- (void)faceUpCard:(PlayingCardView *)view {
+    view.faceUp = YES;
+}
 
 - (void)computerMakeTurnWithCard:(PlayingCard *)card {
     
@@ -355,7 +360,11 @@
                 }
             }
         }
-        playingCardView.faceUp = YES;
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            playingCardView.faceUp = YES;
+            [self.view bringSubviewToFront:playingCardView];
+        });
         
         NSTimeInterval oddCardDelay = 0.f;
         NSTimeInterval evenCardDelay = 0.f;

@@ -85,8 +85,10 @@
                     [cheapOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
                     cheapestOption = [cheapOptions lastObject];
                 } else {
-                    [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
-                    cheapestOption = [expensiveOptions lastObject];
+                    if (self.deck.lastCardsCount == 0) {
+                        [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
+                        cheapestOption = [expensiveOptions lastObject];
+                    }
                 }
                 
                 [self.turnCards addObject:cheapestOption];
@@ -146,10 +148,11 @@
                             [cheapOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
                             cheapestOption = [cheapOptions lastObject];
                         } else {
-                            [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
-                            cheapestOption = [expensiveOptions lastObject];
+                            if (self.deck.lastCardsCount == 0 || expensiveOptions.count > 1) {
+                                [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
+                                cheapestOption = [expensiveOptions lastObject];
+                            }
                         }
-                        
                         
                         [self.turnCards addObject:cheapestOption];
                         [self.delegate computerMakeTurnWithCard:cheapestOption];
@@ -212,8 +215,10 @@
                     [cheapOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
                     cheapestOption = [cheapOptions lastObject];
                 } else {
-                    [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
-                    cheapestOption = [expensiveOptions lastObject];
+                    if (self.deck.lastCardsCount == 0) {
+                        [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
+                        cheapestOption = [expensiveOptions lastObject];
+                    }
                 }
                 
                 if (cheapestOption) {
@@ -285,11 +290,20 @@
     self.selfParticipantCards = [[cheapCards arrayByAddingObjectsFromArray:expensiveCards] mutableCopy];
 }
 
-- (void)setIsComputerTurn:(BOOL)isComputerTurn{
-    _isComputerTurn = isComputerTurn;
+- (void)takeComputerNeededCards {
+    NSUInteger numberOfComputerParticipantCards = self.computerParticipantCards.count;
     
-    self.turnCards = nil;
-    
+    if (self.computerParticipantCards.count < 6) {
+        for (int i = 0; i < 6 - numberOfComputerParticipantCards; i++) {
+            Card *cardToAdd = [self drawCardFromDeck];
+            if (cardToAdd) {
+                [self.computerParticipantCards addObject:cardToAdd];
+            }
+        }
+    }
+}
+
+- (void)takeUserNeededCards {
     NSUInteger numberOfSelfParticipantCards = self.selfParticipantCards.count;
     
     if (self.selfParticipantCards.count < 6) {
@@ -301,17 +315,19 @@
         }
     }
     [self sortSelfParticipantCards];
-    
-    NSUInteger numberOfComputerParticipantCards = self.computerParticipantCards.count;
-    
-    if (self.computerParticipantCards.count < 6) {
-        for (int i = 0; i < 6 - numberOfComputerParticipantCards; i++) {
-            Card *cardToAdd = [self drawCardFromDeck];
-            if (cardToAdd) {
-                [self.computerParticipantCards addObject:cardToAdd];
-            }
-        }
+}
+
+- (void)setIsComputerTurn:(BOOL)isComputerTurn{
+    if (_isComputerTurn) {
+        [self takeComputerNeededCards];
+        [self takeUserNeededCards];
+    } else {
+        [self takeUserNeededCards];
+        [self takeComputerNeededCards];
     }
+    
+    _isComputerTurn = isComputerTurn;
+    self.turnCards = nil;
 }
 
 - (void)pickUpPressed {
