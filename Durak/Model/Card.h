@@ -2,6 +2,8 @@
 
 @interface Card : NSObject
 
+///for git commit
+
 @property (strong, nonatomic) NSString *contents;
 
 @property (nonatomic, getter=isFaceUp) BOOL faceUp;
