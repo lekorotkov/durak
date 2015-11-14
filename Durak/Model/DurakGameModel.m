@@ -29,6 +29,7 @@
             [_computerParticipantCards addObject:[_deck drawRandomCard]];
             [_selfParticipantCards addObject:[_deck drawRandomCard]];
         }
+        [self sortSelfParticipantCards];
     }
     return self;
 }
@@ -276,6 +277,24 @@
     }
 }
 
+- (void)sortSelfParticipantCards {
+    NSMutableArray *cheapCards = [NSMutableArray new];
+    NSMutableArray *expensiveCards = [NSMutableArray new];
+    
+    for (PlayingCard *card in self.selfParticipantCards) {
+        if ([card.suit isEqualToString:self.mainCard.suit]) {
+            [expensiveCards addObject:card];
+        } else {
+            [cheapCards addObject:card];
+        }
+    }
+    
+    [cheapCards sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:YES]]];
+    [expensiveCards sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:YES]]];
+    
+    self.selfParticipantCards = [[cheapCards arrayByAddingObjectsFromArray:expensiveCards] mutableCopy];
+}
+
 - (void)setIsComputerTurn:(BOOL)isComputerTurn{
     _isComputerTurn = isComputerTurn;
     
@@ -289,9 +308,9 @@
             if (cardToAdd) {
                 [self.selfParticipantCards addObject:cardToAdd];
             }
-            
         }
     }
+    [self sortSelfParticipantCards];
     
     NSUInteger numberOfComputerParticipantCards = self.computerParticipantCards.count;
     
