@@ -478,6 +478,15 @@
                                                             handler: nil];
         [controller addAction: alertAction];
         [self presentViewController: controller animated: YES completion: nil];
+    } else if (self.gameModel.gameState == DurakGameStateDraw) {
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Draw"
+                                                                            message: @"stupid motherfucker, even can't win the stupid computer"
+                                                                     preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
+                                                              style: UIAlertActionStyleDestructive
+                                                            handler: nil];
+        [controller addAction: alertAction];
+        [self presentViewController: controller animated: YES completion: nil];
     }
 }
 
