@@ -85,8 +85,10 @@
                     [cheapOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
                     cheapestOption = [cheapOptions lastObject];
                 } else {
-                    [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
-                    cheapestOption = [expensiveOptions lastObject];
+                    if (self.deck.lastCardsCount == 0) {
+                        [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
+                        cheapestOption = [expensiveOptions lastObject];
+                    }
                 }
                 
                 [self.turnCards addObject:cheapestOption];
@@ -146,10 +148,11 @@
                             [cheapOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
                             cheapestOption = [cheapOptions lastObject];
                         } else {
-                            [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
-                            cheapestOption = [expensiveOptions lastObject];
+                            if (self.deck.lastCardsCount == 0 || expensiveOptions.count > 1) {
+                                [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
+                                cheapestOption = [expensiveOptions lastObject];
+                            }
                         }
-                        
                         
                         [self.turnCards addObject:cheapestOption];
                         [self.delegate computerMakeTurnWithCard:cheapestOption];
@@ -212,8 +215,10 @@
                     [cheapOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
                     cheapestOption = [cheapOptions lastObject];
                 } else {
-                    [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
-                    cheapestOption = [expensiveOptions lastObject];
+                    if (self.deck.lastCardsCount == 0) {
+                        [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
+                        cheapestOption = [expensiveOptions lastObject];
+                    }
                 }
                 
                 if (cheapestOption) {
