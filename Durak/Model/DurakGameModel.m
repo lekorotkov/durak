@@ -91,10 +91,17 @@
                     }
                 }
                 
-                [self.turnCards addObject:cheapestOption];
-                [self.delegate computerMakeTurnWithCard:cheapestOption];
-                [self.computerParticipantCards removeObject:cheapestOption];
-                [self checkIfGameStateShouldChange];
+                if (cheapestOption) {
+                    [self.turnCards addObject:cheapestOption];
+                    [self.delegate computerMakeTurnWithCard:cheapestOption];
+                    [self.computerParticipantCards removeObject:cheapestOption];
+                    [self checkIfGameStateShouldChange];
+                } else {
+                    [self.computerParticipantCards addObjectsFromArray:self.turnCards];
+                    self.isComputerTurn = NO;
+                    [self.delegate updateUI];
+                    [self checkIfGameStateShouldChange];
+                }
             } else {
                 [self.computerParticipantCards addObjectsFromArray:self.turnCards];
                 self.isComputerTurn = NO;
@@ -154,10 +161,17 @@
                             }
                         }
                         
-                        [self.turnCards addObject:cheapestOption];
-                        [self.delegate computerMakeTurnWithCard:cheapestOption];
-                        [self.computerParticipantCards removeObject:cheapestOption];
-                        [self checkIfGameStateShouldChange];
+                        if (cheapestOption) {
+                            [self.turnCards addObject:cheapestOption];
+                            [self.delegate computerMakeTurnWithCard:cheapestOption];
+                            [self.computerParticipantCards removeObject:cheapestOption];
+                            [self checkIfGameStateShouldChange];
+                        } else {
+                            [self.computerParticipantCards addObjectsFromArray:self.turnCards];
+                            self.isComputerTurn = NO;
+                            [self.delegate updateUI];
+                            [self checkIfGameStateShouldChange];
+                        }
                     } else {
                         [self.computerParticipantCards addObjectsFromArray:self.turnCards];
                         self.isComputerTurn = NO;
@@ -347,10 +361,10 @@
     self.isComputerTurn = YES;
     [self.delegate updateUI];
     
+    [self checkIfGameStateShouldChange];
+    
     if (self.computerParticipantCards.count == 0) {
-        self.gameState = DurakGameStateEndedWithComputerWin;
-    } else if (self.selfParticipantCards.count == 0) {
-        self.gameState = DurakGameStateEndedWithUserWin;
+        return;
     }
     
     NSMutableArray *cheapOptions = [NSMutableArray new];

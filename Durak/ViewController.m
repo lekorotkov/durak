@@ -196,10 +196,10 @@
                 }
             }
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 playingCardView.faceUp = YES;
                 [self.view bringSubviewToFront:playingCardView];
-            });
+            //});
             
             switch (i) {
                 case 0: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -340,10 +340,10 @@
             }
         }
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+       // dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             playingCardView.faceUp = YES;
             [self.view bringSubviewToFront:playingCardView];
-        });
+        //});
         
         NSTimeInterval oddCardDelay = 0.f;
         NSTimeInterval evenCardDelay = 0.f;
