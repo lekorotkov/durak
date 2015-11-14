@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) PlayingCardDeck *deck;
 @property (nonatomic, strong) PlayingCard *mainCard;
+@property (nonatomic, assign) BOOL isWidthSreenMore320;
 
 @end
 
@@ -30,6 +31,14 @@
         self.gameModel = [[DurakGameModel alloc] initWithBigDeck:NO];
     } else {
         self.gameModel = [[DurakGameModel alloc] initWithBigDeck:YES];
+    }
+    
+    if (self.view.bounds.size.width<=320.0f) {
+        self.isWidthSreenMore320 = NO;
+    }
+    else
+    {
+        self.isWidthSreenMore320 = YES;
     }
     
     self.gameModel.delegate = self;
@@ -46,15 +55,9 @@
     }
     
     if (self.gameModel.deck.lastCardsCount > 0) {
-        PlayingCardView *cardView;
-        if (self.view.bounds.size.width<=320.0f)
-        {
-            cardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(20, self.view.bounds.size.height / 2 + 100, 60, 80)];
-        }
-        else
-        {
-            cardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(20, self.view.bounds.size.height / 2 - 40, 60, 80)];
-        }
+        float temp = self.isWidthSreenMore320 ? self.view.bounds.size.height/2 -40 : self.view.bounds.size.height - 170;
+        NSLog(@"%f",self.view.bounds.size.height);
+        PlayingCardView *cardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(20, temp, 60, 80)];
         cardView.rank = [self.gameModel.mainCard rank];
         cardView.suit = [self.gameModel.mainCard suit];
         cardView.faceUp = YES;
@@ -66,15 +69,8 @@
     }
     
     if (self.gameModel.deck.lastCardsCount > 1) {
-        PlayingCardView *faceDownCardView;
-        if (self.view.bounds.size.width<=320.0f)
-        {
-            faceDownCardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height / 2 + 100, 60, 80)];
-        }
-        else
-        {
-            faceDownCardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height / 2 - 40, 60, 80)];
-        }
+        float temp = self.isWidthSreenMore320 ? self.view.bounds.size.height/2 -40 : self.view.bounds.size.height - 170;
+        PlayingCardView *faceDownCardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(0,temp, 60, 80)];
         faceDownCardView.backgroundColor = [UIColor clearColor];
         [self.view addSubview:faceDownCardView];
     }
@@ -202,8 +198,11 @@
             //});
             
             switch (i) {
-                case 0: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 - 90, self.view.bounds.size.height/2 - 100, 60, 80);
+                case 0: {
+                    [UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    float temp = self.isWidthSreenMore320 ? -90 : -150;
+                    float tempHeight = self.isWidthSreenMore320 ? -100 : -130;
+                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 +temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
                     playingCardView.frame = newFrame;
                     for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
                         [playingCardView  removeGestureRecognizer:recognizer];
@@ -212,7 +211,9 @@
                     break;
                     
                 case 1: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2 - 80, 60, 80);
+                    float temp = self.isWidthSreenMore320 ? -70 : -130;
+                    float tempHeight = self.isWidthSreenMore320 ? -80 : -110;
+                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
                     playingCardView.frame = newFrame;
                     for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
                         [playingCardView  removeGestureRecognizer:recognizer];
@@ -221,7 +222,9 @@
                     break;
                     
                 case 2: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2 - 100, 60, 80);
+                    float temp = self.isWidthSreenMore320 ? 0 : -60;
+                    float tempHeight = self.isWidthSreenMore320 ? -100 : -130;
+                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
                     playingCardView.frame = newFrame;
                     for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
                         [playingCardView  removeGestureRecognizer:recognizer];
@@ -230,7 +233,9 @@
                     break;
                     
                 case 3: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + 20.f, self.view.bounds.size.height/2 - 80, 60, 80);
+                    float temp = self.isWidthSreenMore320 ? 20 : -40;
+                    float tempHeight = self.isWidthSreenMore320 ? -80 : -110;
+                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
                     playingCardView.frame = newFrame;
                     for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
                         [playingCardView  removeGestureRecognizer:recognizer];
@@ -239,7 +244,9 @@
                     break;
                     
                 case 4: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + 90, self.view.bounds.size.height/2 - 100, 60, 80);
+                    float temp = self.isWidthSreenMore320 ? 90 : 30;
+                    float tempHeight = self.isWidthSreenMore320 ? -100 : -130;
+                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
                     playingCardView.frame = newFrame;
                     for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
                         [playingCardView  removeGestureRecognizer:recognizer];
@@ -248,7 +255,9 @@
                     break;
                     
                 case 5: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + 110.f, self.view.bounds.size.height/2 - 80, 60, 80);
+                    float temp = self.isWidthSreenMore320 ? 110 : 50;
+                    float tempHeight = self.isWidthSreenMore320 ? -80 : -110;
+                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
                     playingCardView.frame = newFrame;
                     for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
                         [playingCardView  removeGestureRecognizer:recognizer];
@@ -257,7 +266,9 @@
                     break;
                     
                 case 6: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 - 90, self.view.bounds.size.height/2, 60, 80);
+                    float temp = self.isWidthSreenMore320 ? -90 : -150;
+                    float tempHeight = self.isWidthSreenMore320 ? 5 : -25;
+                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 +temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
                     playingCardView.frame = newFrame;
                     for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
                         [playingCardView  removeGestureRecognizer:recognizer];
@@ -266,7 +277,9 @@
                     break;
                     
                 case 7: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2 + 20, 60, 80);
+                    float temp = self.isWidthSreenMore320 ? -70 : -130;
+                    float tempHeight = self.isWidthSreenMore320 ? 25 : -5;
+                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 +temp, self.view.bounds.size.height/2 + tempHeight, 60, 80);
                     playingCardView.frame = newFrame;
                     for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
                         [playingCardView  removeGestureRecognizer:recognizer];
@@ -275,7 +288,9 @@
                     break;
                     
                 case 8: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2, 60, 80);
+                    float temp = self.isWidthSreenMore320 ? 0 : -60;
+                    float tempHeight = self.isWidthSreenMore320 ? 5 : -25;
+                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2+temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
                     playingCardView.frame = newFrame;
                     for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
                         [playingCardView  removeGestureRecognizer:recognizer];
@@ -284,7 +299,9 @@
                     break;
                     
                 case 9: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + 20.f, self.view.bounds.size.height/2 + 20, 60, 80);
+                    float temp = self.isWidthSreenMore320 ? 20 : -40;
+                    float tempHeight = self.isWidthSreenMore320 ? 25 : -5;
+                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 + tempHeight, 60, 80);
                     playingCardView.frame = newFrame;
                     for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
                         [playingCardView  removeGestureRecognizer:recognizer];
@@ -293,7 +310,9 @@
                     break;
                     
                 case 10: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + 90, self.view.bounds.size.height/2, 60, 80);
+                    float temp = self.isWidthSreenMore320 ? 90 : 30;
+                    float tempHeight = self.isWidthSreenMore320 ? 5 : -25;
+                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
                     playingCardView.frame = newFrame;
                     for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
                         [playingCardView  removeGestureRecognizer:recognizer];
@@ -302,7 +321,9 @@
                     break;
                     
                 case 11: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + 110.f, self.view.bounds.size.height/2 + 20, 60, 80);
+                    float temp = self.isWidthSreenMore320 ? 110 : 50;
+                    float tempHeight = self.isWidthSreenMore320 ? 25 : -5;
+                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 + tempHeight, 60, 80);
                     playingCardView.frame = newFrame;
                     for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
                         [playingCardView  removeGestureRecognizer:recognizer];
@@ -358,73 +379,97 @@
         
         switch (i) {
             case 0: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 - 90, self.view.bounds.size.height/2 - 100, 60, 80);
+                float temp = self.isWidthSreenMore320 ? -90 : -150;
+                float tempHeight = self.isWidthSreenMore320 ? -100 : -130;
+                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
                 playingCardView.frame = newFrame;
             } completion:nil];}
                 break;
                 
             case 1: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2 - 80, 60, 80);
+                float temp = self.isWidthSreenMore320 ? -70 : -130;
+                float tempHeight = self.isWidthSreenMore320 ? -80 : -110;
+                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 +temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
                 playingCardView.frame = newFrame;
             } completion:nil];}
                 break;
                 
             case 2: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2 - 100, 60, 80);
+                float temp = self.isWidthSreenMore320 ? 0 : -60;
+                float tempHeight = self.isWidthSreenMore320 ? -100 : -130;
+                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 +temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
                 playingCardView.frame = newFrame;
             } completion:nil];}
                 break;
                 
             case 3: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + 20.f, self.view.bounds.size.height/2 - 80, 60, 80);
+                float temp = self.isWidthSreenMore320 ? 20 : -40;
+                float tempHeight = self.isWidthSreenMore320 ? -80 : -110;
+                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
                 playingCardView.frame = newFrame;
             } completion:nil];}
                 break;
             
             case 4: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + 90, self.view.bounds.size.height/2 - 100, 60, 80);
+                float temp = self.isWidthSreenMore320 ? 90 : 30;
+                float tempHeight = self.isWidthSreenMore320 ? -100 : -130;
+                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
                 playingCardView.frame = newFrame;
             } completion:nil];}
                 break;
                 
             case 5: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + 110.f, self.view.bounds.size.height/2 - 80, 60, 80);
+                float temp = self.isWidthSreenMore320 ? 110 : 50;
+                float tempHeight = self.isWidthSreenMore320 ? -80 : -110;
+                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
                 playingCardView.frame = newFrame;
             } completion:nil];}
                 break;
                 
             case 6: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 - 90, self.view.bounds.size.height/2, 60, 80);
+                float temp = self.isWidthSreenMore320 ? -90 : -159;
+                float tempHeight = self.isWidthSreenMore320 ? 5 : -25;
+                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 +temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
                 playingCardView.frame = newFrame;
             } completion:nil];}
                 break;
                 
             case 7: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2 + 20, 60, 80);
+                float temp = self.isWidthSreenMore320 ? -70 : -130;
+                float tempHeight = self.isWidthSreenMore320 ? 25 : -5;
+                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 +temp, self.view.bounds.size.height/2 + tempHeight, 60, 80);
                 playingCardView.frame = newFrame;
             } completion:nil];}
                 break;
                 
             case 8: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2, 60, 80);
+                float temp = self.isWidthSreenMore320 ? 0 : -60;
+                float tempHeight = self.isWidthSreenMore320 ? 5 : -25;
+                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2+temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
                 playingCardView.frame = newFrame;
             } completion:nil];}
                 break;
                 
             case 9: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + 20.f, self.view.bounds.size.height/2 + 20, 60, 80);
+                float temp = self.isWidthSreenMore320 ? 20 : -40;
+                float tempHeight = self.isWidthSreenMore320 ? 25 : -5;
+                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 + tempHeight, 60, 80);
                 playingCardView.frame = newFrame;
             } completion:nil];}
                 break;
                 
             case 10: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + 90, self.view.bounds.size.height/2, 60, 80);
+                float temp = self.isWidthSreenMore320 ? 90 : 30;
+                float tempHeight = self.isWidthSreenMore320 ? 5 : -25;
+                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
                 playingCardView.frame = newFrame;
             } completion:nil];}
                 break;
                 
             case 11: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + 110.f, self.view.bounds.size.height/2 + 20, 60, 80);
+                float temp = self.isWidthSreenMore320 ? 110 : 50;
+                float tempHeight = self.isWidthSreenMore320 ? 25 : -5;
+                CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 + tempHeight, 60, 80);
                 playingCardView.frame = newFrame;
             } completion:nil];}
                 break;
