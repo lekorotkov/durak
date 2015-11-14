@@ -46,7 +46,15 @@
     }
     
     if (self.gameModel.deck.lastCardsCount > 0) {
-        PlayingCardView *cardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(20, self.view.bounds.size.height / 2 - 40, 60, 80)];
+        PlayingCardView *cardView;
+        if (self.view.bounds.size.width<=320.0f)
+        {
+            cardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(20, self.view.bounds.size.height / 2 + 100, 60, 80)];
+        }
+        else
+        {
+            cardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(20, self.view.bounds.size.height / 2 - 40, 60, 80)];
+        }
         cardView.rank = [self.gameModel.mainCard rank];
         cardView.suit = [self.gameModel.mainCard suit];
         cardView.faceUp = YES;
@@ -58,7 +66,15 @@
     }
     
     if (self.gameModel.deck.lastCardsCount > 1) {
-        PlayingCardView *faceDownCardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height / 2 - 40, 60, 80)];
+        PlayingCardView *faceDownCardView;
+        if (self.view.bounds.size.width<=320.0f)
+        {
+            faceDownCardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height / 2 + 100, 60, 80)];
+        }
+        else
+        {
+            faceDownCardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height / 2 - 40, 60, 80)];
+        }
         faceDownCardView.backgroundColor = [UIColor clearColor];
         [self.view addSubview:faceDownCardView];
     }
@@ -298,14 +314,7 @@
             
         }
     } else {
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Error!"
-                                                                            message: @"Not allowed action"
-                                                                     preferredStyle: UIAlertControllerStyleAlert];
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
-                                                              style: UIAlertActionStyleDestructive
-                                                            handler: nil];
-        [controller addAction: alertAction];
-        [self presentViewController: controller animated: YES completion: nil];
+        [(PlayingCardView *)recognizer.view animateIncorrectChoose];
     }
 }
 
