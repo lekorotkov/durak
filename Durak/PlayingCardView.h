@@ -8,5 +8,6 @@
 @property (nonatomic, getter=isFaceUp) BOOL faceUp;
 
 - (void)pinch:(UIPinchGestureRecognizer *)gesture;
+- (void)animateIncorrectChoose;
 
 @end

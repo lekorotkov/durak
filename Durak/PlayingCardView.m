@@ -101,6 +101,16 @@
     UIGraphicsPopContext();
 }
 
+- (void)animateIncorrectChoose {
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+    animation.keyPath = @"position.y";
+    animation.values = @[ @0, @-10, @10, @-10, @0 ];
+    animation.keyTimes = @[ @0, @(1 / 6.0), @(3 / 6.0), @(5 / 6.0), @1 ];
+    animation.duration = 0.35;
+    animation.additive = YES;
+    [self.layer addAnimation:animation forKey:@"shake"];
+}
+
 - (NSString *)rankAsString
 {
     return @[@"?", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"J", @"Q", @"K",@"A"][self.rank];
