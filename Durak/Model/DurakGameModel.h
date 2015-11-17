@@ -17,11 +17,33 @@ typedef enum {
     DurakGameStateDraw
 } DurakGameState;
 
+typedef void (^CompletionBlock)();
+
 @protocol DurakGameProtocol <NSObject>
 
 - (void)computerMakeTurnWithCard:(PlayingCard *)card;
 - (void)updateUI;
 - (void)gameStateChanged;
+- (void)removeTurnCards;
+
+- (void)takeCardFromDeckToComputer:(BOOL)yes
+                   withPlayingCard:(PlayingCard *)card
+                        completion:(CompletionBlock)completionBlock;
+
+- (void)sortUserCardsWithCompletion:(CompletionBlock)completionBlock;
+
+- (void)sortComputerCardsWithCompletion:(CompletionBlock)completionBlock;
+
+- (void)makeTurnComputer:(BOOL)yes
+                withCard:(PlayingCard *)card
+              completion:(CompletionBlock)block;
+
+- (void)moveCardToClear:(PlayingCard *)card
+             completion:(CompletionBlock)block;
+
+- (void)pickUpCardsComputer:(BOOL)yes
+                  withCards:(NSArray *)cards
+                 completion:(CompletionBlock)completion;
 
 @end
 

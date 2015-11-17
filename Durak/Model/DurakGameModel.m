@@ -18,8 +18,6 @@
 
 - (instancetype)initWithBigDeck:(BOOL)yes {
     if (self = [super init]) {
-        //int tmp = (arc4random() % 30)+1;
-        //if(tmp % 5 == 0) _isComputerTurn = YES;
         _gameState = DurakGameStatePlaying;
         _deck = [[PlayingCardDeck alloc] initWithBigDeck:yes];
         _mainCard = (PlayingCard *)[_deck drawRandomCard];
@@ -93,20 +91,33 @@
                 
                 if (cheapestOption) {
                     [self.turnCards addObject:cheapestOption];
-                    [self.delegate computerMakeTurnWithCard:cheapestOption];
                     [self.computerParticipantCards removeObject:cheapestOption];
-                    [self checkIfGameStateShouldChange];
+                    [self.delegate makeTurnComputer:NO withCard:card completion:^{
+                        [self.delegate makeTurnComputer:YES withCard:cheapestOption completion:^{
+                            [self checkIfGameStateShouldChange];
+                        }];
+                    }];
                 } else {
                     [self.computerParticipantCards addObjectsFromArray:self.turnCards];
-                    self.isComputerTurn = NO;
-                    [self.delegate updateUI];
-                    [self checkIfGameStateShouldChange];
+                    [self.delegate makeTurnComputer:NO withCard:card completion:^{
+                        [self.delegate pickUpCardsComputer:YES withCards:self.turnCards completion:^{
+                            [self.delegate sortComputerCardsWithCompletion:^{
+                                self.isComputerTurn = NO;
+                                [self checkIfGameStateShouldChange];
+                            }];
+                        }];
+                    }];
                 }
             } else {
                 [self.computerParticipantCards addObjectsFromArray:self.turnCards];
-                self.isComputerTurn = NO;
-                [self.delegate updateUI];
-                [self checkIfGameStateShouldChange];
+                [self.delegate makeTurnComputer:NO withCard:card completion:^{
+                    [self.delegate pickUpCardsComputer:YES withCards:self.turnCards completion:^{
+                        [self.delegate sortComputerCardsWithCompletion:^{
+                            self.isComputerTurn = NO;
+                            [self checkIfGameStateShouldChange];
+                        }];
+                    }];
+                }];
             }
             return YES;
         } else {
@@ -148,9 +159,7 @@
                                 [cheapOptions addObject:option];
                             }
                         }
-                        
                         PlayingCard *cheapestOption;
-                        
                         if (cheapOptions.count > 0) {
                             [cheapOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
                             cheapestOption = [cheapOptions lastObject];
@@ -163,20 +172,33 @@
                         
                         if (cheapestOption) {
                             [self.turnCards addObject:cheapestOption];
-                            [self.delegate computerMakeTurnWithCard:cheapestOption];
-                            [self.computerParticipantCards removeObject:cheapestOption];
-                            [self checkIfGameStateShouldChange];
+                            [self.delegate makeTurnComputer:NO withCard:card completion:^{
+                                [self.computerParticipantCards removeObject:cheapestOption];
+                                [self.delegate makeTurnComputer:YES withCard:cheapestOption completion:^{
+                                    [self checkIfGameStateShouldChange];
+                                }];
+                            }];
                         } else {
-                            [self.computerParticipantCards addObjectsFromArray:self.turnCards];
-                            self.isComputerTurn = NO;
-                            [self.delegate updateUI];
-                            [self checkIfGameStateShouldChange];
+                            [self.delegate makeTurnComputer:NO withCard:card completion:^{
+                                [self.computerParticipantCards addObjectsFromArray:self.turnCards];
+                                [self.delegate pickUpCardsComputer:YES withCards:self.turnCards completion:^{
+                                    [self.delegate sortComputerCardsWithCompletion:^{
+                                        self.isComputerTurn = NO;
+                                        [self checkIfGameStateShouldChange];
+                                    }];
+                                }];
+                            }];
                         }
                     } else {
-                        [self.computerParticipantCards addObjectsFromArray:self.turnCards];
-                        self.isComputerTurn = NO;
-                        [self.delegate updateUI];
-                        [self checkIfGameStateShouldChange];
+                        [self.delegate makeTurnComputer:NO withCard:card completion:^{
+                            [self.computerParticipantCards addObjectsFromArray:self.turnCards];
+                            [self.delegate pickUpCardsComputer:YES withCards:self.turnCards completion:^{
+                                [self.delegate sortComputerCardsWithCompletion:^{
+                                    self.isComputerTurn = NO;
+                                    [self checkIfGameStateShouldChange];
+                                }];
+                            }];
+                        }];
                     }
                     return YES;
                 }
@@ -186,6 +208,7 @@
     } else {
         if ([card.suit isEqualToString:[self.turnCards.lastObject suit]]||[card.suit isEqualToString:self.mainCard.suit]) {
             if (card.rank > [self.turnCards.lastObject rank]||(![self.mainCard.suit isEqualToString:[self.turnCards.lastObject suit]]&&[self.mainCard.suit isEqualToString:card.suit])) {
+                
                 [self.turnCards addObject:card];
                 
                 PlayingCard *cardToRemove;
@@ -237,12 +260,35 @@
                 
                 if (cheapestOption) {
                     [self.turnCards addObject:cheapestOption];
-                    [self.delegate computerMakeTurnWithCard:cheapestOption];
                     [self.computerParticipantCards removeObject:cheapestOption];
+                    [self.delegate makeTurnComputer:NO withCard:card completion:^{
+                        [self.delegate makeTurnComputer:YES withCard:cheapestOption completion:^{
+                            
+                        }];
+                    }];
+                    
+                    
+                    //[self.delegate computerMakeTurnWithCard:cheapestOption];
+                    
                 } else {
-                    self.turnCards = nil;
-                    self.isComputerTurn = NO;
-                    [self.delegate updateUI];
+                    //self.turnCards = nil;
+                    //[self.delegate removeTurnCards];
+                    
+                    __block NSUInteger numberOfAnimatedCards = 0;
+                    
+                    [self.delegate makeTurnComputer:NO withCard:card completion:^{
+                        for (PlayingCard *card in self.turnCards) {
+                            [self.delegate moveCardToClear:card completion:^{
+                                numberOfAnimatedCards++;
+                                if (numberOfAnimatedCards == self.turnCards.count) {
+                                    self.isComputerTurn = NO;
+                                }
+                            }];
+                        }
+                    }];
+                    
+                    
+                    //[self.delegate updateUI];
                 }
                 
                 return YES;
@@ -256,7 +302,7 @@
 }
 
 - (void)checkIfGameStateShouldChange {
-    if (self.deck.lastCardsCount > 0) { //|| !self.mainCardUsed) {
+    if (self.deck.lastCardsCount > 0 || !self.mainCardUsed) {
         return;
     }
     
@@ -304,44 +350,105 @@
     self.selfParticipantCards = [[cheapCards arrayByAddingObjectsFromArray:expensiveCards] mutableCopy];
 }
 
-- (void)takeComputerNeededCards {
+- (void)takeComputerNeededCardsWithCompletion:(CompletionBlock)completion {
     NSUInteger numberOfComputerParticipantCards = self.computerParticipantCards.count;
+    
+    __block NSUInteger numberOfCompletedAnimations = 0;
     
     if (self.computerParticipantCards.count < 6) {
         for (int i = 0; i < 6 - numberOfComputerParticipantCards; i++) {
             Card *cardToAdd = [self drawCardFromDeck];
+            if (!cardToAdd) {
+                if (!self.mainCardUsed) {
+                    cardToAdd = self.mainCard;
+                    self.mainCardUsed = YES;
+                }
+            }
+            
             if (cardToAdd) {
                 [self.computerParticipantCards addObject:cardToAdd];
+                [self.delegate takeCardFromDeckToComputer:YES withPlayingCard:(PlayingCard *)cardToAdd completion:^{
+                    numberOfCompletedAnimations++;
+                    if (numberOfCompletedAnimations == 6 - numberOfComputerParticipantCards) {
+                        [self.delegate sortComputerCardsWithCompletion:^{
+                            completion();
+                        }];
+                    }
+                }];
+            } else {
+                numberOfCompletedAnimations++;
+                if (numberOfCompletedAnimations == 6 - numberOfComputerParticipantCards) {
+                    [self.delegate sortComputerCardsWithCompletion:^{
+                        completion();
+                    }];
+                }
             }
         }
+    } else {
+        [self.delegate sortComputerCardsWithCompletion:^{
+            completion();
+        }];
     }
 }
 
-- (void)takeUserNeededCards {
+- (void)takeUserNeededCardsWithCompletion:(CompletionBlock)completion {
     NSUInteger numberOfSelfParticipantCards = self.selfParticipantCards.count;
+    
+    __block NSUInteger numberOfCompletedAnimations = 0;
     
     if (self.selfParticipantCards.count < 6) {
         for (int i = 0; i < 6 - numberOfSelfParticipantCards; i++) {
             Card *cardToAdd = [self drawCardFromDeck];
+            
+            if (!cardToAdd) {
+                if (!self.mainCardUsed) {
+                    cardToAdd = self.mainCard;
+                    self.mainCardUsed = YES;
+                }
+            }
+            
             if (cardToAdd) {
                 [self.selfParticipantCards addObject:cardToAdd];
+                [self.delegate takeCardFromDeckToComputer:NO withPlayingCard:(PlayingCard *)cardToAdd completion:^{
+                    numberOfCompletedAnimations++;
+                    if (numberOfCompletedAnimations == 6 - numberOfSelfParticipantCards) {
+                        [self.delegate sortUserCardsWithCompletion:^{
+                            completion();
+                        }];
+                    }
+                }];
+            } else {
+                numberOfCompletedAnimations++;
+                if (numberOfCompletedAnimations == 6 - numberOfSelfParticipantCards) {
+                    [self.delegate sortUserCardsWithCompletion:^{
+                        completion();
+                    }];
+                }
             }
         }
+        [self sortSelfParticipantCards];
+    } else {
+        [self sortSelfParticipantCards];
+        [self.delegate sortUserCardsWithCompletion:^{
+            completion();
+        }];
     }
-    [self sortSelfParticipantCards];
 }
 
 - (void)setIsComputerTurn:(BOOL)isComputerTurn{
+    self.turnCards = nil;
+    //[self.delegate removeTurnCards];
+    
+    
     if (_isComputerTurn) {
-        [self takeComputerNeededCards];
-        [self takeUserNeededCards];
+        [self takeComputerNeededCardsWithCompletion:^{ }];
+        [self takeUserNeededCardsWithCompletion:^{ }];
     } else {
-        [self takeUserNeededCards];
-        [self takeComputerNeededCards];
+        [self takeUserNeededCardsWithCompletion:^{ }];
+        [self takeComputerNeededCardsWithCompletion:^{ }];
     }
     
     _isComputerTurn = isComputerTurn;
-    self.turnCards = nil;
 }
 
 - (void)pickUpPressed {
@@ -357,43 +464,63 @@
         }
     }
     
-    self.turnCards = nil;
-    self.isComputerTurn = YES;
-    [self.delegate updateUI];
     
-    [self checkIfGameStateShouldChange];
+    //[self.delegate removeTurnCards];
+        [self.delegate pickUpCardsComputer:NO withCards:self.turnCards completion:^{
+            [self sortSelfParticipantCards];
+            [self.delegate sortUserCardsWithCompletion:^{
+                [self checkIfGameStateShouldChange];
+                
+                //[self takeUserNeededCardsWithCompletion:^{
+                    [self takeComputerNeededCardsWithCompletion:^{
+                        
+                        self.turnCards = nil;
+                        
+                        if (self.computerParticipantCards.count == 0) {
+                            return;
+                        }
+                        
+                        NSMutableArray *cheapOptions = [NSMutableArray new];
+                        NSMutableArray *expensiveOptions = [NSMutableArray new];
+                        
+                        for (PlayingCard *option in self.computerParticipantCards) {
+                            if ([option.suit isEqualToString:self.mainCard.suit]) {
+                                [expensiveOptions addObject:option];
+                            } else {
+                                [cheapOptions addObject:option];
+                            }
+                        }
+                        
+                        PlayingCard *cheapestOption;
+                        
+                        if (cheapOptions.count > 0) {
+                            [cheapOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
+                            cheapestOption = [cheapOptions lastObject];
+                        } else {
+                            [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
+                            cheapestOption = [expensiveOptions lastObject];
+                        }
+                        
+                        [self.turnCards addObject:cheapestOption];
+                        [self.computerParticipantCards removeObject:cheapestOption];
+                        [self.delegate makeTurnComputer:YES withCard:cheapestOption completion:^{
+                            if (self.computerParticipantCards.count == 0) {
+                                self.gameState = DurakGameStateEndedWithComputerWin;
+                            }
+                        }];
+                    }];
+               // }];
+                //[self.delegate updateUI];
+                
+            }];
+        }];
     
-    if (self.computerParticipantCards.count == 0) {
-        return;
-    }
     
-    NSMutableArray *cheapOptions = [NSMutableArray new];
-    NSMutableArray *expensiveOptions = [NSMutableArray new];
     
-    for (PlayingCard *option in self.computerParticipantCards) {
-        if ([option.suit isEqualToString:self.mainCard.suit]) {
-            [expensiveOptions addObject:option];
-        } else {
-            [cheapOptions addObject:option];
-        }
-    }
     
-    PlayingCard *cheapestOption;
+    //[self.delegate computerMakeTurnWithCard:cheapestOption];
     
-    if (cheapOptions.count > 0) {
-        [cheapOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
-        cheapestOption = [cheapOptions lastObject];
-    } else {
-        [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
-        cheapestOption = [expensiveOptions lastObject];
-    }
     
-    [self.turnCards addObject:cheapestOption];
-    [self.delegate computerMakeTurnWithCard:cheapestOption];
-    [self.computerParticipantCards removeObject:cheapestOption];
-    if (self.computerParticipantCards.count == 0) {
-        self.gameState = DurakGameStateEndedWithComputerWin;
-    }
 }
 
 - (void)setGameState:(DurakGameState)gameState {
@@ -404,43 +531,71 @@
 }
 
 - (void)retreatPressed {
-    self.isComputerTurn = YES;
-    [self.delegate updateUI];
+    //[self.delegate removeTurnCards];
     
-    if (self.computerParticipantCards.count == 0) {
-        self.gameState = DurakGameStateEndedWithComputerWin;
-    } else if (self.selfParticipantCards.count == 0) {
-        self.gameState = DurakGameStateEndedWithUserWin;
+    __block int numberOfCompletedClearCards = 0;
+    
+    for (PlayingCard *card in self.turnCards) {
+        [self.delegate moveCardToClear:card completion:^{
+            numberOfCompletedClearCards++;
+            if (numberOfCompletedClearCards == self.turnCards.count) {
+                [self takeUserNeededCardsWithCompletion:^{
+                    [self takeComputerNeededCardsWithCompletion:^{
+                        _isComputerTurn = YES;
+                        self.turnCards = [NSMutableArray new];
+                        
+                        if (self.computerParticipantCards.count == 0) {
+                            self.gameState = DurakGameStateEndedWithComputerWin;
+                        } else if (self.selfParticipantCards.count == 0) {
+                            self.gameState = DurakGameStateEndedWithUserWin;
+                        }
+                        
+                        NSMutableArray *cheapOptions = [NSMutableArray new];
+                        NSMutableArray *expensiveOptions = [NSMutableArray new];
+                        
+                        for (PlayingCard *option in self.computerParticipantCards) {
+                            if ([option.suit isEqualToString:self.mainCard.suit]) {
+                                [expensiveOptions addObject:option];
+                            } else {
+                                [cheapOptions addObject:option];
+                            }
+                        }
+                        
+                        PlayingCard *cheapestOption;
+                        
+                        if (cheapOptions.count > 0) {
+                            [cheapOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
+                            cheapestOption = [cheapOptions lastObject];
+                        } else {
+                            [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
+                            cheapestOption = [expensiveOptions lastObject];
+                        }
+                        
+                        [self.turnCards addObject:cheapestOption];
+                        [self.computerParticipantCards removeObject:cheapestOption];
+                        
+                        [self.delegate makeTurnComputer:YES withCard:cheapestOption completion:^{
+                            if (self.computerParticipantCards.count == 0) {
+                                self.gameState = DurakGameStateEndedWithComputerWin;
+                            }
+                        }];
+                    }];
+                }];
+                
+                
+                //self.isComputerTurn = YES;
+                //[self.delegate updateUI];
+                
+                
+            }
+        }];
     }
     
-    NSMutableArray *cheapOptions = [NSMutableArray new];
-    NSMutableArray *expensiveOptions = [NSMutableArray new];
     
-    for (PlayingCard *option in self.computerParticipantCards) {
-        if ([option.suit isEqualToString:self.mainCard.suit]) {
-            [expensiveOptions addObject:option];
-        } else {
-            [cheapOptions addObject:option];
-        }
-    }
+    //[self.delegate computerMakeTurnWithCard:cheapestOption];
     
-    PlayingCard *cheapestOption;
     
-    if (cheapOptions.count > 0) {
-        [cheapOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
-        cheapestOption = [cheapOptions lastObject];
-    } else {
-        [expensiveOptions sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"rank" ascending:NO]]];
-        cheapestOption = [expensiveOptions lastObject];
-    }
     
-    [self.turnCards addObject:cheapestOption];
-    [self.delegate computerMakeTurnWithCard:cheapestOption];
-    [self.computerParticipantCards removeObject:cheapestOption];
-    
-    if (self.computerParticipantCards.count == 0) {
-        self.gameState = DurakGameStateEndedWithComputerWin;
-    }
 }
 
 @end

@@ -46,6 +46,7 @@
 		11AD61D01BF4BDB3006BF35F /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61CB1BF4BDB3006BF35F /* PlayingCardDeck.m */; settings = {ASSET_TAGS = (); }; };
 		11AD61D31BF4C5BA006BF35F /* DurakGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61D21BF4C5BA006BF35F /* DurakGameModel.m */; settings = {ASSET_TAGS = (); }; };
 		11D79F5B1BF64E78005C4F7E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D79F5A1BF64E78005C4F7E /* SettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CEC1C0541BFB777B00B6193B /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC1C0531BFB777A00B6193B /* iAd.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		11AD61D21BF4C5BA006BF35F /* DurakGameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DurakGameModel.m; sourceTree = "<group>"; };
 		11D79F591BF64E78005C4F7E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		11D79F5A1BF64E78005C4F7E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		CEC1C0531BFB777A00B6193B /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC1C0541BFB777B00B6193B /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +137,7 @@
 		11AD615A1BF4BC73006BF35F = {
 			isa = PBXGroup;
 			children = (
+				CEC1C0531BFB777A00B6193B /* iAd.framework */,
 				11AD61651BF4BC73006BF35F /* Durak */,
 				11AD617F1BF4BC73006BF35F /* DurakUITests */,
 				11AD61641BF4BC73006BF35F /* Products */,
