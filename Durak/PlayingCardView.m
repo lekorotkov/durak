@@ -7,7 +7,8 @@
 @implementation PlayingCardView
 @synthesize faceCardScaleFactor = _faceCardScaleFactor;
 
-#define DEFAULT_FACE_CARD_SCALE_FACTOR 0.90;
+#define DEFAULT_FACE_CARD_SCALE_FACTOR 0.94;
+
 
 - (CGFloat)faceCardScaleFactor
 {
@@ -33,7 +34,7 @@
 }
 
 #define PIP_FONT_SCALE_FACTOR 0.20
-#define CORNER 12.0
+#define CORNER 6.0
 
 - (void)drawRect:(CGRect)rect
 {
@@ -48,6 +49,7 @@
     
     if (self.faceUp) {
         UIImage *faceImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.jpg", [self rankAsString], self.suit]];
+        NSLog(@"%@",[NSString stringWithFormat:@"%@%@.jpg", [self rankAsString], self.suit]);
         if (faceImage) {
             CGRect imageRect = CGRectInset(self.bounds,
                                            self.bounds.size.width * (1.0 - self.faceCardScaleFactor),
@@ -55,7 +57,7 @@
             [faceImage drawInRect:imageRect];
         }
         
-        [self drawCorners];
+        //[self drawCorners];
     } else {
         [[UIImage imageNamed:@"cardback.png"] drawInRect:self.bounds];
     }
