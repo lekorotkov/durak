@@ -217,12 +217,16 @@
 - (void)takeCardFromDeckToComputer:(BOOL)yes
                    withPlayingCard:(PlayingCard *)card
                         completion:(CompletionBlock)block {
-    float temp = self.isWidthSreenMore320 ? self.view.bounds.size.height/2 -40 : self.view.bounds.size.height - 170;
-    PlayingCardView *cardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(0,temp, 60, 80)];
-    cardView.rank = card.rank;
-    cardView.suit = card.suit;
-    cardView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:cardView];
+    
+    if (self.gameModel.deck.lastCardsCount == 0) {
+        for (UIView *view in self.view.subviews) {
+            if ([view isKindOfClass:[PlayingCardView class]]) {
+                if (view.tag == 12) {
+                    [view removeFromSuperview];
+                }
+            }
+        }
+    }
     
     CGRect rect;
     
@@ -242,12 +246,47 @@
             xPosition = self.view.bounds.size.width/2 + ((self.gameModel.selfParticipantCards.count - 1) * 50 + 60)/2 - 60;
         }
         rect = CGRectMake(xPosition, self.view.bounds.size.height - 90, 60, 80);
-        cardView.faceUp = YES;
     }
+    
+    
+    
+    for (UIView *view in self.view.subviews) {
+        if ([view isKindOfClass:[PlayingCardView class]]) {
+            PlayingCardView *cardView = (PlayingCardView *)view;
+            if (cardView.rank == card.rank) {
+                if ([cardView.suit isEqualToString:card.suit]) {
+                    [UIView animateWithDuration:0.5f animations:^{
+                        cardView.frame = rect;
+                        double rads = ((0) / 180.0 * M_PI);
+                        CGAffineTransform transform = CGAffineTransformRotate(CGAffineTransformIdentity, rads);
+                        cardView.transform = transform;
+                    } completion:^(BOOL finished) {
+                        if (!yes) {
+                            cardView.faceUp = YES;
+                        }
+                        block();
+                    }];
+                    return;
+                }
+            }
+        }
+    }
+    
+    float temp = self.isWidthSreenMore320 ? self.view.bounds.size.height/2 -40 : self.view.bounds.size.height - 170;
+    PlayingCardView *cardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(0,temp, 60, 80)];
+    cardView.rank = card.rank;
+    cardView.suit = card.suit;
+    cardView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:cardView];
+    
+    
     
     [UIView animateWithDuration:0.5f animations:^{
         cardView.frame = rect;
     } completion:^(BOOL finished) {
+        if (!yes) {
+            cardView.faceUp = YES;
+        }
         block();
     }];
 }
@@ -544,7 +583,7 @@
         }
     }
     
-    if (self.gameModel.deck.lastCardsCount > 0) {
+    if (!self.gameModel.mainCardUsed) {
         float temp = self.isWidthSreenMore320 ? self.view.bounds.size.height/2 -40 : self.view.bounds.size.height - 170;
         NSLog(@"%f",self.view.bounds.size.height);
         PlayingCardView *cardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(20, temp, 60, 80)];
@@ -558,9 +597,10 @@
         [self.view addSubview:cardView];
     }
     
-    if (self.gameModel.deck.lastCardsCount > 1) {
+    if (self.gameModel.deck.lastCardsCount > 0) {
         float temp = self.isWidthSreenMore320 ? self.view.bounds.size.height/2 -40 : self.view.bounds.size.height - 170;
         PlayingCardView *faceDownCardView = [[PlayingCardView alloc] initWithFrame:CGRectMake(0,temp, 60, 80)];
+        faceDownCardView.tag = 12;
         faceDownCardView.backgroundColor = [UIColor clearColor];
         [self.view addSubview:faceDownCardView];
     }
@@ -656,7 +696,10 @@
     PlayingCard *card = [[PlayingCard alloc] init];
     card.rank = [(PlayingCardView *)recognizer.view rank];
     card.suit = [(PlayingCardView *)recognizer.view suit];
-    [self.gameModel userTurnWithCard:card];
+    if (![self.gameModel userTurnWithCard:card]) {
+        [(PlayingCardView *)recognizer.view animateIncorrectChoose];
+    }
+    
     /* PlayingCard *card = [[PlayingCard alloc] init];
     card.rank = [(PlayingCardView *)recognizer.view rank];
     card.suit = [(PlayingCardView *)recognizer.view suit];
@@ -999,7 +1042,9 @@
                                                                      preferredStyle: UIAlertControllerStyleAlert];
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
                                                               style: UIAlertActionStyleDestructive
-                                                            handler: nil];
+                                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                                
+        }];
         [controller addAction: alertAction];
         [self presentViewController: controller animated: YES completion: nil];
     }
@@ -1029,7 +1074,9 @@
                                                                      preferredStyle: UIAlertControllerStyleAlert];
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
                                                               style: UIAlertActionStyleDestructive
-                                                            handler: nil];
+                                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                                [self performSegueWithIdentifier:@"unwindToSettings" sender:nil];
+                                                            }];
         [controller addAction: alertAction];
         [self presentViewController: controller animated: YES completion: nil];
     } else if (self.gameModel.gameState == DurakGameStateEndedWithComputerWin) {
@@ -1038,7 +1085,9 @@
                                                                      preferredStyle: UIAlertControllerStyleAlert];
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
                                                               style: UIAlertActionStyleDestructive
-                                                            handler: nil];
+                                                            handler: ^(UIAlertAction * _Nonnull action) {
+                                                                [self performSegueWithIdentifier:@"unwindToSettings" sender:nil];
+                                                            }];
         [controller addAction: alertAction];
         [self presentViewController: controller animated: YES completion: nil];
     } else if (self.gameModel.gameState == DurakGameStateDraw) {
@@ -1047,7 +1096,9 @@
                                                                      preferredStyle: UIAlertControllerStyleAlert];
         UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
                                                               style: UIAlertActionStyleDestructive
-                                                            handler: nil];
+                                                            handler: ^(UIAlertAction * _Nonnull action) {
+                                                                [self performSegueWithIdentifier:@"unwindToSettings" sender:nil];
+                                                            }];
         [controller addAction: alertAction];
         [self presentViewController: controller animated: YES completion: nil];
     }

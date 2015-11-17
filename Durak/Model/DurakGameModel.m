@@ -10,8 +10,6 @@
 
 @interface DurakGameModel ()
 
-@property (nonatomic) BOOL mainCardUsed;
-
 @end
 
 @implementation DurakGameModel
@@ -581,21 +579,9 @@
                         }];
                     }];
                 }];
-                
-                
-                //self.isComputerTurn = YES;
-                //[self.delegate updateUI];
-                
-                
             }
         }];
     }
-    
-    
-    //[self.delegate computerMakeTurnWithCard:cheapestOption];
-    
-    
-    
 }
 
 @end

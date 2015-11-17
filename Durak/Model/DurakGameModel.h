@@ -59,6 +59,8 @@ typedef void (^CompletionBlock)();
 @property (nonatomic) BOOL isComputerTurn;
 @property (nonatomic, strong) PlayingCard *mainCard;
 
+@property (nonatomic) BOOL mainCardUsed;
+
 - (BOOL)userTurnWithCard:(PlayingCard *)card;
 - (void)retreatPressed;
 - (void)pickUpPressed;

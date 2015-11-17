@@ -8,10 +8,20 @@
 
 #import "SettingsViewController.h"
 #import "ViewController.h"
+#import <iAd/iAd.h>
 
-@interface SettingsViewController ()
+@interface SettingsViewController () <ADBannerViewDelegate>
 
+@property (weak, nonatomic) IBOutlet ADBannerView *adBanner;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *numberOfCardsSegmentedControl;
+@property (weak, nonatomic) IBOutlet UILabel *lblTimerMessage;
+
+
+@property (nonatomic, strong) NSTimer *timer;
+
+@property (nonatomic) int secondsElapsed;
+
+@property (nonatomic) BOOL pauseTimeCounting;
 
 @end
 
@@ -19,7 +29,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.adBanner.delegate = self;
+    self.adBanner.alpha = 0.0;
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showTimerMessage) userInfo:nil repeats:YES];
+    
+    self.secondsElapsed = 0;
+}
+
+-(void)showTimerMessage{
+    if (!self.pauseTimeCounting) {
+        self.secondsElapsed++;
+        
+        self.lblTimerMessage.text = [NSString stringWithFormat:@"You've been viewing this view for %d seconds", self.secondsElapsed];
+    }
+    else{
+        self.lblTimerMessage.text = @"Paused to show ad...";
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,5 +68,52 @@
         }
     }
 }
+
+- (IBAction)unwindToSettingsVC:(UIStoryboardSegue *)segue {
+    
+}
+
+#pragma mark - AdBannerViewDelegate method implementation
+
+-(void)bannerViewWillLoadAd:(ADBannerView *)banner{
+    NSLog(@"Ad Banner will load ad.");
+}
+
+
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner{
+    NSLog(@"Ad Banner did load ad.");
+    
+    // Show the ad banner.
+    [UIView animateWithDuration:0.5 animations:^{
+        self.adBanner.alpha = 1.0;
+    }];
+}
+
+
+-(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave{
+    NSLog(@"Ad Banner action is about to begin.");
+    
+    self.pauseTimeCounting = YES;
+    
+    return YES;
+}
+
+
+-(void)bannerViewActionDidFinish:(ADBannerView *)banner{
+    NSLog(@"Ad Banner action did finish");
+    
+    self.pauseTimeCounting = NO;
+}
+
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error{
+    NSLog(@"Unable to show ads. Error: %@", [error localizedDescription]);
+    
+    // Hide the ad banner.
+    [UIView animateWithDuration:0.5 animations:^{
+        self.adBanner.alpha = 0.0;
+    }];
+}
+
 
 @end
