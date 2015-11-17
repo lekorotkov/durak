@@ -20,7 +20,6 @@
 		11AD61CF1BF4BDB3006BF35F /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61C91BF4BDB3006BF35F /* PlayingCard.m */; settings = {ASSET_TAGS = (); }; };
 		11AD61D01BF4BDB3006BF35F /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61CB1BF4BDB3006BF35F /* PlayingCardDeck.m */; settings = {ASSET_TAGS = (); }; };
 		11AD61D31BF4C5BA006BF35F /* DurakGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61D21BF4C5BA006BF35F /* DurakGameModel.m */; settings = {ASSET_TAGS = (); }; };
-		11D0E2851BFB756B009EE570 /* .DS_Store in Resources */ = {isa = PBXBuildFile; fileRef = 11D0E21A1BFB756B009EE570 /* .DS_Store */; settings = {ASSET_TAGS = (); }; };
 		11D0E2861BFB756B009EE570 /* 2♠@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11D0E21B1BFB756B009EE570 /* 2♠@2x.jpg */; settings = {ASSET_TAGS = (); }; };
 		11D0E2871BFB756B009EE570 /* 2♠@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11D0E21C1BFB756B009EE570 /* 2♠@3x.jpg */; settings = {ASSET_TAGS = (); }; };
 		11D0E2881BFB756B009EE570 /* 2♣@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11D0E21D1BFB756B009EE570 /* 2♣@2x.jpg */; settings = {ASSET_TAGS = (); }; };
@@ -166,7 +165,6 @@
 		11AD61CB1BF4BDB3006BF35F /* PlayingCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardDeck.m; sourceTree = "<group>"; };
 		11AD61D11BF4C5BA006BF35F /* DurakGameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DurakGameModel.h; sourceTree = "<group>"; };
 		11AD61D21BF4C5BA006BF35F /* DurakGameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DurakGameModel.m; sourceTree = "<group>"; };
-		11D0E21A1BFB756B009EE570 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; path = .DS_Store; sourceTree = "<group>"; };
 		11D0E21B1BFB756B009EE570 /* 2♠@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2♠@2x.jpg"; sourceTree = "<group>"; };
 		11D0E21C1BFB756B009EE570 /* 2♠@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2♠@3x.jpg"; sourceTree = "<group>"; };
 		11D0E21D1BFB756B009EE570 /* 2♣@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2♣@2x.jpg"; sourceTree = "<group>"; };
@@ -355,7 +353,6 @@
 		11AD618B1BF4BCD3006BF35F /* images */ = {
 			isa = PBXGroup;
 			children = (
-				11D0E21A1BFB756B009EE570 /* .DS_Store */,
 				11D0E21B1BFB756B009EE570 /* 2♠@2x.jpg */,
 				11D0E21C1BFB756B009EE570 /* 2♠@3x.jpg */,
 				11D0E21D1BFB756B009EE570 /* 2♣@2x.jpg */,
@@ -589,7 +586,6 @@
 				11AD61731BF4BC73006BF35F /* Assets.xcassets in Resources */,
 				11D0E28F1BFB756B009EE570 /* 3♠@3x.jpg in Resources */,
 				11D0E2861BFB756B009EE570 /* 2♠@2x.jpg in Resources */,
-				11D0E2851BFB756B009EE570 /* .DS_Store in Resources */,
 				11D0E29D1BFB756B009EE570 /* 4♦@3x.jpg in Resources */,
 				11D0E2E61BFB756B009EE570 /* K♦@2x.jpg in Resources */,
 				11D0E2A51BFB756B009EE570 /* 5♦@3x.jpg in Resources */,
