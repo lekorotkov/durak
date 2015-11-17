@@ -447,9 +447,11 @@
     }
     
     _isComputerTurn = isComputerTurn;
+    [self.delegate changeButtonName];
 }
 
 - (void)pickUpPressed {
+    [self.delegate disableButton];
     for (PlayingCard *card in self.turnCards) {
         BOOL shouldAddToSelfParticipantCards = YES;
         for (PlayingCard *selfCard in self.selfParticipantCards) {
@@ -502,6 +504,7 @@
                         [self.turnCards addObject:cheapestOption];
                         [self.computerParticipantCards removeObject:cheapestOption];
                         [self.delegate makeTurnComputer:YES withCard:cheapestOption completion:^{
+                            [self.delegate changeButtonName];
                             if (self.computerParticipantCards.count == 0) {
                                 self.gameState = DurakGameStateEndedWithComputerWin;
                             }
@@ -530,7 +533,7 @@
 
 - (void)retreatPressed {
     //[self.delegate removeTurnCards];
-    
+    [self.delegate disableButton];
     __block int numberOfCompletedClearCards = 0;
     
     for (PlayingCard *card in self.turnCards) {
@@ -540,6 +543,7 @@
                 [self takeUserNeededCardsWithCompletion:^{
                     [self takeComputerNeededCardsWithCompletion:^{
                         _isComputerTurn = YES;
+                        [self.delegate changeButtonName];
                         self.turnCards = [NSMutableArray new];
                         
                         if (self.computerParticipantCards.count == 0) {

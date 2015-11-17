@@ -15,15 +15,12 @@
 
 @interface ViewController () <DurakGameProtocol, ADBannerViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIButton *button;
 @property (nonatomic, strong) DurakGameModel *gameModel;
 
 @property (nonatomic, strong) PlayingCardDeck *deck;
 @property (nonatomic, strong) PlayingCard *mainCard;
 @property (nonatomic, assign) BOOL isWidthSreenMore320;
-
-@property (nonatomic, retain) IBOutlet UIView *contentView;
-@property (nonatomic, retain) id adBannerView;
-@property (nonatomic) BOOL adBannerViewIsVisible;
 
 @end
 
@@ -50,11 +47,16 @@
     
     self.gameModel.delegate = self;
     
+    
+    [self changeButtonName];
+    [self disableButton];
     [self updateUI];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    
+    self.button.layer.borderWidth = 2.f;
+    self.button.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor blueColor]);
+    self.button.layer.cornerRadius = 5.f;
 }
 
 - (void)checkIfGameModelCorrect {
@@ -212,6 +214,27 @@
     } completion:^(BOOL finished) {
         completionBlock();
     }];
+}
+
+- (IBAction)buttonPressed:(id)sender {
+    if (!self.gameModel.isComputerTurn) {
+        [self.gameModel retreatPressed];
+    } else {
+        [self.gameModel pickUpPressed];
+    }
+}
+
+- (void)disableButton {
+    self.button.enabled = NO;
+}
+
+- (void)changeButtonName {
+    self.button.enabled = YES;
+    if (!self.gameModel.isComputerTurn) {
+        [self.button setTitle:@"Отбой" forState:UIControlStateNormal];
+    } else {
+        [self.button setTitle:@"Забрать" forState:UIControlStateNormal];
+    }
 }
 
 - (void)takeCardFromDeckToComputer:(BOOL)yes

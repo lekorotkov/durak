@@ -44,6 +44,8 @@ typedef void (^CompletionBlock)();
 - (void)pickUpCardsComputer:(BOOL)yes
                   withCards:(NSArray *)cards
                  completion:(CompletionBlock)completion;
+- (void)changeButtonName;
+- (void)disableButton;
 
 @end
 
