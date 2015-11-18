@@ -38,6 +38,7 @@
 }
 
 - (BOOL)userTurnWithCard:(PlayingCard *)card {
+    [self.delegate changeButtonName];
     NSLog(@"%lu", (unsigned long)self.deck.lastCardsCount);
     if (!self.isComputerTurn) {
         if (self.turnCards.count == 0) {
@@ -439,11 +440,15 @@
     
     
     if (_isComputerTurn) {
-        [self takeComputerNeededCardsWithCompletion:^{ }];
-        [self takeUserNeededCardsWithCompletion:^{ }];
+        [self takeComputerNeededCardsWithCompletion:^{
+            [self takeUserNeededCardsWithCompletion:^{ }];
+        }];
+        
     } else {
-        [self takeUserNeededCardsWithCompletion:^{ }];
-        [self takeComputerNeededCardsWithCompletion:^{ }];
+        [self takeUserNeededCardsWithCompletion:^{
+            [self takeComputerNeededCardsWithCompletion:^{ }];
+        }];
+        
     }
     
     _isComputerTurn = isComputerTurn;
@@ -465,13 +470,10 @@
     }
     
     
-    //[self.delegate removeTurnCards];
-        [self.delegate pickUpCardsComputer:NO withCards:self.turnCards completion:^{
-            [self sortSelfParticipantCards];
+    [self.delegate pickUpCardsComputer:NO withCards:self.turnCards completion:^{
+        [self sortSelfParticipantCards];
             [self.delegate sortUserCardsWithCompletion:^{
                 [self checkIfGameStateShouldChange];
-                
-                //[self takeUserNeededCardsWithCompletion:^{
                     [self takeComputerNeededCardsWithCompletion:^{
                         
                         self.turnCards = nil;
@@ -510,18 +512,8 @@
                             }
                         }];
                     }];
-               // }];
-                //[self.delegate updateUI];
-                
             }];
         }];
-    
-    
-    
-    
-    //[self.delegate computerMakeTurnWithCard:cheapestOption];
-    
-    
 }
 
 - (void)setGameState:(DurakGameState)gameState {

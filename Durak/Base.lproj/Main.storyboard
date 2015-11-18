@@ -122,7 +122,7 @@
                                     <constraint firstAttribute="width" constant="94" id="NMl-F3-XOt"/>
                                     <constraint firstAttribute="height" constant="30" id="w3n-wW-KKd"/>
                                 </constraints>
-                                <state key="normal" title="Перераздать"/>
+                                <state key="normal" title="Пауза"/>
                                 <connections>
                                     <action selector="changePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iCE-vG-45K"/>
                                 </connections>
@@ -132,6 +132,7 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="K02-hl-eCo" secondAttribute="bottom" constant="100" id="9fU-3w-dsw"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="K02-hl-eCo" secondAttribute="bottom" constant="100" id="SdU-aT-Xup"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="H94-6F-HuU" secondAttribute="bottom" id="cDV-ie-XtG"/>
                             <constraint firstItem="xYA-Yg-zX1" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="eTK-Oa-h7x"/>
                             <constraint firstItem="xYA-Yg-zX1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="esD-as-50q"/>
@@ -140,6 +141,11 @@
                             <constraint firstAttribute="trailingMargin" secondItem="H94-6F-HuU" secondAttribute="trailing" constant="-20" id="luc-HK-TdF"/>
                             <constraint firstItem="H94-6F-HuU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="nDI-ZC-XWJ"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9fU-3w-dsw"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="button" destination="K02-hl-eCo" id="R0f-Ca-6bb"/>

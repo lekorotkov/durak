@@ -55,51 +55,28 @@
     
     self.view.backgroundColor = [UIColor greenColor];
     
+    [self.button removeFromSuperview];
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width / 2 - 50.f, self.view.bounds.size.height - 130, 100, 30)];
+    [button setTitle:@"Забрать" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    self.button = button;
+    
     [self changeButtonName];
     [self disableButton];
+    [self.view bringSubviewToFront:self.button];
     [self updateUI];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    self.button.layer.borderWidth = 2.f;
-    self.button.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor blueColor]);
-    self.button.layer.cornerRadius = 5.f;
-    
-    [self.view addSubview:[self createScrollView]];
-    
-    /*:::::::::::::::::::::::: Create Blurred View ::::::::::::::::::::::::::*/
-    
-    // Blurred with UIImage+ImageEffects
+    self.blurredBgImage = [[UIImageView  alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.blurredBgImage setContentMode:UIViewContentModeScaleToFill];
     self.blurredBgImage.image = [self blurWithImageEffects:[self takeSnapshotOfView:self.view]];
-    
-    // Blurred with Core Image
-    // blurredBgImage.image = [self blurWithCoreImage:[self takeSnapshotOfView:[self createContentView]]];
-    
-    // Blurring with GPUImage framework
-    // blurredBgImage.image = [self blurWithGPUImage:[self takeSnapshotOfView:[self createContentView]]];
-    
-    /*::::::::::::::::::: Create Mask for Blurred View :::::::::::::::::::::*/
-    
-    
-    
+    [self.view addSubview:self.blurredBgImage];
     self.blurMask = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 0)];
     self.blurMask.backgroundColor = [UIColor whiteColor];
     self.blurredBgImage.layer.mask = self.blurMask.layer;
-    
-    [self.scrollView scrollRectToVisible:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) animated:YES];
-    
-    UIView *view =[[UIView alloc]initWithFrame:CGRectMake(10, 10, 20, 10)];
-    view.backgroundColor = [UIColor whiteColor];
-    
-    
-    
-    //[self.scrollView setContentOffset:CGPointMake(0, -self.view.bounds.size.height) animated:NO];
-    [UIView animateWithDuration:1.f animations:^{
-        self.blurMask.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
-    } completion:^(BOOL finished) {
-        [self.view addSubview:view];
-    }];
-    
 }
 
 - (void)checkIfGameModelCorrect {
@@ -125,7 +102,7 @@
     }
     
     if (firstSuitCounter > 4 || secondSuitCounter > 4 || thirdSuitCounter > 4 || fourthSuitCounter > 4) {
-        [self changePressed:nil];
+        [self changeDeck];
     }
     
     firstSuitCounter = 0;
@@ -149,7 +126,7 @@
     }
     
     if (firstSuitCounter > 4 || secondSuitCounter > 4 || thirdSuitCounter > 4 || fourthSuitCounter > 4) {
-        [self changePressed:nil];
+        [self changeDeck];
     }
 }
 
@@ -1134,60 +1111,164 @@
 }
 
 - (void)gameStateChanged {
+    [self.view bringSubviewToFront:self.blurredBgImage];
     if (self.gameModel.gameState == DurakGameStateEndedWithUserWin) {
-        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
+        label.text = @"Victory";
+        label.textAlignment = NSTextAlignmentCenter;
+        label.tag = 20;
         
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Congratulation"
-                                                                            message: @"You win"
-                                                                     preferredStyle: UIAlertControllerStyleAlert];
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
-                                                              style: UIAlertActionStyleDestructive
-                                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                                [self performSegueWithIdentifier:@"unwindToSettings" sender:nil];
-                                                            }];
-        [controller addAction: alertAction];
-        [self presentViewController: controller animated: YES completion: nil];
+        UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
+        [button2 setTitle:@"Ещё раз" forState:UIControlStateNormal];
+        button2.titleLabel.textAlignment = NSTextAlignmentCenter;
+        button2.tag = 20;
+        [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
+        [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
+        button3.titleLabel.textAlignment = NSTextAlignmentCenter;
+        button3.tag = 20;
+        [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        [UIView animateWithDuration:1.f animations:^{
+            self.blurMask.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+        } completion:^(BOOL finished) {
+            [self.view addSubview:label];
+            [self.view addSubview:button2];
+            [self.view addSubview:button3];
+        }];
     } else if (self.gameModel.gameState == DurakGameStateEndedWithComputerWin) {
-        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Loser"
-                                                                            message: @"stupid motherfucker"
-                                                                     preferredStyle: UIAlertControllerStyleAlert];
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
-                                                              style: UIAlertActionStyleDestructive
-                                                            handler: ^(UIAlertAction * _Nonnull action) {
-                                                                [self performSegueWithIdentifier:@"unwindToSettings" sender:nil];
-                                                            }];
-        [controller addAction: alertAction];
-        [self presentViewController: controller animated: YES completion: nil];
-    } else if (self.gameModel.gameState == DurakGameStateDraw) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
+        label.text = @"Defeat";
+        label.textAlignment = NSTextAlignmentCenter;
+        label.tag = 20;
         
-        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Draw"
-                                                                            message: @"stupid motherfucker, even can't win the stupid computer"
-                                                                     preferredStyle: UIAlertControllerStyleAlert];
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
-                                                              style: UIAlertActionStyleDestructive
-                                                            handler: ^(UIAlertAction * _Nonnull action) {
-                                                                [self performSegueWithIdentifier:@"unwindToSettings" sender:nil];
-                                                            }];
-        [controller addAction: alertAction];
-        [self presentViewController: controller animated: YES completion: nil];
+        UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
+        [button2 setTitle:@"Ещё раз" forState:UIControlStateNormal];
+        button2.titleLabel.textAlignment = NSTextAlignmentCenter;
+        button2.tag = 20;
+        [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
+        [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
+        button3.titleLabel.textAlignment = NSTextAlignmentCenter;
+        button3.tag = 20;
+        [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        [UIView animateWithDuration:1.f animations:^{
+            self.blurMask.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+        } completion:^(BOOL finished) {
+            [self.view addSubview:label];
+            [self.view addSubview:button3];
+            [self.view addSubview:button2];
+        }];
+    } else if (self.gameModel.gameState == DurakGameStateDraw) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
+        label.text = @"Draw";
+        label.textAlignment = NSTextAlignmentCenter;
+        label.tag = 20;
+        
+        UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
+        [button2 setTitle:@"Ещё раз" forState:UIControlStateNormal];
+        button2.titleLabel.textAlignment = NSTextAlignmentCenter;
+        button2.tag = 20;
+        [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
+        [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
+        button3.titleLabel.textAlignment = NSTextAlignmentCenter;
+        button3.tag = 20;
+        [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        [UIView animateWithDuration:1.f animations:^{
+            self.blurMask.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+        } completion:^(BOOL finished) {
+            [self.view addSubview:label];
+            [self.view addSubview:button3];
+            [self.view addSubview:button2];
+            }];
     }
 }
 
-- (IBAction)changePressed:(id)sender {
-    
+- (void)backToGameActionPressed {
+    for (UIView *view in self.view.subviews) {
+        if (view.tag == 20) {
+            [view removeFromSuperview];
+        }
+    }
+    [UIView animateWithDuration:1.f animations:^{
+        self.blurMask.frame = CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 0);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)changeDeck {
     if (self.amount == DurakGameCardAmount36) {
         self.gameModel = [[DurakGameModel alloc] initWithBigDeck:NO];
     } else {
         self.gameModel = [[DurakGameModel alloc] initWithBigDeck:YES];
     }
-
+    
     [self checkIfGameModelCorrect];
     
     self.gameModel.delegate = self;
     
     [self updateUI];
+}
+
+- (void)changeDeckPressed {
+    for (UIView *view in self.view.subviews) {
+        if (view.tag == 20) {
+            [view removeFromSuperview];
+        }
+    }
+    [UIView animateWithDuration:1.f animations:^{
+        self.blurMask.frame = CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 0);
+    } completion:^(BOOL finished) {
+        [self changeDeck];
+    }];
+}
+
+- (void)goToMainMenuPressed {
+    [self performSegueWithIdentifier:@"unwindToSettings" sender:self];
+}
+
+- (IBAction)changePressed:(id)sender {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
+    label.text = @"Pause";
+    label.textAlignment = NSTextAlignmentCenter;
+    label.tag = 20;
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 2, 200, 30)];
+    [button setTitle:@"Возобновить Игру" forState:UIControlStateNormal];
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    button.tag = 20;
+    [button addTarget:self action:@selector(backToGameActionPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
+    [button2 setTitle:@"Перераздать" forState:UIControlStateNormal];
+    button2.titleLabel.textAlignment = NSTextAlignmentCenter;
+    button2.tag = 20;
+    [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
+    [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
+    button3.titleLabel.textAlignment = NSTextAlignmentCenter;
+    button3.tag = 20;
+    [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view bringSubviewToFront:self.blurredBgImage];
+    
+    [UIView animateWithDuration:1.f animations:^{
+        self.blurMask.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    } completion:^(BOOL finished) {
+        [self.view addSubview:label];
+        [self.view addSubview:button];
+        [self.view addSubview:button2];
+        [self.view addSubview:button3];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -1205,90 +1286,6 @@
     UIGraphicsEndImageContext();
     
     return image;
-}
-
-- (UIView *)createScrollView
-{
-    UIView *containerView = [[UIView alloc] initWithFrame:self.view.frame];
-    
-    self.blurredBgImage = [[UIImageView  alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [self.blurredBgImage setContentMode:UIViewContentModeScaleToFill];
-    [containerView addSubview:self.blurredBgImage];
-    
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
-    [containerView addSubview:scrollView];
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height*2);
-    scrollView.delegate = self;
-    scrollView.bounces = NO;
-    scrollView.showsHorizontalScrollIndicator = NO;
-    scrollView.showsVerticalScrollIndicator = NO;
-    self.scrollView = scrollView;
-    
-    UIView *slideContentView = [[UIView alloc] initWithFrame:CGRectMake(0, 518, self.view.frame.size.width, 508)];
-    slideContentView.backgroundColor = [UIColor clearColor];
-    [scrollView addSubview:slideContentView];
-    
-   /* UILabel *slideUpLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 6, self.view.frame.size.width, 50)];
-    slideUpLabel.text = @"Photo information";
-    [slideUpLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:18]];
-    [slideUpLabel setTextAlignment:NSTextAlignmentCenter];
-    slideUpLabel.textColor = [UIColor colorWithWhite:0 alpha:0.5];
-    [slideContentView addSubview:slideUpLabel];
-    
-    UIImageView *slideUpImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 12, 4, 24, 22.5)];
-    slideUpImage.image = [UIImage imageNamed:@"up-arrow.png"];
-    [slideContentView addSubview:slideUpImage];
-    
-    UITextView *detailsText = [[UITextView alloc] initWithFrame:CGRectMake(25, 100, 270, 350)];
-    detailsText.backgroundColor = [UIColor clearColor];
-    detailsText.text = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-    [detailsText setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16]];
-    [detailsText setTextAlignment:NSTextAlignmentCenter];
-    detailsText.textColor = [UIColor colorWithWhite:0 alpha:0.6];*/
-    //[slideContentView addSubview:detailsText];
-    
-    return containerView;
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    
-    //self.blurMask.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
-    
-    //self.blurMask.frame = CGRectMake(self.blurMask.frame.origin.x,
-    //                            self.view.frame.size.height + scrollView.contentOffset.y,
-    //                            self.blurMask.frame.size.width,
-    //                                 self.blurMask.frame.size.height); //+ scrollView.contentOffset.y);
-}
-
-- (UIView *)createContentView
-{
-    UIView *contentView = [[UIView alloc] initWithFrame:self.view.frame];
-    
-    UIImageView *contentImage = [[UIImageView alloc] initWithFrame:contentView.frame];
-    contentImage.image = [UIImage imageNamed:@"demo-bg"];
-    [contentView addSubview:contentImage];
-    
-    UIView *metaViewContainer = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 65, 335, 130, 130)];
-    metaViewContainer.backgroundColor = [UIColor whiteColor];
-    metaViewContainer.layer.cornerRadius = 65;
-    [contentView addSubview:metaViewContainer];
-    
-    UILabel *photoTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 54, 130, 18)];
-    photoTitle.text = @"Peach Garden";
-    [photoTitle setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:18]];
-    [photoTitle setTextAlignment:NSTextAlignmentCenter];
-    photoTitle.textColor = [UIColor colorWithWhite:0.4 alpha:1];
-    [metaViewContainer addSubview:photoTitle];
-    
-    UILabel *photographer = [[UILabel alloc] initWithFrame:CGRectMake(0, 72, 130, 9)];
-    photographer.text = @"by Cas Cornelissen";
-    [photographer setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:9]];
-    [photographer setTextAlignment:NSTextAlignmentCenter];
-    photographer.textColor = [UIColor colorWithWhite:0.4 alpha:1];
-    [metaViewContainer addSubview:photographer];
-    
-    return contentView;
 }
 
 - (UIImage *)blurWithImageEffects:(UIImage *)image

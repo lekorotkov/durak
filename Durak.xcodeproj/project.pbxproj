@@ -127,6 +127,7 @@
 		11D0E2EE1BFB756B009EE570 /* Q♦@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11D0E2831BFB756B009EE570 /* Q♦@2x.jpg */; settings = {ASSET_TAGS = (); }; };
 		11D0E2EF1BFB756B009EE570 /* Q♦@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11D0E2841BFB756B009EE570 /* Q♦@3x.jpg */; settings = {ASSET_TAGS = (); }; };
 		11D79F5B1BF64E78005C4F7E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D79F5A1BF64E78005C4F7E /* SettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CE3D731E1BFD24F300DDF020 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3D731D1BFD24F300DDF020 /* CoreGraphics.framework */; };
 		CE9638AE1BFC8D3E004BE13C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9638AD1BFC8D3E004BE13C /* UIImage+ImageEffects.m */; settings = {ASSET_TAGS = (); }; };
 		CE9638B11BFC97C4004BE13C /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9638B01BFC97C4004BE13C /* GPUImage.framework */; settings = {ASSET_TAGS = (); }; };
 		CE9638B31BFC9D56004BE13C /* cardtableimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9638B21BFC9D56004BE13C /* cardtableimage.jpg */; settings = {ASSET_TAGS = (); }; };
@@ -277,6 +278,7 @@
 		11D0E2841BFB756B009EE570 /* Q♦@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Q♦@3x.jpg"; sourceTree = "<group>"; };
 		11D79F591BF64E78005C4F7E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		11D79F5A1BF64E78005C4F7E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		CE3D731D1BFD24F300DDF020 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CE9638AC1BFC8D3E004BE13C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		CE9638AD1BFC8D3E004BE13C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		CE9638B01BFC97C4004BE13C /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3D731E1BFD24F300DDF020 /* CoreGraphics.framework in Frameworks */,
 				CEC1C0541BFB777B00B6193B /* iAd.framework in Frameworks */,
 				CE9638B11BFC97C4004BE13C /* GPUImage.framework in Frameworks */,
 			);
@@ -307,6 +310,7 @@
 		11AD615A1BF4BC73006BF35F = {
 			isa = PBXGroup;
 			children = (
+				CE3D731D1BFD24F300DDF020 /* CoreGraphics.framework */,
 				CE9638B01BFC97C4004BE13C /* GPUImage.framework */,
 				CEC1C0531BFB777A00B6193B /* iAd.framework */,
 				11AD61651BF4BC73006BF35F /* Durak */,
