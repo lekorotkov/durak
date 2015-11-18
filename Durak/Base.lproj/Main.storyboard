@@ -99,36 +99,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lHN-Rb-9iZ">
-                                <rect key="frame" x="534" y="470" width="46" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardtableimage.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="H94-6F-HuU">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K02-hl-eCo">
+                                <rect key="frame" x="235" y="470" width="130" height="30"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="EuB-mS-mNJ"/>
-                                    <constraint firstAttribute="height" constant="30" id="j7a-sl-e7T"/>
+                                    <constraint firstAttribute="height" constant="30" id="88j-P3-f8v"/>
+                                    <constraint firstAttribute="width" constant="130" id="cmW-B0-NvT"/>
                                 </constraints>
-                                <state key="normal" title="Отбой"/>
+                                <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="retreatAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ZD-4w-68T"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkZ-PK-Db9">
-                                <rect key="frame" x="474" y="470" width="58" height="30"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="0AB-ci-7yz"/>
-                                    <constraint firstAttribute="width" constant="58" id="1hQ-uA-VBb"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="58" id="Oxx-oY-6gS"/>
-                                    <constraint firstAttribute="height" constant="30" id="Znm-RA-xdT"/>
-                                </constraints>
-                                <state key="normal" title="Забрать"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="0AB-ci-7yz"/>
-                                        <exclude reference="Oxx-oY-6gS"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="pickUpAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tgu-TE-2G2"/>
+                                    <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="04s-XO-67d"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-Yg-zX1">
@@ -143,30 +127,18 @@
                                     <action selector="changePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iCE-vG-45K"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K02-hl-eCo">
-                                <rect key="frame" x="235" y="470" width="130" height="30"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="88j-P3-f8v"/>
-                                    <constraint firstAttribute="width" constant="130" id="cmW-B0-NvT"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="04s-XO-67d"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="K02-hl-eCo" secondAttribute="bottom" constant="100" id="9fU-3w-dsw"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lHN-Rb-9iZ" secondAttribute="bottom" constant="100" id="E0y-tS-Cac"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gkZ-PK-Db9" secondAttribute="bottom" constant="100" id="GIr-qS-POr"/>
-                            <constraint firstItem="lHN-Rb-9iZ" firstAttribute="leading" secondItem="gkZ-PK-Db9" secondAttribute="trailing" constant="2" id="Myy-Dr-Rk4"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="H94-6F-HuU" secondAttribute="bottom" id="cDV-ie-XtG"/>
                             <constraint firstItem="xYA-Yg-zX1" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="eTK-Oa-h7x"/>
                             <constraint firstItem="xYA-Yg-zX1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="esD-as-50q"/>
                             <constraint firstItem="K02-hl-eCo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h0P-wO-HyW"/>
-                            <constraint firstItem="lHN-Rb-9iZ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="qDY-v4-COv"/>
+                            <constraint firstItem="H94-6F-HuU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="h1a-Y3-UuZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="H94-6F-HuU" secondAttribute="trailing" constant="-20" id="luc-HK-TdF"/>
+                            <constraint firstItem="H94-6F-HuU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="nDI-ZC-XWJ"/>
                         </constraints>
                     </view>
                     <connections>
@@ -180,4 +152,7 @@
             <point key="canvasLocation" x="245" y="306"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cardtableimage.jpg" width="2100" height="3000"/>
+    </resources>
 </document>

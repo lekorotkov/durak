@@ -127,6 +127,9 @@
 		11D0E2EE1BFB756B009EE570 /* Q♦@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11D0E2831BFB756B009EE570 /* Q♦@2x.jpg */; settings = {ASSET_TAGS = (); }; };
 		11D0E2EF1BFB756B009EE570 /* Q♦@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11D0E2841BFB756B009EE570 /* Q♦@3x.jpg */; settings = {ASSET_TAGS = (); }; };
 		11D79F5B1BF64E78005C4F7E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D79F5A1BF64E78005C4F7E /* SettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CE9638AE1BFC8D3E004BE13C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9638AD1BFC8D3E004BE13C /* UIImage+ImageEffects.m */; settings = {ASSET_TAGS = (); }; };
+		CE9638B11BFC97C4004BE13C /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9638B01BFC97C4004BE13C /* GPUImage.framework */; settings = {ASSET_TAGS = (); }; };
+		CE9638B31BFC9D56004BE13C /* cardtableimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9638B21BFC9D56004BE13C /* cardtableimage.jpg */; settings = {ASSET_TAGS = (); }; };
 		CEC1C0541BFB777B00B6193B /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC1C0531BFB777A00B6193B /* iAd.framework */; };
 /* End PBXBuildFile section */
 
@@ -274,6 +277,10 @@
 		11D0E2841BFB756B009EE570 /* Q♦@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Q♦@3x.jpg"; sourceTree = "<group>"; };
 		11D79F591BF64E78005C4F7E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		11D79F5A1BF64E78005C4F7E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		CE9638AC1BFC8D3E004BE13C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		CE9638AD1BFC8D3E004BE13C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		CE9638B01BFC97C4004BE13C /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
+		CE9638B21BFC9D56004BE13C /* cardtableimage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cardtableimage.jpg; sourceTree = "<group>"; };
 		CEC1C0531BFB777A00B6193B /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -283,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC1C0541BFB777B00B6193B /* iAd.framework in Frameworks */,
+				CE9638B11BFC97C4004BE13C /* GPUImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +307,7 @@
 		11AD615A1BF4BC73006BF35F = {
 			isa = PBXGroup;
 			children = (
+				CE9638B01BFC97C4004BE13C /* GPUImage.framework */,
 				CEC1C0531BFB777A00B6193B /* iAd.framework */,
 				11AD61651BF4BC73006BF35F /* Durak */,
 				11AD617F1BF4BC73006BF35F /* DurakUITests */,
@@ -318,6 +327,8 @@
 		11AD61651BF4BC73006BF35F /* Durak */ = {
 			isa = PBXGroup;
 			children = (
+				CE9638B21BFC9D56004BE13C /* cardtableimage.jpg */,
+				CE9638AF1BFC8D42004BE13C /* Utility */,
 				11AD61C11BF4BDB3006BF35F /* Model */,
 				11AD61BE1BF4BCFC006BF35F /* PlayingCardView.h */,
 				11AD61BF1BF4BCFC006BF35F /* PlayingCardView.m */,
@@ -484,6 +495,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		CE9638AF1BFC8D42004BE13C /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				CE9638AC1BFC8D3E004BE13C /* UIImage+ImageEffects.h */,
+				CE9638AD1BFC8D3E004BE13C /* UIImage+ImageEffects.m */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -622,6 +642,7 @@
 				11D0E2AB1BFB756B009EE570 /* 6♥@3x.jpg in Resources */,
 				11D0E2EC1BFB756B009EE570 /* Q♥@2x.jpg in Resources */,
 				11D0E2D61BFB756B009EE570 /* cardback@2x.png in Resources */,
+				CE9638B31BFC9D56004BE13C /* cardtableimage.jpg in Resources */,
 				11D0E2D01BFB756B009EE570 /* A♣@2x.jpg in Resources */,
 				11D0E2A01BFB756B009EE570 /* 5♣@2x.jpg in Resources */,
 				11D0E2D31BFB756B009EE570 /* A♥@3x.jpg in Resources */,
@@ -694,6 +715,7 @@
 				11AD61CE1BF4BDB3006BF35F /* Deck.m in Sources */,
 				11AD61D31BF4C5BA006BF35F /* DurakGameModel.m in Sources */,
 				11AD61CC1BF4BDB3006BF35F /* Card.m in Sources */,
+				CE9638AE1BFC8D3E004BE13C /* UIImage+ImageEffects.m in Sources */,
 				11AD616E1BF4BC73006BF35F /* ViewController.m in Sources */,
 				11AD61C01BF4BCFC006BF35F /* PlayingCardView.m in Sources */,
 				11AD616B1BF4BC73006BF35F /* AppDelegate.m in Sources */,
@@ -825,8 +847,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Durak/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Alex-Kartsev.Durak";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -837,8 +863,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Durak/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Alex-Kartsev.Durak";
 				PRODUCT_NAME = "$(TARGET_NAME)";

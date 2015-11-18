@@ -12,8 +12,10 @@
 #import "PlayingCardDeck.h"
 #import "DurakGameModel.h"
 #import "iAd/ADBannerView.h"
+#import "UIImage+ImageEffects.h"
+#import <GPUImage/GPUImage.h>
 
-@interface ViewController () <DurakGameProtocol, ADBannerViewDelegate>
+@interface ViewController () <DurakGameProtocol, ADBannerViewDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *button;
 @property (nonatomic, strong) DurakGameModel *gameModel;
@@ -21,6 +23,10 @@
 @property (nonatomic, strong) PlayingCardDeck *deck;
 @property (nonatomic, strong) PlayingCard *mainCard;
 @property (nonatomic, assign) BOOL isWidthSreenMore320;
+
+@property UIScrollView *scrollView;
+@property UIView *blurMask;
+@property UIImageView *blurredBgImage;
 
 @end
 
@@ -47,6 +53,7 @@
     
     self.gameModel.delegate = self;
     
+    self.view.backgroundColor = [UIColor greenColor];
     
     [self changeButtonName];
     [self disableButton];
@@ -57,6 +64,42 @@
     self.button.layer.borderWidth = 2.f;
     self.button.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor blueColor]);
     self.button.layer.cornerRadius = 5.f;
+    
+    [self.view addSubview:[self createScrollView]];
+    
+    /*:::::::::::::::::::::::: Create Blurred View ::::::::::::::::::::::::::*/
+    
+    // Blurred with UIImage+ImageEffects
+    self.blurredBgImage.image = [self blurWithImageEffects:[self takeSnapshotOfView:self.view]];
+    
+    // Blurred with Core Image
+    // blurredBgImage.image = [self blurWithCoreImage:[self takeSnapshotOfView:[self createContentView]]];
+    
+    // Blurring with GPUImage framework
+    // blurredBgImage.image = [self blurWithGPUImage:[self takeSnapshotOfView:[self createContentView]]];
+    
+    /*::::::::::::::::::: Create Mask for Blurred View :::::::::::::::::::::*/
+    
+    
+    
+    self.blurMask = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 0)];
+    self.blurMask.backgroundColor = [UIColor whiteColor];
+    self.blurredBgImage.layer.mask = self.blurMask.layer;
+    
+    [self.scrollView scrollRectToVisible:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) animated:YES];
+    
+    UIView *view =[[UIView alloc]initWithFrame:CGRectMake(10, 10, 20, 10)];
+    view.backgroundColor = [UIColor whiteColor];
+    
+    
+    
+    //[self.scrollView setContentOffset:CGPointMake(0, -self.view.bounds.size.height) animated:NO];
+    [UIView animateWithDuration:1.f animations:^{
+        self.blurMask.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    } completion:^(BOOL finished) {
+        [self.view addSubview:view];
+    }];
+    
 }
 
 - (void)checkIfGameModelCorrect {
@@ -1092,6 +1135,8 @@
 
 - (void)gameStateChanged {
     if (self.gameModel.gameState == DurakGameStateEndedWithUserWin) {
+        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
+        
         UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Congratulation"
                                                                             message: @"You win"
                                                                      preferredStyle: UIAlertControllerStyleAlert];
@@ -1103,6 +1148,7 @@
         [controller addAction: alertAction];
         [self presentViewController: controller animated: YES completion: nil];
     } else if (self.gameModel.gameState == DurakGameStateEndedWithComputerWin) {
+        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
         UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Loser"
                                                                             message: @"stupid motherfucker"
                                                                      preferredStyle: UIAlertControllerStyleAlert];
@@ -1114,6 +1160,8 @@
         [controller addAction: alertAction];
         [self presentViewController: controller animated: YES completion: nil];
     } else if (self.gameModel.gameState == DurakGameStateDraw) {
+        
+        self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
         UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Draw"
                                                                             message: @"stupid motherfucker, even can't win the stupid computer"
                                                                      preferredStyle: UIAlertControllerStyleAlert];
@@ -1144,6 +1192,163 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark blur 
+
+- (UIImage *)takeSnapshotOfView:(UIView *)view
+{
+    CGFloat reductionFactor = 1;
+    UIGraphicsBeginImageContext(CGSizeMake(view.frame.size.width/reductionFactor, view.frame.size.height/reductionFactor));
+    [view drawViewHierarchyInRect:CGRectMake(0, 0, view.frame.size.width/reductionFactor, view.frame.size.height/reductionFactor) afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+- (UIView *)createScrollView
+{
+    UIView *containerView = [[UIView alloc] initWithFrame:self.view.frame];
+    
+    self.blurredBgImage = [[UIImageView  alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.blurredBgImage setContentMode:UIViewContentModeScaleToFill];
+    [containerView addSubview:self.blurredBgImage];
+    
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
+    [containerView addSubview:scrollView];
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height*2);
+    scrollView.delegate = self;
+    scrollView.bounces = NO;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView = scrollView;
+    
+    UIView *slideContentView = [[UIView alloc] initWithFrame:CGRectMake(0, 518, self.view.frame.size.width, 508)];
+    slideContentView.backgroundColor = [UIColor clearColor];
+    [scrollView addSubview:slideContentView];
+    
+   /* UILabel *slideUpLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 6, self.view.frame.size.width, 50)];
+    slideUpLabel.text = @"Photo information";
+    [slideUpLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:18]];
+    [slideUpLabel setTextAlignment:NSTextAlignmentCenter];
+    slideUpLabel.textColor = [UIColor colorWithWhite:0 alpha:0.5];
+    [slideContentView addSubview:slideUpLabel];
+    
+    UIImageView *slideUpImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 12, 4, 24, 22.5)];
+    slideUpImage.image = [UIImage imageNamed:@"up-arrow.png"];
+    [slideContentView addSubview:slideUpImage];
+    
+    UITextView *detailsText = [[UITextView alloc] initWithFrame:CGRectMake(25, 100, 270, 350)];
+    detailsText.backgroundColor = [UIColor clearColor];
+    detailsText.text = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+    [detailsText setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16]];
+    [detailsText setTextAlignment:NSTextAlignmentCenter];
+    detailsText.textColor = [UIColor colorWithWhite:0 alpha:0.6];*/
+    //[slideContentView addSubview:detailsText];
+    
+    return containerView;
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+    //self.blurMask.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    
+    //self.blurMask.frame = CGRectMake(self.blurMask.frame.origin.x,
+    //                            self.view.frame.size.height + scrollView.contentOffset.y,
+    //                            self.blurMask.frame.size.width,
+    //                                 self.blurMask.frame.size.height); //+ scrollView.contentOffset.y);
+}
+
+- (UIView *)createContentView
+{
+    UIView *contentView = [[UIView alloc] initWithFrame:self.view.frame];
+    
+    UIImageView *contentImage = [[UIImageView alloc] initWithFrame:contentView.frame];
+    contentImage.image = [UIImage imageNamed:@"demo-bg"];
+    [contentView addSubview:contentImage];
+    
+    UIView *metaViewContainer = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 65, 335, 130, 130)];
+    metaViewContainer.backgroundColor = [UIColor whiteColor];
+    metaViewContainer.layer.cornerRadius = 65;
+    [contentView addSubview:metaViewContainer];
+    
+    UILabel *photoTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 54, 130, 18)];
+    photoTitle.text = @"Peach Garden";
+    [photoTitle setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:18]];
+    [photoTitle setTextAlignment:NSTextAlignmentCenter];
+    photoTitle.textColor = [UIColor colorWithWhite:0.4 alpha:1];
+    [metaViewContainer addSubview:photoTitle];
+    
+    UILabel *photographer = [[UILabel alloc] initWithFrame:CGRectMake(0, 72, 130, 9)];
+    photographer.text = @"by Cas Cornelissen";
+    [photographer setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:9]];
+    [photographer setTextAlignment:NSTextAlignmentCenter];
+    photographer.textColor = [UIColor colorWithWhite:0.4 alpha:1];
+    [metaViewContainer addSubview:photographer];
+    
+    return contentView;
+}
+
+- (UIImage *)blurWithImageEffects:(UIImage *)image
+{
+    return [image applyBlurWithRadius:15 tintColor:[UIColor colorWithWhite:1 alpha:0.5] saturationDeltaFactor:1.5 maskImage:nil];
+}
+
+- (UIImage *)blurWithCoreImage:(UIImage *)sourceImage
+{
+    CIImage *inputImage = [CIImage imageWithCGImage:sourceImage.CGImage];
+    
+    // Apply Affine-Clamp filter to stretch the image so that it does not look shrunken when gaussian blur is applied
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    CIFilter *clampFilter = [CIFilter filterWithName:@"CIAffineClamp"];
+    [clampFilter setValue:inputImage forKey:@"inputImage"];
+    [clampFilter setValue:[NSValue valueWithBytes:&transform objCType:@encode(CGAffineTransform)] forKey:@"inputTransform"];
+    
+    // Apply gaussian blur filter with radius of 30
+    CIFilter *gaussianBlurFilter = [CIFilter filterWithName: @"CIGaussianBlur"];
+    [gaussianBlurFilter setValue:clampFilter.outputImage forKey: @"inputImage"];
+    [gaussianBlurFilter setValue:@30 forKey:@"inputRadius"];
+    
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef cgImage = [context createCGImage:gaussianBlurFilter.outputImage fromRect:[inputImage extent]];
+    
+    // Set up output context.
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    CGContextRef outputContext = UIGraphicsGetCurrentContext();
+    CGContextScaleCTM(outputContext, 1.0, -1.0);
+    CGContextTranslateCTM(outputContext, 0, -self.view.frame.size.height);
+    
+    // Draw base image.
+    CGContextDrawImage(outputContext, self.view.frame, cgImage);
+    
+    // Apply white tint
+    CGContextSaveGState(outputContext);
+    CGContextSetFillColorWithColor(outputContext, [UIColor colorWithWhite:1 alpha:0.2].CGColor);
+    CGContextFillRect(outputContext, self.view.frame);
+    CGContextRestoreGState(outputContext);
+    
+    // Output image is ready.
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return outputImage;
+}
+
+- (UIImage *)blurWithGPUImage:(UIImage *)sourceImage
+{
+    GPUImageGaussianBlurFilter *blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
+    blurFilter.blurRadiusInPixels = 30.0;
+    
+    //    GPUImageBoxBlurFilter *blurFilter = [[GPUImageBoxBlurFilter alloc] init];
+    //    blurFilter.blurRadiusInPixels = 20.0;
+    
+    //    GPUImageiOSBlurFilter *blurFilter = [[GPUImageiOSBlurFilter alloc] init];
+    //    blurFilter.saturation = 1.5;
+    //    blurFilter.blurRadiusInPixels = 30.0;
+    
+    return [blurFilter imageByFilteringImage: sourceImage];
 }
 
 @end
