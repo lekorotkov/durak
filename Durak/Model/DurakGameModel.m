@@ -101,8 +101,9 @@
                     [self.delegate makeTurnComputer:NO withCard:card completion:^{
                         [self.delegate pickUpCardsComputer:YES withCards:self.turnCards completion:^{
                             [self.delegate sortComputerCardsWithCompletion:^{
-                                self.isComputerTurn = NO;
-                                [self checkIfGameStateShouldChange];
+                                if (![self checkIfGameStateShouldChange]) {
+                                    self.isComputerTurn = NO;
+                                }
                             }];
                         }];
                     }];
@@ -112,14 +113,21 @@
                 [self.delegate makeTurnComputer:NO withCard:card completion:^{
                     [self.delegate pickUpCardsComputer:YES withCards:self.turnCards completion:^{
                         [self.delegate sortComputerCardsWithCompletion:^{
-                            self.isComputerTurn = NO;
-                            [self checkIfGameStateShouldChange];
+                            if (![self checkIfGameStateShouldChange]) {
+                                self.isComputerTurn = NO;
+                            }
                         }];
                     }];
                 }];
             }
             return YES;
         } else {
+            
+            if (self.turnCards.count == 12) {
+                [self retreatPressed];
+                return NO;
+            }
+            
             for (PlayingCard *playingCard in self.turnCards) {
                 if (playingCard.rank == card.rank) {
                     [self.turnCards addObject:card];
@@ -182,8 +190,9 @@
                                 [self.computerParticipantCards addObjectsFromArray:self.turnCards];
                                 [self.delegate pickUpCardsComputer:YES withCards:self.turnCards completion:^{
                                     [self.delegate sortComputerCardsWithCompletion:^{
-                                        self.isComputerTurn = NO;
-                                        [self checkIfGameStateShouldChange];
+                                        if (![self checkIfGameStateShouldChange]) {
+                                            self.isComputerTurn = NO;
+                                        }
                                     }];
                                 }];
                             }];
@@ -193,8 +202,9 @@
                             [self.computerParticipantCards addObjectsFromArray:self.turnCards];
                             [self.delegate pickUpCardsComputer:YES withCards:self.turnCards completion:^{
                                 [self.delegate sortComputerCardsWithCompletion:^{
-                                    self.isComputerTurn = NO;
-                                    [self checkIfGameStateShouldChange];
+                                    if (![self checkIfGameStateShouldChange]) {
+                                        self.isComputerTurn = NO;
+                                    }
                                 }];
                             }];
                         }];
@@ -259,7 +269,7 @@
                     }
                 }
                 
-                if (cheapestOption) {
+                if (cheapestOption && self.turnCards.count < 12) {
                     [self.turnCards addObject:cheapestOption];
                     [self.computerParticipantCards removeObject:cheapestOption];
                     [self.delegate makeTurnComputer:NO withCard:card completion:^{
@@ -267,14 +277,7 @@
                             
                         }];
                     }];
-                    
-                    
-                    //[self.delegate computerMakeTurnWithCard:cheapestOption];
-                    
                 } else {
-                    //self.turnCards = nil;
-                    //[self.delegate removeTurnCards];
-                    
                     __block NSUInteger numberOfAnimatedCards = 0;
                     
                     [self.delegate makeTurnComputer:NO withCard:card completion:^{
@@ -287,9 +290,6 @@
                             }];
                         }
                     }];
-                    
-                    
-                    //[self.delegate updateUI];
                 }
                 
                 return YES;

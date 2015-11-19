@@ -75,7 +75,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     self.blurredBgImage = [[UIImageView  alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.blurredBgImage setContentMode:UIViewContentModeScaleToFill];
-    self.blurredBgImage.image = [self blurWithImageEffects:[self takeSnapshotOfView:self.view]];
     [self.view addSubview:self.blurredBgImage];
     self.blurMask = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 0)];
     self.blurMask.backgroundColor = [UIColor whiteColor];
@@ -936,6 +935,7 @@
 }
 
 - (void)gameStateChanged {
+    self.blurredBgImage.image = [self blurWithImageEffects:[self takeSnapshotOfView:self.view]];
     [self.view bringSubviewToFront:self.blurredBgImage];
     if (self.gameModel.gameState == DurakGameStateEndedWithUserWin) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
@@ -1062,6 +1062,7 @@
 }
 
 - (IBAction)changePressed:(id)sender {
+    self.blurredBgImage.image = [self blurWithImageEffects:[self takeSnapshotOfView:self.view]];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
     label.text = @"Pause";
     label.textAlignment = NSTextAlignmentCenter;
