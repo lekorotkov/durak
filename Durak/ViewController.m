@@ -14,6 +14,7 @@
 #import "iAd/ADBannerView.h"
 #import "UIImage+ImageEffects.h"
 #import <GPUImage/GPUImage.h>
+#import "CoolButton.h"
 
 @interface ViewController () <DurakGameProtocol, ADBannerViewDelegate, UIScrollViewDelegate>
 
@@ -1118,13 +1119,13 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         
-        UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
+        CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
         [button2 setTitle:@"Ещё раз" forState:UIControlStateNormal];
         button2.titleLabel.textAlignment = NSTextAlignmentCenter;
         button2.tag = 20;
         [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
         
-        UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
+        CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
         [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
         button3.titleLabel.textAlignment = NSTextAlignmentCenter;
         button3.tag = 20;
@@ -1143,13 +1144,13 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         
-        UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
+        CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
         [button2 setTitle:@"Ещё раз" forState:UIControlStateNormal];
         button2.titleLabel.textAlignment = NSTextAlignmentCenter;
         button2.tag = 20;
         [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
         
-        UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
+        CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
         [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
         button3.titleLabel.textAlignment = NSTextAlignmentCenter;
         button3.tag = 20;
@@ -1168,13 +1169,13 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         
-        UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
+        CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
         [button2 setTitle:@"Ещё раз" forState:UIControlStateNormal];
         button2.titleLabel.textAlignment = NSTextAlignmentCenter;
         button2.tag = 20;
         [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
         
-        UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
+        CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
         [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
         button3.titleLabel.textAlignment = NSTextAlignmentCenter;
         button3.tag = 20;
@@ -1235,28 +1236,33 @@
     [self performSegueWithIdentifier:@"unwindToSettings" sender:self];
 }
 
+- (void)makeButtonPreparationsWithButton:(CoolButton *)button {
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    button.tag = 20;
+    button.hue = 28.f/360.f;
+    button.saturation = 64.f/100.f;
+    button.brightness = 96.f/100.f;
+}
+
 - (IBAction)changePressed:(id)sender {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
     label.text = @"Pause";
     label.textAlignment = NSTextAlignmentCenter;
     label.tag = 20;
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 2, 200, 30)];
+    CoolButton *button = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 90, self.view.bounds.size.height/2 - 80, 180, 50)];
     [button setTitle:@"Возобновить Игру" forState:UIControlStateNormal];
-    button.titleLabel.textAlignment = NSTextAlignmentCenter;
-    button.tag = 20;
+    [self makeButtonPreparationsWithButton:button];
     [button addTarget:self action:@selector(backToGameActionPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *button2 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
+    CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2 - 25, 140, 50)];
     [button2 setTitle:@"Перераздать" forState:UIControlStateNormal];
-    button2.titleLabel.textAlignment = NSTextAlignmentCenter;
-    button2.tag = 20;
+    [self makeButtonPreparationsWithButton:button2];
     [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *button3 = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
+    CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 80, self.view.bounds.size.height/2 + 35, 160, 50)];
     [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
-    button3.titleLabel.textAlignment = NSTextAlignmentCenter;
-    button3.tag = 20;
+    [self makeButtonPreparationsWithButton:button3];
     [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view bringSubviewToFront:self.blurredBgImage];

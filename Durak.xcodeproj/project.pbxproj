@@ -128,6 +128,9 @@
 		11D0E2EF1BFB756B009EE570 /* Q♦@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11D0E2841BFB756B009EE570 /* Q♦@3x.jpg */; settings = {ASSET_TAGS = (); }; };
 		11D79F5B1BF64E78005C4F7E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D79F5A1BF64E78005C4F7E /* SettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CE3D731E1BFD24F300DDF020 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3D731D1BFD24F300DDF020 /* CoreGraphics.framework */; };
+		CE3D73231BFD417300DDF020 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3D73201BFD417300DDF020 /* Common.m */; settings = {ASSET_TAGS = (); }; };
+		CE3D73241BFD417300DDF020 /* CoolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3D73221BFD417300DDF020 /* CoolButton.m */; settings = {ASSET_TAGS = (); }; };
+		CE3D73261BFD4F7300DDF020 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3D73251BFD4F7300DDF020 /* bg.png */; settings = {ASSET_TAGS = (); }; };
 		CE9638AE1BFC8D3E004BE13C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9638AD1BFC8D3E004BE13C /* UIImage+ImageEffects.m */; settings = {ASSET_TAGS = (); }; };
 		CE9638B11BFC97C4004BE13C /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9638B01BFC97C4004BE13C /* GPUImage.framework */; settings = {ASSET_TAGS = (); }; };
 		CE9638B31BFC9D56004BE13C /* cardtableimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9638B21BFC9D56004BE13C /* cardtableimage.jpg */; settings = {ASSET_TAGS = (); }; };
@@ -279,6 +282,11 @@
 		11D79F591BF64E78005C4F7E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		11D79F5A1BF64E78005C4F7E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		CE3D731D1BFD24F300DDF020 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CE3D731F1BFD417300DDF020 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		CE3D73201BFD417300DDF020 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		CE3D73211BFD417300DDF020 /* CoolButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoolButton.h; sourceTree = "<group>"; };
+		CE3D73221BFD417300DDF020 /* CoolButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoolButton.m; sourceTree = "<group>"; };
+		CE3D73251BFD4F7300DDF020 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		CE9638AC1BFC8D3E004BE13C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		CE9638AD1BFC8D3E004BE13C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		CE9638B01BFC97C4004BE13C /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
@@ -331,6 +339,7 @@
 		11AD61651BF4BC73006BF35F /* Durak */ = {
 			isa = PBXGroup;
 			children = (
+				CE3D73251BFD4F7300DDF020 /* bg.png */,
 				CE9638B21BFC9D56004BE13C /* cardtableimage.jpg */,
 				CE9638AF1BFC8D42004BE13C /* Utility */,
 				11AD61C11BF4BDB3006BF35F /* Model */,
@@ -495,6 +504,10 @@
 				11AD61CB1BF4BDB3006BF35F /* PlayingCardDeck.m */,
 				11AD61D11BF4C5BA006BF35F /* DurakGameModel.h */,
 				11AD61D21BF4C5BA006BF35F /* DurakGameModel.m */,
+				CE3D731F1BFD417300DDF020 /* Common.h */,
+				CE3D73201BFD417300DDF020 /* Common.m */,
+				CE3D73211BFD417300DDF020 /* CoolButton.h */,
+				CE3D73221BFD417300DDF020 /* CoolButton.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -677,6 +690,7 @@
 				11D0E2D41BFB756B009EE570 /* A♦@2x.jpg in Resources */,
 				11D0E29E1BFB756B009EE570 /* 5♠@2x.jpg in Resources */,
 				11D0E2A61BFB756B009EE570 /* 6♠@2x.jpg in Resources */,
+				CE3D73261BFD4F7300DDF020 /* bg.png in Resources */,
 				11D0E2C01BFB756B009EE570 /* 9♣@2x.jpg in Resources */,
 				11D0E2BC1BFB756B009EE570 /* 8♦@2x.jpg in Resources */,
 				11D0E2C81BFB756B009EE570 /* 10♣@2x.jpg in Resources */,
@@ -715,12 +729,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3D73231BFD417300DDF020 /* Common.m in Sources */,
 				11AD61D01BF4BDB3006BF35F /* PlayingCardDeck.m in Sources */,
 				11AD61CE1BF4BDB3006BF35F /* Deck.m in Sources */,
 				11AD61D31BF4C5BA006BF35F /* DurakGameModel.m in Sources */,
 				11AD61CC1BF4BDB3006BF35F /* Card.m in Sources */,
 				CE9638AE1BFC8D3E004BE13C /* UIImage+ImageEffects.m in Sources */,
 				11AD616E1BF4BC73006BF35F /* ViewController.m in Sources */,
+				CE3D73241BFD417300DDF020 /* CoolButton.m in Sources */,
 				11AD61C01BF4BCFC006BF35F /* PlayingCardView.m in Sources */,
 				11AD616B1BF4BC73006BF35F /* AppDelegate.m in Sources */,
 				11D79F5B1BF64E78005C4F7E /* SettingsViewController.m in Sources */,

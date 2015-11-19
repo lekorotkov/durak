@@ -99,7 +99,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardtableimage.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="H94-6F-HuU">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="H94-6F-HuU">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </imageView>
@@ -159,6 +159,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cardtableimage.jpg" width="2100" height="3000"/>
+        <image name="bg.png" width="1120" height="1600"/>
     </resources>
 </document>
