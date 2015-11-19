@@ -218,7 +218,9 @@
                 }
                 [self.selfParticipantCards removeObject:cardToRemove];
                 
-                [self checkIfGameStateShouldChange];
+                if ([self checkIfGameStateShouldChange]) {
+                    return NO;
+                }
                 
                 NSMutableArray *availableOptions = [NSMutableArray new];
                 
@@ -300,22 +302,26 @@
     }
 }
 
-- (void)checkIfGameStateShouldChange {
+- (BOOL)checkIfGameStateShouldChange {
     if (self.deck.lastCardsCount > 0 || !self.mainCardUsed) {
-        return;
+        return NO;
     }
     
     if (self.selfParticipantCards.count == 0 && self.computerParticipantCards.count == 0) {
         self.gameState = DurakGameStateDraw;
+        return YES;
     }
     
     if (self.selfParticipantCards.count == 0 && self.computerParticipantCards.count > 0) {
         self.gameState = DurakGameStateEndedWithUserWin;
+        return YES;
     }
     
     if (self.selfParticipantCards.count > 0 && self.computerParticipantCards.count == 0) {
         self.gameState = DurakGameStateEndedWithComputerWin;
+        return YES;
     }
+    return NO;
 }
 
 - (Card *)drawCardFromDeck {
@@ -473,7 +479,9 @@
     [self.delegate pickUpCardsComputer:NO withCards:self.turnCards completion:^{
         [self sortSelfParticipantCards];
             [self.delegate sortUserCardsWithCompletion:^{
-                [self checkIfGameStateShouldChange];
+                if ([self checkIfGameStateShouldChange]) {
+                    return;
+                }
                     [self takeComputerNeededCardsWithCompletion:^{
                         
                         self.turnCards = nil;

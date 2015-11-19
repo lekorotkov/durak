@@ -58,8 +58,10 @@
     
     [self.button removeFromSuperview];
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width / 2 - 50.f, self.view.bounds.size.height - 130, 100, 30)];
+    CoolButton *button = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width / 2 - 55.f, self.view.bounds.size.height - 130, 100, 40)];
     [button setTitle:@"Забрать" forState:UIControlStateNormal];
+    [self makeButtonPreparationsWithButton:button];
+    button.tag = 0;
     [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     self.button = button;
@@ -743,184 +745,6 @@
     if (![self.gameModel userTurnWithCard:card]) {
         [(PlayingCardView *)recognizer.view animateIncorrectChoose];
     }
-    
-    /* PlayingCard *card = [[PlayingCard alloc] init];
-    card.rank = [(PlayingCardView *)recognizer.view rank];
-    card.suit = [(PlayingCardView *)recognizer.view suit];
-    
-    if ([self.gameModel userTurnWithCard:card]) {
-        NSTimeInterval oddCardDelay = 0.f;
-        NSTimeInterval evenCardDelay = 0.f;
-        
-        if (self.gameModel.isComputerTurn) {
-            evenCardDelay = 0.5f;
-        } else {
-            oddCardDelay = 0.5f;
-        }
-        
-        for (int i = 0; i < self.gameModel.turnCards.count; i++) {
-            PlayingCard *playingCard = self.gameModel.turnCards[i];
-            PlayingCardView *playingCardView;
-            for (UIView *view in self.view.subviews) {
-                if ([view isKindOfClass:[PlayingCardView class]]) {
-                    PlayingCardView *cardView = (PlayingCardView *)view;
-                    if (cardView.rank == playingCard.rank) {
-                        if ([cardView.suit isEqualToString:playingCard.suit]) {
-                            playingCardView = cardView;
-                        }
-                    }
-                }
-            }
-            
-            //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                playingCardView.faceUp = YES;
-                [self.view bringSubviewToFront:playingCardView];
-            //});
-            
-            playingCardView.tag = 12;
-            
-            switch (i) {
-                case 0: {
-                    [UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    float temp = self.isWidthSreenMore320 ? -90 : -150;
-                    float tempHeight = self.isWidthSreenMore320 ? -100 : -130;
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 +temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
-                    playingCardView.frame = newFrame;
-                    for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
-                        [playingCardView  removeGestureRecognizer:recognizer];
-                    }
-                } completion:nil];}
-                    break;
-                    
-                case 1: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    float temp = self.isWidthSreenMore320 ? -70 : -130;
-                    float tempHeight = self.isWidthSreenMore320 ? -80 : -110;
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
-                    playingCardView.frame = newFrame;
-                    for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
-                        [playingCardView  removeGestureRecognizer:recognizer];
-                    }
-                } completion:nil];}
-                    break;
-                    
-                case 2: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    float temp = self.isWidthSreenMore320 ? 0 : -60;
-                    float tempHeight = self.isWidthSreenMore320 ? -100 : -130;
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
-                    playingCardView.frame = newFrame;
-                    for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
-                        [playingCardView  removeGestureRecognizer:recognizer];
-                    }
-                } completion:nil];}
-                    break;
-                    
-                case 3: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    float temp = self.isWidthSreenMore320 ? 20 : -40;
-                    float tempHeight = self.isWidthSreenMore320 ? -80 : -110;
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
-                    playingCardView.frame = newFrame;
-                    for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
-                        [playingCardView  removeGestureRecognizer:recognizer];
-                    }
-                } completion:nil];}
-                    break;
-                    
-                case 4: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    float temp = self.isWidthSreenMore320 ? 90 : 30;
-                    float tempHeight = self.isWidthSreenMore320 ? -100 : -130;
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
-                    playingCardView.frame = newFrame;
-                    for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
-                        [playingCardView  removeGestureRecognizer:recognizer];
-                    }
-                } completion:nil];}
-                    break;
-                    
-                case 5: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    float temp = self.isWidthSreenMore320 ? 110 : 50;
-                    float tempHeight = self.isWidthSreenMore320 ? -80 : -110;
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 +tempHeight, 60, 80);
-                    playingCardView.frame = newFrame;
-                    for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
-                        [playingCardView  removeGestureRecognizer:recognizer];
-                    }
-                } completion:nil];}
-                    break;
-                    
-                case 6: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    float temp = self.isWidthSreenMore320 ? -90 : -150;
-                    float tempHeight = self.isWidthSreenMore320 ? 5 : -25;
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 +temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
-                    playingCardView.frame = newFrame;
-                    for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
-                        [playingCardView  removeGestureRecognizer:recognizer];
-                    }
-                } completion:nil];}
-                    break;
-                    
-                case 7: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    float temp = self.isWidthSreenMore320 ? -70 : -130;
-                    float tempHeight = self.isWidthSreenMore320 ? 25 : -5;
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 +temp, self.view.bounds.size.height/2 + tempHeight, 60, 80);
-                    playingCardView.frame = newFrame;
-                    for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
-                        [playingCardView  removeGestureRecognizer:recognizer];
-                    }
-                } completion:nil];}
-                    break;
-                    
-                case 8: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    float temp = self.isWidthSreenMore320 ? 0 : -60;
-                    float tempHeight = self.isWidthSreenMore320 ? 5 : -25;
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2+temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
-                    playingCardView.frame = newFrame;
-                    for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
-                        [playingCardView  removeGestureRecognizer:recognizer];
-                    }
-                } completion:nil];}
-                    break;
-                    
-                case 9: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    float temp = self.isWidthSreenMore320 ? 20 : -40;
-                    float tempHeight = self.isWidthSreenMore320 ? 25 : -5;
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 + tempHeight, 60, 80);
-                    playingCardView.frame = newFrame;
-                    for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
-                        [playingCardView  removeGestureRecognizer:recognizer];
-                    }
-                } completion:nil];}
-                    break;
-                    
-                case 10: {[UIView animateWithDuration:0.5f delay:evenCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    float temp = self.isWidthSreenMore320 ? 90 : 30;
-                    float tempHeight = self.isWidthSreenMore320 ? 5 : -25;
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2+tempHeight, 60, 80);
-                    playingCardView.frame = newFrame;
-                    for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
-                        [playingCardView  removeGestureRecognizer:recognizer];
-                    }
-                } completion:nil];}
-                    break;
-                    
-                case 11: {[UIView animateWithDuration:0.5f delay:oddCardDelay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    float temp = self.isWidthSreenMore320 ? 110 : 50;
-                    float tempHeight = self.isWidthSreenMore320 ? 25 : -5;
-                    CGRect newFrame = CGRectMake(self.view.bounds.size.width/2 + temp, self.view.bounds.size.height/2 + tempHeight, 60, 80);
-                    playingCardView.frame = newFrame;
-                    for (UIGestureRecognizer *recognizer in playingCardView.gestureRecognizers) {
-                        [playingCardView  removeGestureRecognizer:recognizer];
-                    }
-                } completion:nil];}
-                    break;
-                    
-                default:
-                    break;
-            }
-            
-        }
-    } else {
-        [(PlayingCardView *)recognizer.view animateIncorrectChoose];
-    }*/
 }
 
 - (void)faceUpCard:(PlayingCardView *)view {
@@ -1119,16 +943,14 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         
-        CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
+        CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/2 - 55, 120, 50)];
         [button2 setTitle:@"Ещё раз" forState:UIControlStateNormal];
-        button2.titleLabel.textAlignment = NSTextAlignmentCenter;
-        button2.tag = 20;
+        [self makeButtonPreparationsWithButton:button2];
         [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
         
-        CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
+        CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/2, 200, 50)];
         [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
-        button3.titleLabel.textAlignment = NSTextAlignmentCenter;
-        button3.tag = 20;
+        [self makeButtonPreparationsWithButton:button3];
         [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
         
         [UIView animateWithDuration:1.f animations:^{
@@ -1144,16 +966,14 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         
-        CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
+        CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/2 - 55, 120, 50)];
         [button2 setTitle:@"Ещё раз" forState:UIControlStateNormal];
-        button2.titleLabel.textAlignment = NSTextAlignmentCenter;
-        button2.tag = 20;
+        [self makeButtonPreparationsWithButton:button2];
         [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
         
-        CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
+        CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/2, 200, 50)];
         [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
-        button3.titleLabel.textAlignment = NSTextAlignmentCenter;
-        button3.tag = 20;
+        [self makeButtonPreparationsWithButton:button3];
         [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
         
         [UIView animateWithDuration:1.f animations:^{
@@ -1169,18 +989,15 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         
-        CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/5 * 3, 120, 30)];
+        CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/2 - 55, 120, 50)];
         [button2 setTitle:@"Ещё раз" forState:UIControlStateNormal];
-        button2.titleLabel.textAlignment = NSTextAlignmentCenter;
-        button2.tag = 20;
+        [self makeButtonPreparationsWithButton:button2];
         [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
         
-        CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/5 * 4, 200, 30)];
+        CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/2, 200, 50)];
         [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
-        button3.titleLabel.textAlignment = NSTextAlignmentCenter;
-        button3.tag = 20;
+        [self makeButtonPreparationsWithButton:button3];
         [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
-        
         
         [UIView animateWithDuration:1.f animations:^{
             self.blurMask.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
