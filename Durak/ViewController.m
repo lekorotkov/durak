@@ -13,7 +13,6 @@
 #import "DurakGameModel.h"
 #import "iAd/ADBannerView.h"
 #import "UIImage+ImageEffects.h"
-#import <GPUImage/GPUImage.h>
 #import "CoolButton.h"
 
 @interface ViewController () <DurakGameProtocol, ADBannerViewDelegate, UIScrollViewDelegate>
@@ -1155,21 +1154,6 @@
     UIGraphicsEndImageContext();
     
     return outputImage;
-}
-
-- (UIImage *)blurWithGPUImage:(UIImage *)sourceImage
-{
-    GPUImageGaussianBlurFilter *blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
-    blurFilter.blurRadiusInPixels = 30.0;
-    
-    //    GPUImageBoxBlurFilter *blurFilter = [[GPUImageBoxBlurFilter alloc] init];
-    //    blurFilter.blurRadiusInPixels = 20.0;
-    
-    //    GPUImageiOSBlurFilter *blurFilter = [[GPUImageiOSBlurFilter alloc] init];
-    //    blurFilter.saturation = 1.5;
-    //    blurFilter.blurRadiusInPixels = 30.0;
-    
-    return [blurFilter imageByFilteringImage: sourceImage];
 }
 
 @end

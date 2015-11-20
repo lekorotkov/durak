@@ -131,8 +131,8 @@
 		CE3D73231BFD417300DDF020 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3D73201BFD417300DDF020 /* Common.m */; settings = {ASSET_TAGS = (); }; };
 		CE3D73241BFD417300DDF020 /* CoolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3D73221BFD417300DDF020 /* CoolButton.m */; settings = {ASSET_TAGS = (); }; };
 		CE3D73261BFD4F7300DDF020 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3D73251BFD4F7300DDF020 /* bg.png */; settings = {ASSET_TAGS = (); }; };
+		CE3D732D1BFF6BBE00DDF020 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3D732C1BFF6BBE00DDF020 /* StoreKit.framework */; };
 		CE9638AE1BFC8D3E004BE13C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9638AD1BFC8D3E004BE13C /* UIImage+ImageEffects.m */; settings = {ASSET_TAGS = (); }; };
-		CE9638B11BFC97C4004BE13C /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9638B01BFC97C4004BE13C /* GPUImage.framework */; settings = {ASSET_TAGS = (); }; };
 		CE9638B31BFC9D56004BE13C /* cardtableimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9638B21BFC9D56004BE13C /* cardtableimage.jpg */; settings = {ASSET_TAGS = (); }; };
 		CEC1C0541BFB777B00B6193B /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC1C0531BFB777A00B6193B /* iAd.framework */; };
 /* End PBXBuildFile section */
@@ -287,9 +287,9 @@
 		CE3D73211BFD417300DDF020 /* CoolButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoolButton.h; sourceTree = "<group>"; };
 		CE3D73221BFD417300DDF020 /* CoolButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoolButton.m; sourceTree = "<group>"; };
 		CE3D73251BFD4F7300DDF020 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		CE3D732C1BFF6BBE00DDF020 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CE9638AC1BFC8D3E004BE13C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		CE9638AD1BFC8D3E004BE13C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		CE9638B01BFC97C4004BE13C /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
 		CE9638B21BFC9D56004BE13C /* cardtableimage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cardtableimage.jpg; sourceTree = "<group>"; };
 		CEC1C0531BFB777A00B6193B /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -299,9 +299,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3D732D1BFF6BBE00DDF020 /* StoreKit.framework in Frameworks */,
 				CE3D731E1BFD24F300DDF020 /* CoreGraphics.framework in Frameworks */,
 				CEC1C0541BFB777B00B6193B /* iAd.framework in Frameworks */,
-				CE9638B11BFC97C4004BE13C /* GPUImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,8 +318,8 @@
 		11AD615A1BF4BC73006BF35F = {
 			isa = PBXGroup;
 			children = (
+				CE3D732C1BFF6BBE00DDF020 /* StoreKit.framework */,
 				CE3D731D1BFD24F300DDF020 /* CoreGraphics.framework */,
-				CE9638B01BFC97C4004BE13C /* GPUImage.framework */,
 				CEC1C0531BFB777A00B6193B /* iAd.framework */,
 				11AD61651BF4BC73006BF35F /* Durak */,
 				11AD617F1BF4BC73006BF35F /* DurakUITests */,
@@ -565,11 +565,18 @@
 		11AD615B1BF4BC73006BF35F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Alex Kartsev";
 				TargetAttributes = {
 					11AD61621BF4BC73006BF35F = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = ZPC5P3JQ8K;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					11AD617B1BF4BC73006BF35F = {
 						CreatedOnToolsVersion = 7.0;
@@ -867,6 +874,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -874,8 +883,10 @@
 				INFOPLIST_FILE = Durak/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Alex-Kartsev.Durak";
+				PRODUCT_BUNDLE_IDENTIFIER = com.game.durak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Durak/Model/Durak-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -883,6 +894,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -890,8 +903,9 @@
 				INFOPLIST_FILE = Durak/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Alex-Kartsev.Durak";
+				PRODUCT_BUNDLE_IDENTIFIER = com.game.durak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Durak/Model/Durak-Bridging-Header.h";
 			};
 			name = Release;
 		};

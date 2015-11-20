@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Durak/ViewController.m"
-            timestampString = "469657417.085693"
+            timestampString = "469723677.162738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
             landmarkName = "-pickUpCardsComputer:withCards:completion:"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Durak/ViewController.m"
-            timestampString = "469657417.085693"
+            timestampString = "469723677.162738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "-pickUpCardsComputer:withCards:completion:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Durak/ViewController.m"
-            timestampString = "469657417.085693"
+            timestampString = "469723677.162738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "-pickUpCardsComputer:withCards:completion:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Durak/ViewController.m"
-            timestampString = "469657417.085693"
+            timestampString = "469723677.162738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "-pickUpCardsComputer:withCards:completion:"
             landmarkType = "5">
             <Locations>
@@ -154,7 +154,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Durak/ViewController.m"
-            timestampString = "469657417.085693"
+            timestampString = "469723677.162738"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "-pickUpCardsComputer:withCards:completion:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Durak/ViewController.m"
+            timestampString = "469723677.162738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "141"
@@ -170,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Durak/ViewController.m"
-            timestampString = "469657417.085693"
+            timestampString = "469723677.162738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "-pickUpCardsComputer:withCards:completion:"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,27 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Durak/ViewController.m"
-            timestampString = "469657417.085693"
+            timestampString = "469723677.162738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "-pickUpCardsComputer:withCards:completion:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Durak/ViewController.m"
-            timestampString = "469657417.085693"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "-pickUpCardsComputer:withCards:completion:"
             landmarkType = "5">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Durak/ViewController.m"
-            timestampString = "469657417.085693"
+            timestampString = "469723677.162738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "-checkIfGameModelCorrect"
             landmarkType = "5">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Durak/ViewController.m"
-            timestampString = "469657417.085693"
+            timestampString = "469723677.162738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "-changeButtonName"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Durak/ViewController.m"
-            timestampString = "469646700.707657"
+            timestampString = "469723677.162738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Durak/ViewController.m"
-            timestampString = "469657417.085693"
+            timestampString = "469723677.162738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "-buttonPressed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Durak/ViewController.m"
-            timestampString = "469646700.707657"
+            timestampString = "469723677.162738"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1021"
-            endingLineNumber = "1021"
+            startingLineNumber = "1020"
+            endingLineNumber = "1020"
             landmarkName = "-backToGameActionPressed"
             landmarkType = "5">
          </BreakpointContent>
