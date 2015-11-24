@@ -16,7 +16,7 @@
 #import "CoolButton.h"
 #import "iRate.h"
 
-@interface ViewController () <DurakGameProtocol, ADBannerViewDelegate, UIScrollViewDelegate>
+@interface ViewController () <DurakGameProtocol, ADBannerViewDelegate, UIScrollViewDelegate, iRateDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *button;
 @property (nonatomic, strong) DurakGameModel *gameModel;
@@ -66,6 +66,7 @@
     [self.view addSubview:button];
     self.button = button;
     
+    [iRate sharedInstance].delegate = self;
     
     [self changeButtonName];
     [self disableButton];
@@ -942,12 +943,12 @@
     [self.view bringSubviewToFront:self.blurredBgImage];
     if (self.gameModel.gameState == DurakGameStateEndedWithUserWin) {
         
-        NSInteger *gamesPlayed = [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"];
+        NSInteger gamesPlayed = [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"];
         [[NSUserDefaults standardUserDefaults] setInteger:gamesPlayed + 1 forKey:@"Games played"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 5) {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Prompt Was Shown"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 4) {
+            [[iRate sharedInstance] promptForRating];
         }
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
@@ -975,6 +976,14 @@
             [self.view addSubview:button3];
         }];
     } else if (self.gameModel.gameState == DurakGameStateEndedWithComputerWin) {
+        NSInteger gamesPlayed = [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"];
+        [[NSUserDefaults standardUserDefaults] setInteger:gamesPlayed + 1 forKey:@"Games played"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 4) {
+            [[iRate sharedInstance] promptForRating];
+        }
+        
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
         label.text = @"Defeat";
         label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
@@ -1000,6 +1009,14 @@
             [self.view addSubview:button2];
         }];
     } else if (self.gameModel.gameState == DurakGameStateDraw) {
+        NSInteger gamesPlayed = [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"];
+        [[NSUserDefaults standardUserDefaults] setInteger:gamesPlayed + 1 forKey:@"Games played"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 4) {
+            [[iRate sharedInstance] promptForRating];
+        }
+        
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
         label.text = @"Draw";
         label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
@@ -1028,6 +1045,11 @@
     
     
     [[iRate sharedInstance] promptIfAllCriteriaMet];
+}
+
+- (void)iRateDidPromptForRating {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Prompt Was Shown"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)backToGameActionPressed {
