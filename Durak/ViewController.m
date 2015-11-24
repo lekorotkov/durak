@@ -35,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setNeedsStatusBarAppearanceUpdate];
     if (self.amount == DurakGameCardAmount36) {
         self.gameModel = [[DurakGameModel alloc] initWithBigDeck:NO];
     } else {
@@ -73,6 +73,11 @@
     self.button.hidden = YES;
     [self.view bringSubviewToFront:self.button];
     [self updateUI];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

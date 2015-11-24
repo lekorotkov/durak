@@ -301,7 +301,7 @@
 		CE3D73221BFD417300DDF020 /* CoolButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoolButton.m; sourceTree = "<group>"; };
 		CE3D73251BFD4F7300DDF020 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		CE3D732C1BFF6BBE00DDF020 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		CE8FC9C41C01DE45001D4728 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Durak/Model/GoogleMobileAds.framework; sourceTree = "<group>"; };
+		CE8FC9C41C01DE45001D4728 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Model/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		CE8FC9C61C01DF5F001D4728 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		CE8FC9C81C01DF67001D4728 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		CE8FC9CA1C01DF6F001D4728 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -348,7 +348,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		11AD615A1BF4BC73006BF35F = {
+		116AED6C1C04F7ED002EF618 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				CE8FC9D61C01DFBA001D4728 /* SystemConfiguration.framework */,
@@ -364,6 +364,13 @@
 				CE3D732C1BFF6BBE00DDF020 /* StoreKit.framework */,
 				CE3D731D1BFD24F300DDF020 /* CoreGraphics.framework */,
 				CEC1C0531BFB777A00B6193B /* iAd.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		11AD615A1BF4BC73006BF35F = {
+			isa = PBXGroup;
+			children = (
 				11AD61651BF4BC73006BF35F /* Durak */,
 				11AD617F1BF4BC73006BF35F /* DurakUITests */,
 				11AD61641BF4BC73006BF35F /* Products */,
@@ -382,6 +389,7 @@
 		11AD61651BF4BC73006BF35F /* Durak */ = {
 			isa = PBXGroup;
 			children = (
+				116AED6C1C04F7ED002EF618 /* Frameworks */,
 				CE04D4E71C04BD9800066D95 /* iRate.h */,
 				CE04D4E81C04BD9800066D95 /* iRate.m */,
 				CE3D73251BFD4F7300DDF020 /* bg.png */,
