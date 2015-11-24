@@ -55,7 +55,13 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUserDefaults) name:@"PurchaseValueChanged" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(printError:) name:@"Purchase failed" object:nil];
+    [self setNeedsStatusBarAppearanceUpdate];
     
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)printError:(NSNotification *)notification {
