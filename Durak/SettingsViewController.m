@@ -9,12 +9,17 @@
 #import "SettingsViewController.h"
 #import "ViewController.h"
 #import <iAd/iAd.h>
+#import <StoreKit/StoreKit.h>
+#import <GoogleMobileAds/GoogleMobileAds.h>
+#import "CoolButton.h"
 
-@interface SettingsViewController () <ADBannerViewDelegate>
+@interface SettingsViewController () < SKProductsRequestDelegate,GADBannerViewDelegate>
 
-@property (weak, nonatomic) IBOutlet ADBannerView *adBanner;
+//@property (weak, nonatomic) IBOutlet ADBannerView *adBanner;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *numberOfCardsSegmentedControl;
 @property (weak, nonatomic) IBOutlet UILabel *lblTimerMessage;
+@property(nonatomic, strong) IBOutlet GADBannerView *bannerView;
+@property (weak, nonatomic) IBOutlet CoolButton *startButton;
 
 
 @property (nonatomic, strong) NSTimer *timer;
@@ -23,6 +28,8 @@
 
 @property (nonatomic) BOOL pauseTimeCounting;
 
+@property (nonatomic, strong) SKProductsRequest *request;
+
 @end
 
 @implementation SettingsViewController
@@ -30,28 +37,95 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.adBanner.delegate = self;
-    self.adBanner.alpha = 0.0;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Advertising removed"] == NO) {
+        self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+        self.bannerView.frame = CGRectMake(self.view.bounds.size.width / 2 - 160, self.view.bounds.size.height - 50, 320, 50);
+        self.bannerView.rootViewController = self;
+        self.bannerView.adUnitID = @"ca-app-pub-9490228623239882/9885825550";
+        [self.view addSubview:self.bannerView];
+        [self.bannerView loadRequest:[GADRequest request]];
+        self.bannerView.delegate = self;
+    }
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(showTimerMessage) userInfo:nil repeats:YES];
+    self.startButton.hue = 28.f/360.f;
+    self.startButton.saturation = 64.f/100.f;
+    self.startButton.brightness = 96.f/100.f;
     
-    self.secondsElapsed = 0;
+    self.removeAdsButton.hidden = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUserDefaults) name:@"PurchaseValueChanged" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(printError:) name:@"Purchase failed" object:nil];
+    
 }
 
--(void)showTimerMessage{
-    if (!self.pauseTimeCounting) {
-        self.secondsElapsed++;
-        
-        self.lblTimerMessage.text = [NSString stringWithFormat:@"You've been viewing this view for %d seconds", self.secondsElapsed];
-    }
-    else{
-        self.lblTimerMessage.text = @"Paused to show ad...";
+- (void)printError:(NSNotification *)notification {
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Error!"
+                                                                        message:notification.object
+                                                                 preferredStyle: UIAlertControllerStyleAlert];
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
+                                                          style: UIAlertActionStyleDestructive
+                                                        handler:nil];
+    
+    [controller addAction: alertAction];
+    [self presentViewController: controller animated:YES completion:nil];
+}
+
+- (void)checkUserDefaults {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Advertising removed"] == NO) {
+        self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+        self.bannerView.frame = CGRectMake(self.view.bounds.size.width / 2 - 160, self.view.bounds.size.height - 50, 320, 50);
+        self.bannerView.rootViewController = self;
+        self.bannerView.adUnitID = @"ca-app-pub-9490228623239882/9885825550";
+        [self.view addSubview:self.bannerView];
+        [self.bannerView loadRequest:[GADRequest request]];
+        self.bannerView.delegate = self;
+    } else {
+        [self.bannerView removeFromSuperview];
+        [self.removeAdsButton removeFromSuperview];
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)validateProductIdentifiers:(NSArray *)productIdentifiers
+{
+    SKProductsRequest *productsRequest = [[SKProductsRequest alloc]
+                                          initWithProductIdentifiers:[NSSet setWithArray:productIdentifiers]];
+    
+    self.request = productsRequest;
+    productsRequest.delegate = self;
+    [productsRequest start];
+}
+
+// SKProductsRequestDelegate protocol method
+- (void)productsRequest:(SKProductsRequest *)request
+     didReceiveResponse:(SKProductsResponse *)response
+{
+    //self.products = response.products;
+    
+    SKProduct *product = [response.products firstObject];
+    SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:product];
+    payment.quantity = 1;
+    
+    [[SKPaymentQueue defaultQueue] addPayment:payment];
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [numberFormatter setLocale:response.products.firstObject.priceLocale];
+    NSString *formattedPrice = [numberFormatter stringFromNumber:response.products.firstObject.price];
+    
+    //[self displayStoreUI]; // Custom method
+}
+
+- (void)request:(SKRequest *)request didFailWithError:(NSError *)error NS_AVAILABLE_IOS(3_0) {
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Error!"
+                                                                        message:error.localizedDescription
+                                                                 preferredStyle: UIAlertControllerStyleAlert];
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
+                                                          style: UIAlertActionStyleDestructive
+                                                        handler:nil];
+    
+    [controller addAction: alertAction];
+    [self presentViewController: controller animated:YES completion:nil];
 }
 
 - (IBAction)startPressed:(id)sender {
@@ -73,47 +147,51 @@
     
 }
 
-#pragma mark - AdBannerViewDelegate method implementation
+#pragma mark - GADBannerViewDelegate
 
--(void)bannerViewWillLoadAd:(ADBannerView *)banner{
-    NSLog(@"Ad Banner will load ad.");
+// Called when an ad request loaded an ad.
+- (void)adViewDidReceiveAd:(GADBannerView *)adView {
+    self.removeAdsButton.hidden = NO;
 }
 
-
--(void)bannerViewDidLoadAd:(ADBannerView *)banner{
-    NSLog(@"Ad Banner did load ad.");
-    
-    // Show the ad banner.
-    [UIView animateWithDuration:0.5 animations:^{
-        self.adBanner.alpha = 1.0;
-    }];
+// Called when an ad request failed.
+- (void)adView:(GADBannerView *)adView didFailToReceiveAdWithError:(GADRequestError *)error {
+    NSLog(@"%s: %@", __PRETTY_FUNCTION__, error.localizedDescription);
+    self.removeAdsButton.hidden = YES;
 }
 
-
--(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave{
-    NSLog(@"Ad Banner action is about to begin.");
-    
-    self.pauseTimeCounting = YES;
-    
-    return YES;
+// Called just before presenting the user a full screen view, such as a browser, in response to
+// clicking on an ad.
+- (void)adViewWillPresentScreen:(GADBannerView *)adView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-
--(void)bannerViewActionDidFinish:(ADBannerView *)banner{
-    NSLog(@"Ad Banner action did finish");
-    
-    self.pauseTimeCounting = NO;
+// Called just before dismissing a full screen view.
+- (void)adViewWillDismissScreen:(GADBannerView *)adView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-
--(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error{
-    NSLog(@"Unable to show ads. Error: %@", [error localizedDescription]);
-    
-    // Hide the ad banner.
-    [UIView animateWithDuration:0.5 animations:^{
-        self.adBanner.alpha = 0.0;
-    }];
+// Called just after dismissing a full screen view.
+- (void)adViewDidDismissScreen:(GADBannerView *)adView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    self.removeAdsButton.hidden = YES;
 }
 
+// Called just before the application will background or terminate because the user clicked on an ad
+// that will launch another application (such as the App Store).
+- (void)adViewWillLeaveApplication:(GADBannerView *)adView {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (IBAction)removeAdPressed:(id)sender {
+    GADRequest *request = [GADRequest request];
+    [self.bannerView loadRequest:request];
+    
+    [self validateProductIdentifiers:@[@"Remove.Ads"]];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

@@ -10,6 +10,8 @@
 
 @interface DurakGameModel ()
 
+@property BOOL animationIsInProgress;
+
 @end
 
 @implementation DurakGameModel
@@ -38,6 +40,11 @@
 }
 
 - (BOOL)userTurnWithCard:(PlayingCard *)card {
+    if (self.animationIsInProgress) {
+        return NO;
+    } else {
+        self.animationIsInProgress = YES;
+    }
     [self.delegate changeButtonName];
     NSLog(@"%lu", (unsigned long)self.deck.lastCardsCount);
     if (!self.isComputerTurn) {
@@ -94,6 +101,7 @@
                     [self.delegate makeTurnComputer:NO withCard:card completion:^{
                         [self.delegate makeTurnComputer:YES withCard:cheapestOption completion:^{
                             [self checkIfGameStateShouldChange];
+                            self.animationIsInProgress = NO;
                         }];
                     }];
                 } else {
@@ -104,6 +112,7 @@
                                 if (![self checkIfGameStateShouldChange]) {
                                     self.isComputerTurn = NO;
                                 }
+                                self.animationIsInProgress = NO;
                             }];
                         }];
                     }];
@@ -116,6 +125,7 @@
                             if (![self checkIfGameStateShouldChange]) {
                                 self.isComputerTurn = NO;
                             }
+                            self.animationIsInProgress = NO;
                         }];
                     }];
                 }];
@@ -183,6 +193,7 @@
                                 [self.computerParticipantCards removeObject:cheapestOption];
                                 [self.delegate makeTurnComputer:YES withCard:cheapestOption completion:^{
                                     [self checkIfGameStateShouldChange];
+                                    self.animationIsInProgress = NO;
                                 }];
                             }];
                         } else {
@@ -193,6 +204,7 @@
                                         if (![self checkIfGameStateShouldChange]) {
                                             self.isComputerTurn = NO;
                                         }
+                                        self.animationIsInProgress = NO;
                                     }];
                                 }];
                             }];
@@ -205,6 +217,7 @@
                                     if (![self checkIfGameStateShouldChange]) {
                                         self.isComputerTurn = NO;
                                     }
+                                    self.animationIsInProgress = NO;
                                 }];
                             }];
                         }];
@@ -212,6 +225,7 @@
                     return YES;
                 }
             }
+            self.animationIsInProgress = NO;
             return NO;
         }
     } else {
@@ -274,7 +288,7 @@
                     [self.computerParticipantCards removeObject:cheapestOption];
                     [self.delegate makeTurnComputer:NO withCard:card completion:^{
                         [self.delegate makeTurnComputer:YES withCard:cheapestOption completion:^{
-                            
+                            self.animationIsInProgress = NO;
                         }];
                     }];
                 } else {
@@ -287,6 +301,7 @@
                                 if (numberOfAnimatedCards == self.turnCards.count) {
                                     self.isComputerTurn = NO;
                                 }
+                                self.animationIsInProgress = NO;
                             }];
                         }
                     }];
@@ -294,9 +309,11 @@
                 
                 return YES;
             } else {
+                self.animationIsInProgress = NO;
                 return NO;
             }
         } else {
+            self.animationIsInProgress = NO;
             return NO;
         }
     }
@@ -543,6 +560,9 @@
                 [self takeUserNeededCardsWithCompletion:^{
                     [self takeComputerNeededCardsWithCompletion:^{
                         _isComputerTurn = YES;
+                        
+                        self.animationIsInProgress = NO;
+                        
                         [self.delegate changeButtonName];
                         self.turnCards = [NSMutableArray new];
                         

@@ -65,8 +65,10 @@
     [self.view addSubview:button];
     self.button = button;
     
+    
     [self changeButtonName];
     [self disableButton];
+    self.button.hidden = YES;
     [self.view bringSubviewToFront:self.button];
     [self updateUI];
 }
@@ -250,6 +252,7 @@
 }
 
 - (void)changeButtonName {
+    self.button.hidden = NO;
     self.button.enabled = YES;
     if (!self.gameModel.isComputerTurn) {
         [self.button setTitle:@"Отбой" forState:UIControlStateNormal];
@@ -939,6 +942,8 @@
     if (self.gameModel.gameState == DurakGameStateEndedWithUserWin) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
         label.text = @"Victory";
+        label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
+        label.textColor = [UIColor colorWithRed:40.f/256.f green:77./256.f blue:45.f/256.f alpha:1.0];
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         
@@ -962,6 +967,8 @@
     } else if (self.gameModel.gameState == DurakGameStateEndedWithComputerWin) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
         label.text = @"Defeat";
+        label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
+        label.textColor = [UIColor colorWithRed:40.f/256.f green:77./256.f blue:45.f/256.f alpha:1.0];
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         
@@ -985,6 +992,8 @@
     } else if (self.gameModel.gameState == DurakGameStateDraw) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
         label.text = @"Draw";
+        label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
+        label.textColor = [UIColor colorWithRed:40.f/256.f green:77./256.f blue:45.f/256.f alpha:1.0];
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         

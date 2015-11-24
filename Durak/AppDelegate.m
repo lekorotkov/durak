@@ -7,17 +7,54 @@
 //
 
 #import "AppDelegate.h"
+#import <StoreKit/StoreKit.h>
+#import "iRate.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <SKPaymentTransactionObserver>
 
 @end
 
 @implementation AppDelegate
 
++(void)initialize {
+    [iRate sharedInstance].previewMode = YES;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     return YES;
+}
+
+- (void)paymentQueue:(SKPaymentQueue *)queue
+ updatedTransactions:(NSArray<SKPaymentTransaction *> *)transactions {
+    if ([transactions firstObject].transactionState == SKPaymentTransactionStatePurchased) {
+        [self provideContent];
+        [queue finishTransaction:[transactions firstObject]];
+    } else if ([transactions firstObject].transactionState == SKPaymentTransactionStateFailed) {
+        /*SKErrorUnknown,
+         SKErrorClientInvalid,               // client is not allowed to issue the request, etc.
+         SKErrorPaymentCancelled,            // user cancelled the request, etc.
+         SKErrorPaymentInvalid,              // purchase identifier was invalid, etc.
+         SKErrorPaymentNotAllowed,           // this device is not allowed to make the payment
+         SKErrorStoreProductNotAvailable,*/
+        if ([transactions firstObject].error.code != SKErrorPaymentCancelled) {
+            //[[NSNotificationCenter defaultCenter] postNotificationName:@"Purchase failed" object:[transactions firstObject].error.localizedDescription];
+        }
+        [queue finishTransaction:[transactions firstObject]];
+    } else if ([transactions firstObject].transactionState == SKPaymentTransactionStateRestored) {
+        [self provideContent];
+        [queue finishTransaction:[transactions firstObject]];
+    } else if ([transactions firstObject].transactionState == SKPaymentTransactionStateDeferred) {
+        
+    } else if ([transactions firstObject].transactionState == SKPaymentTransactionStatePurchasing) {
+
+    }
+}
+
+- (void)provideContent {
+    [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"Advertising removed"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PurchaseValueChanged" object:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
