@@ -942,6 +942,9 @@
     [self.view bringSubviewToFront:self.blurredBgImage];
     if (self.gameModel.gameState == DurakGameStateEndedWithUserWin) {
         
+        NSInteger *gamesPlayed = [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"];
+        [[NSUserDefaults standardUserDefaults] setInteger:gamesPlayed + 1 forKey:@"Games played"];
+        
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 5) {
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Prompt Was Shown"];
             [[NSUserDefaults standardUserDefaults] synchronize];
