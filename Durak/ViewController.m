@@ -1015,6 +1015,8 @@
             [self.view addSubview:button2];
             }];
     }
+    
+    [[iRate sharedInstance] promptIfAllCriteriaMet];
 }
 
 - (void)backToGameActionPressed {
