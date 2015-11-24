@@ -919,37 +919,39 @@
 }
 
 - (IBAction)pickUpAction:(id)sender {
-    if (self.gameModel.isComputerTurn) {
-        [self.gameModel pickUpPressed];
-    } else {
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Error!"
-                                                                            message: @"Not allowed action"
-                                                                     preferredStyle: UIAlertControllerStyleAlert];
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
-                                                              style: UIAlertActionStyleDestructive
-                                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                                
-        }];
-        [controller addAction: alertAction];
-        [self presentViewController: controller animated: YES completion: nil];
+    if (!self.gameModel.animationIsInProgress) {
+        if (self.gameModel.isComputerTurn) {
+            [self.gameModel pickUpPressed];
+        } else {
+            UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Error!"
+                                                                                message: @"Not allowed action"
+                                                                         preferredStyle: UIAlertControllerStyleAlert];
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
+                                                                  style: UIAlertActionStyleDestructive
+                                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                                    
+                                                                }];
+            [controller addAction: alertAction];
+            [self presentViewController: controller animated: YES completion: nil];
+        }
     }
-    
 }
 
 - (IBAction)retreatAction:(id)sender {
-    if (!self.gameModel.isComputerTurn) {
-        [self.gameModel retreatPressed];
-    } else {
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Error!"
-                                                                            message: @"Not allowed action"
-                                                                     preferredStyle: UIAlertControllerStyleAlert];
-        UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
-                                                              style: UIAlertActionStyleDestructive
-                                                            handler: nil];
-        [controller addAction: alertAction];
-        [self presentViewController: controller animated: YES completion: nil];
+    if (!self.gameModel.animationIsInProgress) {
+        if (!self.gameModel.isComputerTurn) {
+            [self.gameModel retreatPressed];
+        } else {
+            UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Error!"
+                                                                                message: @"Not allowed action"
+                                                                         preferredStyle: UIAlertControllerStyleAlert];
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
+                                                                  style: UIAlertActionStyleDestructive
+                                                                handler: nil];
+            [controller addAction: alertAction];
+            [self presentViewController: controller animated: YES completion: nil];
+        }
     }
-    
 }
 
 - (void)gameStateChanged {
@@ -1119,37 +1121,39 @@
 }
 
 - (IBAction)changePressed:(id)sender {
-    self.blurredBgImage.image = [self blurWithImageEffects:[self takeSnapshotOfView:self.view]];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
-    label.text = @"Pause";
-    label.textAlignment = NSTextAlignmentCenter;
-    label.tag = 20;
-    
-    CoolButton *button = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 90, self.view.bounds.size.height/2 - 80, 180, 50)];
-    [button setTitle:@"Возобновить Игру" forState:UIControlStateNormal];
-    [self makeButtonPreparationsWithButton:button];
-    [button addTarget:self action:@selector(backToGameActionPressed) forControlEvents:UIControlEventTouchUpInside];
-    
-    CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2 - 25, 140, 50)];
-    [button2 setTitle:@"Перераздать" forState:UIControlStateNormal];
-    [self makeButtonPreparationsWithButton:button2];
-    [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
-    
-    CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 80, self.view.bounds.size.height/2 + 35, 160, 50)];
-    [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
-    [self makeButtonPreparationsWithButton:button3];
-    [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view bringSubviewToFront:self.blurredBgImage];
-    
-    [UIView animateWithDuration:1.f animations:^{
-        self.blurMask.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
-    } completion:^(BOOL finished) {
-        [self.view addSubview:label];
-        [self.view addSubview:button];
-        [self.view addSubview:button2];
-        [self.view addSubview:button3];
-    }];
+    if (!self.gameModel.animationIsInProgress) {
+        self.blurredBgImage.image = [self blurWithImageEffects:[self takeSnapshotOfView:self.view]];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
+        label.text = @"Pause";
+        label.textAlignment = NSTextAlignmentCenter;
+        label.tag = 20;
+        
+        CoolButton *button = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 90, self.view.bounds.size.height/2 - 80, 180, 50)];
+        [button setTitle:@"Возобновить Игру" forState:UIControlStateNormal];
+        [self makeButtonPreparationsWithButton:button];
+        [button addTarget:self action:@selector(backToGameActionPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2 - 25, 140, 50)];
+        [button2 setTitle:@"Перераздать" forState:UIControlStateNormal];
+        [self makeButtonPreparationsWithButton:button2];
+        [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 80, self.view.bounds.size.height/2 + 35, 160, 50)];
+        [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
+        [self makeButtonPreparationsWithButton:button3];
+        [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view bringSubviewToFront:self.blurredBgImage];
+        
+        [UIView animateWithDuration:1.f animations:^{
+            self.blurMask.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+        } completion:^(BOOL finished) {
+            [self.view addSubview:label];
+            [self.view addSubview:button];
+            [self.view addSubview:button2];
+            [self.view addSubview:button3];
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

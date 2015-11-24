@@ -10,7 +10,7 @@
 
 @interface DurakGameModel ()
 
-@property BOOL animationIsInProgress;
+
 
 @end
 
@@ -479,6 +479,8 @@
 }
 
 - (void)pickUpPressed {
+    self.animationIsInProgress = YES;
+    
     [self.delegate disableButton];
     for (PlayingCard *card in self.turnCards) {
         BOOL shouldAddToSelfParticipantCards = YES;
@@ -497,6 +499,7 @@
         [self sortSelfParticipantCards];
             [self.delegate sortUserCardsWithCompletion:^{
                 if ([self checkIfGameStateShouldChange]) {
+                    self.animationIsInProgress = NO;
                     return;
                 }
                     [self takeComputerNeededCardsWithCompletion:^{
@@ -504,6 +507,7 @@
                         self.turnCards = nil;
                         
                         if (self.computerParticipantCards.count == 0) {
+                            self.animationIsInProgress = NO;
                             return;
                         }
                         
@@ -532,6 +536,7 @@
                         [self.computerParticipantCards removeObject:cheapestOption];
                         [self.delegate makeTurnComputer:YES withCard:cheapestOption completion:^{
                             [self.delegate changeButtonName];
+                            self.animationIsInProgress = NO;
                             if (self.computerParticipantCards.count == 0) {
                                 self.gameState = DurakGameStateEndedWithComputerWin;
                             }
@@ -549,6 +554,8 @@
 }
 
 - (void)retreatPressed {
+    
+    self.animationIsInProgress = YES;
     //[self.delegate removeTurnCards];
     [self.delegate disableButton];
     __block int numberOfCompletedClearCards = 0;
@@ -597,6 +604,7 @@
                         [self.computerParticipantCards removeObject:cheapestOption];
                         
                         [self.delegate makeTurnComputer:YES withCard:cheapestOption completion:^{
+                            self.animationIsInProgress = NO;
                             if (self.computerParticipantCards.count == 0) {
                                 self.gameState = DurakGameStateEndedWithComputerWin;
                             }

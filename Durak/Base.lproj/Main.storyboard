@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="hSS-X2-ChE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="hSS-X2-ChE">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </imageView>
@@ -85,6 +85,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="C2X-xH-Zp4" secondAttribute="trailing" constant="-20" id="242-F7-iIB"/>
                             <constraint firstItem="bWj-5S-bmz" firstAttribute="centerY" secondItem="Nxx-Zr-Qvv" secondAttribute="centerY" id="4nX-BI-dBP"/>
                             <constraint firstItem="dbc-0B-Dl7" firstAttribute="top" secondItem="C2X-xH-Zp4" secondAttribute="bottom" constant="50" id="9lT-GH-5zh"/>
+                            <constraint firstItem="hSS-X2-ChE" firstAttribute="top" secondItem="Nxx-Zr-Qvv" secondAttribute="topMargin" id="Bn4-1O-489"/>
+                            <constraint firstItem="dbc-0B-Dl7" firstAttribute="top" secondItem="hSS-X2-ChE" secondAttribute="bottom" id="BwS-sz-3P1"/>
+                            <constraint firstItem="hSS-X2-ChE" firstAttribute="leading" secondItem="Nxx-Zr-Qvv" secondAttribute="leadingMargin" constant="-20" id="MEm-y7-5qn"/>
                             <constraint firstItem="ZhR-aw-KbY" firstAttribute="trailing" secondItem="Nxx-Zr-Qvv" secondAttribute="trailingMargin" id="TWn-SB-IYW"/>
                             <constraint firstItem="dbc-0B-Dl7" firstAttribute="top" secondItem="C2X-xH-Zp4" secondAttribute="bottom" constant="20" id="gsz-fF-HNa"/>
                             <constraint firstItem="ZhR-aw-KbY" firstAttribute="leading" secondItem="Nxx-Zr-Qvv" secondAttribute="leadingMargin" id="luF-Ix-gEl"/>
@@ -92,6 +95,7 @@
                             <constraint firstItem="bWj-5S-bmz" firstAttribute="centerX" secondItem="Nxx-Zr-Qvv" secondAttribute="centerX" id="rxm-cG-A7f"/>
                             <constraint firstAttribute="trailingMargin" secondItem="C2X-xH-Zp4" secondAttribute="trailing" constant="-20" id="sn0-TU-kt4"/>
                             <constraint firstItem="bWj-5S-bmz" firstAttribute="top" secondItem="ZhR-aw-KbY" secondAttribute="bottom" constant="8" id="tvI-Sr-xRZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hSS-X2-ChE" secondAttribute="trailing" constant="-20" id="zC7-AV-Sr3"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

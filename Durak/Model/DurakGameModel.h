@@ -55,6 +55,8 @@ typedef void (^CompletionBlock)();
 @property (nonatomic, strong) NSMutableArray *turnCards;
 @property (nonatomic) DurakGameState gameState;
 
+@property BOOL animationIsInProgress;
+
 @property (nonatomic, strong) PlayingCardDeck *deck;
 @property (nonatomic, strong) NSMutableArray *computerParticipantCards;
 @property (nonatomic, strong) NSMutableArray *selfParticipantCards;
