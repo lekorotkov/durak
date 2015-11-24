@@ -1,0 +1,15 @@
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "K02-hl-eCo"; */
+"K02-hl-eCo.normalTitle" = "Кнопка";
+
+/* Class = "UISegmentedControl"; ZhR-aw-KbY.segmentTitles[0] = "36"; ObjectID = "ZhR-aw-KbY"; */
+"ZhR-aw-KbY.segmentTitles[0]" = "36";
+
+/* Class = "UISegmentedControl"; ZhR-aw-KbY.segmentTitles[1] = "52"; ObjectID = "ZhR-aw-KbY"; */
+"ZhR-aw-KbY.segmentTitles[1]" = "52";
+
+/* Class = "UIButton"; normalTitle = "Start"; ObjectID = "bWj-5S-bmz"; */
+"bWj-5S-bmz.normalTitle" = "Старт";
+
+/* Class = "UIButton"; normalTitle = "Pause"; ObjectID = "xYA-Yg-zX1"; */
+"xYA-Yg-zX1.normalTitle" = "Пауза";

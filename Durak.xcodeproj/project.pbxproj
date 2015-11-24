@@ -20,6 +20,7 @@
 		11AD61CF1BF4BDB3006BF35F /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61C91BF4BDB3006BF35F /* PlayingCard.m */; };
 		11AD61D01BF4BDB3006BF35F /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61CB1BF4BDB3006BF35F /* PlayingCardDeck.m */; };
 		11AD61D31BF4C5BA006BF35F /* DurakGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AD61D21BF4C5BA006BF35F /* DurakGameModel.m */; };
+		11B903301C05070F00C72C46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 11B903321C05070F00C72C46 /* Localizable.strings */; };
 		11D0E2861BFB756B009EE570 /* 2♠@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11D0E21B1BFB756B009EE570 /* 2♠@2x.jpg */; };
 		11D0E2871BFB756B009EE570 /* 2♠@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11D0E21C1BFB756B009EE570 /* 2♠@3x.jpg */; };
 		11D0E2881BFB756B009EE570 /* 2♣@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 11D0E21D1BFB756B009EE570 /* 2♣@2x.jpg */; };
@@ -184,6 +185,10 @@
 		11AD61CB1BF4BDB3006BF35F /* PlayingCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardDeck.m; sourceTree = "<group>"; };
 		11AD61D11BF4C5BA006BF35F /* DurakGameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DurakGameModel.h; sourceTree = "<group>"; };
 		11AD61D21BF4C5BA006BF35F /* DurakGameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DurakGameModel.m; sourceTree = "<group>"; };
+		11B9032C1C04FD3E00C72C46 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		11B9032D1C04FD3E00C72C46 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		11B903311C05070F00C72C46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		11B903331C05071500C72C46 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		11D0E21B1BFB756B009EE570 /* 2♠@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2♠@2x.jpg"; sourceTree = "<group>"; };
 		11D0E21C1BFB756B009EE570 /* 2♠@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2♠@3x.jpg"; sourceTree = "<group>"; };
 		11D0E21D1BFB756B009EE570 /* 2♣@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "2♣@2x.jpg"; sourceTree = "<group>"; };
@@ -389,6 +394,7 @@
 		11AD61651BF4BC73006BF35F /* Durak */ = {
 			isa = PBXGroup;
 			children = (
+				11B903321C05070F00C72C46 /* Localizable.strings */,
 				116AED6C1C04F7ED002EF618 /* Frameworks */,
 				CE04D4E71C04BD9800066D95 /* iRate.h */,
 				CE04D4E81C04BD9800066D95 /* iRate.m */,
@@ -706,6 +712,7 @@
 				11D0E2D81BFB756B009EE570 /* J♠@2x.jpg in Resources */,
 				11D0E28C1BFB756B009EE570 /* 2♦@2x.jpg in Resources */,
 				11D0E2A21BFB756B009EE570 /* 5♥@2x.jpg in Resources */,
+				11B903301C05070F00C72C46 /* Localizable.strings in Resources */,
 				11D0E2D21BFB756B009EE570 /* A♥@2x.jpg in Resources */,
 				11D0E29C1BFB756B009EE570 /* 4♦@2x.jpg in Resources */,
 				11D0E2EF1BFB756B009EE570 /* Q♦@3x.jpg in Resources */,
@@ -829,6 +836,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				11AD61701BF4BC73006BF35F /* Base */,
+				11B9032C1C04FD3E00C72C46 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -837,8 +845,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				11AD61751BF4BC73006BF35F /* Base */,
+				11B9032D1C04FD3E00C72C46 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		11B903321C05070F00C72C46 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				11B903311C05070F00C72C46 /* Base */,
+				11B903331C05071500C72C46 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -59,9 +59,9 @@
     self.view.backgroundColor = [UIColor greenColor];
     
     [self.button removeFromSuperview];
-    
+    NSLog(NSLocalizedString(@"Take", @"Take button"));
     CoolButton *button = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width / 2 - 55.f, self.view.bounds.size.height - 140, 100, 40)];
-    [button setTitle:@"Забрать" forState:UIControlStateNormal];
+    [button setTitle:NSLocalizedString(@"Take", @"Take button") forState:UIControlStateNormal];
     [self makeButtonPreparationsWithButton:button];
     button.tag = 0;
     [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -77,7 +77,7 @@
     [self updateUI];
     
     self.pauseButton = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 110, self.view.bounds.size.height - 140, 100, 40)];
-    [self.pauseButton setTitle:@"Пауза" forState:UIControlStateNormal];
+    [self.pauseButton setTitle:NSLocalizedString(@"Pause", @"Pause button") forState:UIControlStateNormal];
     [self makeButtonPreparationsWithButton:self.pauseButton];
     self.pauseButton.tag = 0;
     [self.pauseButton addTarget:self action:@selector(changePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -271,9 +271,9 @@
     self.button.hidden = NO;
     self.button.enabled = YES;
     if (!self.gameModel.isComputerTurn) {
-        [self.button setTitle:@"Отбой" forState:UIControlStateNormal];
+        [self.button setTitle:NSLocalizedString(@"Skip", @"Skip button") forState:UIControlStateNormal];
     } else {
-        [self.button setTitle:@"Забрать" forState:UIControlStateNormal];
+        [self.button setTitle:NSLocalizedString(@"Take", @"Take button") forState:UIControlStateNormal];
     }
 }
 
@@ -923,10 +923,10 @@
         if (self.gameModel.isComputerTurn) {
             [self.gameModel pickUpPressed];
         } else {
-            UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Error!"
-                                                                                message: @"Not allowed action"
+            UIAlertController *controller = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error!", @"error title")
+                                                                                message: NSLocalizedString(@"Not allowed action", @"Not allowed action message")
                                                                          preferredStyle: UIAlertControllerStyleAlert];
-            UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle: NSLocalizedString(@"Dismiss", @"Dismiss message")
                                                                   style: UIAlertActionStyleDestructive
                                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                                     
@@ -942,10 +942,10 @@
         if (!self.gameModel.isComputerTurn) {
             [self.gameModel retreatPressed];
         } else {
-            UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Error!"
-                                                                                message: @"Not allowed action"
+            UIAlertController *controller = [UIAlertController alertControllerWithTitle: NSLocalizedString(@"Error!", @"error title")
+                                                                                message: NSLocalizedString(@"Not allowed action", @"Not allowed action message")
                                                                          preferredStyle: UIAlertControllerStyleAlert];
-            UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle: NSLocalizedString(@"Dismiss", @"Dismiss message")
                                                                   style: UIAlertActionStyleDestructive
                                                                 handler: nil];
             [controller addAction: alertAction];
@@ -968,19 +968,19 @@
         }
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
-        label.text = @"Victory";
+        label.text = NSLocalizedString(@"Victory", @"victory message");
         label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
         label.textColor = [UIColor colorWithRed:40.f/256.f green:77./256.f blue:45.f/256.f alpha:1.0];
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         
         CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/2 - 55, 120, 50)];
-        [button2 setTitle:@"Ещё раз" forState:UIControlStateNormal];
+        [button2 setTitle:NSLocalizedString(@"Replay", @"Replay message") forState:UIControlStateNormal];
         [self makeButtonPreparationsWithButton:button2];
         [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
         
         CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/2, 200, 50)];
-        [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
+        [button3 setTitle:NSLocalizedString(@"Main menu", @"Main menu message") forState:UIControlStateNormal];
         [self makeButtonPreparationsWithButton:button3];
         [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
         
@@ -1001,19 +1001,19 @@
         }
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
-        label.text = @"Defeat";
+        label.text = NSLocalizedString(@"Defeat", @"Defeat message");
         label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
         label.textColor = [UIColor colorWithRed:40.f/256.f green:77./256.f blue:45.f/256.f alpha:1.0];
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         
         CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/2 - 55, 120, 50)];
-        [button2 setTitle:@"Ещё раз" forState:UIControlStateNormal];
+        [button2 setTitle:NSLocalizedString(@"Replay", @"Replay message") forState:UIControlStateNormal];
         [self makeButtonPreparationsWithButton:button2];
         [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
         
         CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/2, 200, 50)];
-        [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
+        [button3 setTitle:NSLocalizedString(@"Main menu", @"Main menu message") forState:UIControlStateNormal];
         [self makeButtonPreparationsWithButton:button3];
         [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
         
@@ -1034,19 +1034,19 @@
         }
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
-        label.text = @"Draw";
+        label.text = NSLocalizedString(@"Draw", @"Draw message");
         label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
         label.textColor = [UIColor colorWithRed:40.f/256.f green:77./256.f blue:45.f/256.f alpha:1.0];
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         
         CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60, self.view.bounds.size.height/2 - 55, 120, 50)];
-        [button2 setTitle:@"Ещё раз" forState:UIControlStateNormal];
+        [button2 setTitle:NSLocalizedString(@"Replay", @"Replay message") forState:UIControlStateNormal];
         [self makeButtonPreparationsWithButton:button2];
         [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
         
         CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, self.view.bounds.size.height/2, 200, 50)];
-        [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
+        [button3 setTitle:NSLocalizedString(@"Main menu", @"Main menu message") forState:UIControlStateNormal];
         [self makeButtonPreparationsWithButton:button3];
         [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
         
@@ -1124,26 +1124,27 @@
     if (!self.gameModel.animationIsInProgress) {
         self.blurredBgImage.image = [self blurWithImageEffects:[self takeSnapshotOfView:self.view]];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
-        label.text = @"Pause";
+        label.text = NSLocalizedString(@"Pause", @"Pause message");
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
         
         CoolButton *button = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 90, self.view.bounds.size.height/2 - 80, 180, 50)];
-        [button setTitle:@"Возобновить Игру" forState:UIControlStateNormal];
+        [button setTitle:NSLocalizedString(@"Continue ", @"Continue message") forState:UIControlStateNormal];
         [self makeButtonPreparationsWithButton:button];
         [button addTarget:self action:@selector(backToGameActionPressed) forControlEvents:UIControlEventTouchUpInside];
         
         CoolButton *button2 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 70, self.view.bounds.size.height/2 - 25, 140, 50)];
-        [button2 setTitle:@"Перераздать" forState:UIControlStateNormal];
+        [button2 setTitle:NSLocalizedString(@"Deal ", @"Deal message") forState:UIControlStateNormal];
         [self makeButtonPreparationsWithButton:button2];
         [button2 addTarget:self action:@selector(changeDeckPressed) forControlEvents:UIControlEventTouchUpInside];
         
         CoolButton *button3 = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 80, self.view.bounds.size.height/2 + 35, 160, 50)];
-        [button3 setTitle:@"Главное Меню" forState:UIControlStateNormal];
+        [button3 setTitle:NSLocalizedString(@"Main menu", @"Main menu message") forState:UIControlStateNormal];
         [self makeButtonPreparationsWithButton:button3];
         [button3 addTarget:self action:@selector(goToMainMenuPressed) forControlEvents:UIControlEventTouchUpInside];
         
         [self.view bringSubviewToFront:self.blurredBgImage];
+        
         
         [UIView animateWithDuration:1.f animations:^{
             self.blurMask.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
