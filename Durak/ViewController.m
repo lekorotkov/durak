@@ -25,6 +25,8 @@
 @property (nonatomic, strong) PlayingCard *mainCard;
 @property (nonatomic, assign) BOOL isWidthSreenMore320;
 
+@property (nonatomic, strong) CoolButton * pauseButton;
+
 @property UIScrollView *scrollView;
 @property UIView *blurMask;
 @property UIImageView *blurredBgImage;
@@ -58,7 +60,7 @@
     
     [self.button removeFromSuperview];
     
-    CoolButton *button = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width / 2 - 55.f, self.view.bounds.size.height - 130, 100, 40)];
+    CoolButton *button = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width / 2 - 55.f, self.view.bounds.size.height - 140, 100, 40)];
     [button setTitle:@"Забрать" forState:UIControlStateNormal];
     [self makeButtonPreparationsWithButton:button];
     button.tag = 0;
@@ -73,6 +75,13 @@
     self.button.hidden = YES;
     [self.view bringSubviewToFront:self.button];
     [self updateUI];
+    
+    self.pauseButton = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 110, self.view.bounds.size.height - 140, 100, 40)];
+    [self.pauseButton setTitle:@"Пауза" forState:UIControlStateNormal];
+    [self makeButtonPreparationsWithButton:self.pauseButton];
+    self.pauseButton.tag = 0;
+    [self.pauseButton addTarget:self action:@selector(changePressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.pauseButton];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
