@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "11AD61621BF4BC73006BF35F"
-               BuildableName = "Durak.app"
+               BuildableName = "Durak Card Game.app"
                BlueprintName = "Durak"
                ReferencedContainer = "container:Durak.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "11AD61621BF4BC73006BF35F"
-            BuildableName = "Durak.app"
+            BuildableName = "Durak Card Game.app"
             BlueprintName = "Durak"
             ReferencedContainer = "container:Durak.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "11AD61621BF4BC73006BF35F"
-            BuildableName = "Durak.app"
+            BuildableName = "Durak Card Game.app"
             BlueprintName = "Durak"
             ReferencedContainer = "container:Durak.xcodeproj">
          </BuildableReference>
@@ -85,7 +85,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "11AD61621BF4BC73006BF35F"
-            BuildableName = "Durak.app"
+            BuildableName = "Durak Card Game.app"
             BlueprintName = "Durak"
             ReferencedContainer = "container:Durak.xcodeproj">
          </BuildableReference>

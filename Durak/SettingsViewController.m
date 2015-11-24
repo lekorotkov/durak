@@ -56,7 +56,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUserDefaults) name:@"PurchaseValueChanged" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(printError:) name:@"Purchase failed" object:nil];
     [self setNeedsStatusBarAppearanceUpdate];
-    
+    NSLog(NSLocalizedString(@"Hello World", @"hello message"));
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -65,10 +65,10 @@
 }
 
 - (void)printError:(NSNotification *)notification {
-    UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Error!"
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle: NSLocalizedString(@"Error!", @"error title")
                                                                         message:notification.object
                                                                  preferredStyle: UIAlertControllerStyleAlert];
-    UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle: NSLocalizedString(@"Dismiss", @"Dismiss message")
                                                           style: UIAlertActionStyleDestructive
                                                         handler:nil];
     
@@ -123,10 +123,10 @@
 }
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error NS_AVAILABLE_IOS(3_0) {
-    UIAlertController *controller = [UIAlertController alertControllerWithTitle: @"Error!"
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle: NSLocalizedString(@"Error!", @"error title")
                                                                         message:error.localizedDescription
                                                                  preferredStyle: UIAlertControllerStyleAlert];
-    UIAlertAction *alertAction = [UIAlertAction actionWithTitle: @"Dismiss"
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle: NSLocalizedString(@"Dismiss", @"Dismiss message")
                                                           style: UIAlertActionStyleDestructive
                                                         handler:nil];
     

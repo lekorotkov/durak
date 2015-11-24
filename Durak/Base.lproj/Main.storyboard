@@ -149,7 +149,7 @@
                                     <constraint firstAttribute="height" constant="30" id="w3n-wW-KKd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Пауза"/>
+                                <state key="normal" title="Pause"/>
                                 <connections>
                                     <action selector="changePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iCE-vG-45K"/>
                                 </connections>
