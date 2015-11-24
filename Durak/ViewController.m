@@ -16,7 +16,7 @@
 #import "CoolButton.h"
 #import "iRate.h"
 
-@interface ViewController () <DurakGameProtocol, ADBannerViewDelegate, UIScrollViewDelegate>
+@interface ViewController () <DurakGameProtocol, ADBannerViewDelegate, UIScrollViewDelegate, iRateDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *button;
 @property (nonatomic, strong) DurakGameModel *gameModel;
@@ -24,6 +24,8 @@
 @property (nonatomic, strong) PlayingCardDeck *deck;
 @property (nonatomic, strong) PlayingCard *mainCard;
 @property (nonatomic, assign) BOOL isWidthSreenMore320;
+
+@property (nonatomic, strong) CoolButton * pauseButton;
 
 @property UIScrollView *scrollView;
 @property UIView *blurMask;
@@ -58,7 +60,7 @@
     
     [self.button removeFromSuperview];
     NSLog(NSLocalizedString(@"Take", @"Take button"));
-    CoolButton *button = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width / 2 - 55.f, self.view.bounds.size.height - 130, 100, 40)];
+    CoolButton *button = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width / 2 - 55.f, self.view.bounds.size.height - 140, 100, 40)];
     [button setTitle:NSLocalizedString(@"Take", @"Take button") forState:UIControlStateNormal];
     [self makeButtonPreparationsWithButton:button];
     button.tag = 0;
@@ -66,12 +68,20 @@
     [self.view addSubview:button];
     self.button = button;
     
+    [iRate sharedInstance].delegate = self;
     
     [self changeButtonName];
     [self disableButton];
     self.button.hidden = YES;
     [self.view bringSubviewToFront:self.button];
     [self updateUI];
+    
+    self.pauseButton = [[CoolButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 110, self.view.bounds.size.height - 140, 100, 40)];
+    [self.pauseButton setTitle:NSLocalizedString(@"Pause", @"Pause button") forState:UIControlStateNormal];
+    [self makeButtonPreparationsWithButton:self.pauseButton];
+    self.pauseButton.tag = 0;
+    [self.pauseButton addTarget:self action:@selector(changePressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.pauseButton];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -947,12 +957,12 @@
     [self.view bringSubviewToFront:self.blurredBgImage];
     if (self.gameModel.gameState == DurakGameStateEndedWithUserWin) {
         
-        NSInteger *gamesPlayed = [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"];
+        NSInteger gamesPlayed = [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"];
         [[NSUserDefaults standardUserDefaults] setInteger:gamesPlayed + 1 forKey:@"Games played"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 5) {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Prompt Was Shown"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 4) {
+            [[iRate sharedInstance] promptForRating];
         }
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
@@ -980,6 +990,14 @@
             [self.view addSubview:button3];
         }];
     } else if (self.gameModel.gameState == DurakGameStateEndedWithComputerWin) {
+        NSInteger gamesPlayed = [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"];
+        [[NSUserDefaults standardUserDefaults] setInteger:gamesPlayed + 1 forKey:@"Games played"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 4) {
+            [[iRate sharedInstance] promptForRating];
+        }
+        
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
         label.text = NSLocalizedString(@"Defeat", @"Defeat message");
         label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
@@ -1005,6 +1023,14 @@
             [self.view addSubview:button2];
         }];
     } else if (self.gameModel.gameState == DurakGameStateDraw) {
+        NSInteger gamesPlayed = [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"];
+        [[NSUserDefaults standardUserDefaults] setInteger:gamesPlayed + 1 forKey:@"Games played"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 4) {
+            [[iRate sharedInstance] promptForRating];
+        }
+        
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
         label.text = NSLocalizedString(@"Draw", @"Draw message");
         label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
@@ -1033,6 +1059,11 @@
     
     
     [[iRate sharedInstance] promptIfAllCriteriaMet];
+}
+
+- (void)iRateDidPromptForRating {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Prompt Was Shown"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)backToGameActionPressed {

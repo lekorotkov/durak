@@ -125,10 +125,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="H94-6F-HuU">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <animations/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K02-hl-eCo">
                                 <rect key="frame" x="235" y="470" width="130" height="30"/>
                                 <animations/>
@@ -141,19 +137,10 @@
                                     <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="04s-XO-67d"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-Yg-zX1">
-                                <rect key="frame" x="486" y="285" width="94" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="H94-6F-HuU">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="94" id="NMl-F3-XOt"/>
-                                    <constraint firstAttribute="height" constant="30" id="w3n-wW-KKd"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Pause"/>
-                                <connections>
-                                    <action selector="changePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iCE-vG-45K"/>
-                                </connections>
-                            </button>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -161,8 +148,6 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="K02-hl-eCo" secondAttribute="bottom" constant="100" id="9fU-3w-dsw"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="K02-hl-eCo" secondAttribute="bottom" constant="100" id="SdU-aT-Xup"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="H94-6F-HuU" secondAttribute="bottom" id="cDV-ie-XtG"/>
-                            <constraint firstItem="xYA-Yg-zX1" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="eTK-Oa-h7x"/>
-                            <constraint firstItem="xYA-Yg-zX1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="esD-as-50q"/>
                             <constraint firstItem="K02-hl-eCo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h0P-wO-HyW"/>
                             <constraint firstItem="H94-6F-HuU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="h1a-Y3-UuZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="H94-6F-HuU" secondAttribute="trailing" constant="-20" id="luc-HK-TdF"/>
