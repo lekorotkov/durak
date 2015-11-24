@@ -14,6 +14,7 @@
 #import "iAd/ADBannerView.h"
 #import "UIImage+ImageEffects.h"
 #import "CoolButton.h"
+#import "iRate.h"
 
 @interface ViewController () <DurakGameProtocol, ADBannerViewDelegate, UIScrollViewDelegate>
 
@@ -940,6 +941,12 @@
     self.blurredBgImage.image = [self blurWithImageEffects:[self takeSnapshotOfView:self.view]];
     [self.view bringSubviewToFront:self.blurredBgImage];
     if (self.gameModel.gameState == DurakGameStateEndedWithUserWin) {
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 5) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Prompt Was Shown"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
         label.text = @"Victory";
         label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
@@ -1015,6 +1022,7 @@
             [self.view addSubview:button2];
             }];
     }
+    
     
     [[iRate sharedInstance] promptIfAllCriteriaMet];
 }
