@@ -968,7 +968,7 @@
             [[iRate sharedInstance] promptForRating];
         }
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 80,self.view.bounds.size.height/5, 160, 30)];
         label.text = NSLocalizedString(@"Victory", @"victory message");
         label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
         label.textColor = [UIColor colorWithRed:40.f/256.f green:77./256.f blue:45.f/256.f alpha:1.0];
@@ -1001,7 +1001,7 @@
             [[iRate sharedInstance] promptForRating];
         }
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 80,self.view.bounds.size.height/5, 160, 30)];
         label.text = NSLocalizedString(@"Defeat", @"Defeat message");
         label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
         label.textColor = [UIColor colorWithRed:40.f/256.f green:77./256.f blue:45.f/256.f alpha:1.0];
@@ -1034,7 +1034,7 @@
             [[iRate sharedInstance] promptForRating];
         }
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 80,self.view.bounds.size.height/5, 160, 30)];
         label.text = NSLocalizedString(@"Draw", @"Draw message");
         label.font = [UIFont fontWithName:@"HelveticaNeue-BoldItalic" size:30.f];
         label.textColor = [UIColor colorWithRed:40.f/256.f green:77./256.f blue:45.f/256.f alpha:1.0];
@@ -1124,7 +1124,7 @@
 - (IBAction)changePressed:(id)sender {
     if (!self.gameModel.animationIsInProgress) {
         self.blurredBgImage.image = [self blurWithImageEffects:[self takeSnapshotOfView:self.view]];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 60,self.view.bounds.size.height/5, 120, 30)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 80,self.view.bounds.size.height/5, 160, 30)];
         label.text = NSLocalizedString(@"Pause", @"Pause message");
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 20;
