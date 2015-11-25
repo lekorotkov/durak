@@ -145,7 +145,6 @@
 		CE8FC9D51C01DFA9001D4728 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8FC9D41C01DFA9001D4728 /* MessageUI.framework */; };
 		CE8FC9D71C01DFBA001D4728 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8FC9D61C01DFBA001D4728 /* SystemConfiguration.framework */; };
 		CE9638AE1BFC8D3E004BE13C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9638AD1BFC8D3E004BE13C /* UIImage+ImageEffects.m */; };
-		CE9638B31BFC9D56004BE13C /* cardtableimage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE9638B21BFC9D56004BE13C /* cardtableimage.jpg */; };
 		CEC1C0541BFB777B00B6193B /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC1C0531BFB777A00B6193B /* iAd.framework */; };
 /* End PBXBuildFile section */
 
@@ -327,7 +326,6 @@
 		CE8FC9D61C01DFBA001D4728 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE9638AC1BFC8D3E004BE13C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		CE9638AD1BFC8D3E004BE13C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		CE9638B21BFC9D56004BE13C /* cardtableimage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cardtableimage.jpg; sourceTree = "<group>"; };
 		CEC1C0531BFB777A00B6193B /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -408,7 +406,6 @@
 				CE04D4E71C04BD9800066D95 /* iRate.h */,
 				CE04D4E81C04BD9800066D95 /* iRate.m */,
 				CE3D73251BFD4F7300DDF020 /* bg.png */,
-				CE9638B21BFC9D56004BE13C /* cardtableimage.jpg */,
 				CE9638AF1BFC8D42004BE13C /* Utility */,
 				11AD61C11BF4BDB3006BF35F /* Model */,
 				11AD61BE1BF4BCFC006BF35F /* PlayingCardView.h */,
@@ -738,7 +735,6 @@
 				11D0E2AB1BFB756B009EE570 /* 6♥@3x.jpg in Resources */,
 				11D0E2EC1BFB756B009EE570 /* Q♥@2x.jpg in Resources */,
 				11D0E2D61BFB756B009EE570 /* cardback@2x.png in Resources */,
-				CE9638B31BFC9D56004BE13C /* cardtableimage.jpg in Resources */,
 				11D0E2D01BFB756B009EE570 /* A♣@2x.jpg in Resources */,
 				11D0E2A01BFB756B009EE570 /* 5♣@2x.jpg in Resources */,
 				11D0E2D31BFB756B009EE570 /* A♥@3x.jpg in Resources */,
