@@ -36,7 +36,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    UIFont *font = [UIFont boldSystemFontOfSize:17.0f];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+                                                           forKey:NSFontAttributeName];
+    [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]} forState:UIControlStateSelected];
+    [self.numberOfCardsSegmentedControl setTitleTextAttributes:attributes
+                                    forState:UIControlStateNormal];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Advertising removed"] == NO) {
         self.bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
         self.bannerView.frame = CGRectMake(self.view.bounds.size.width / 2 - 160, self.view.bounds.size.height - 50, 320, 50);
