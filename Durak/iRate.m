@@ -136,6 +136,16 @@ static NSString *const iRateMacAppStoreURLFormat = @"macappstore://itunes.apple.
     return sharedInstance;
 }
 
++ (void)initialize
+{
+    //overriding the default iRate strings
+    [iRate sharedInstance].messageTitle = NSLocalizedString(@"Rate Durak Game", @"iRate message title");
+    [iRate sharedInstance].message = NSLocalizedString(@"If you like Durak Game, please take the time, etc", @"iRate message");
+    [iRate sharedInstance].cancelButtonLabel = NSLocalizedString(@"No, Thanks", @"iRate decline button");
+    [iRate sharedInstance].remindButtonLabel = NSLocalizedString(@"Remind Me Later", @"iRate remind button");
+    [iRate sharedInstance].rateButtonLabel = NSLocalizedString(@"Rate It Now", @"iRate accept button");
+}
+
 - (NSString *)localizedStringForKey:(NSString *)key withDefault:(NSString *)defaultString
 {
     static NSBundle *bundle = nil;
