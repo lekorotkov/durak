@@ -964,7 +964,7 @@
         [[NSUserDefaults standardUserDefaults] setInteger:gamesPlayed + 1 forKey:@"Games played"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 0) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 4) {
             [[iRate sharedInstance] promptForRating];
         }
         
@@ -997,7 +997,7 @@
         [[NSUserDefaults standardUserDefaults] setInteger:gamesPlayed + 1 forKey:@"Games played"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 0) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 4) {
             [[iRate sharedInstance] promptForRating];
         }
         
@@ -1030,7 +1030,7 @@
         [[NSUserDefaults standardUserDefaults] setInteger:gamesPlayed + 1 forKey:@"Games played"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 0) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Prompt Was Shown"] == NO && [[NSUserDefaults standardUserDefaults] integerForKey:@"Games played"] > 4) {
             [[iRate sharedInstance] promptForRating];
         }
         

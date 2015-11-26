@@ -998,6 +998,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.game.durak;
 				PRODUCT_NAME = "Durak Card Game";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Durak/Model/Durak-Bridging-Header.h";
 			};
 			name = Release;
